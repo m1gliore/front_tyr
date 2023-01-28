@@ -1,0 +1,130 @@
+@charset "utf-8";
+
+/* HEADER */
+.header-top {
+    background-color: rgb(173, 26, 39);
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+
+.header-contact {
+    margin-top: 1.5rem;
+    color: rgb(255, 255, 255);
+}
+
+.header-top-phone-1 {
+    padding: 0 4px;
+}
+
+.header-top-phone-2 {
+    border-left: rgb(255, 255, 255) 1px solid;
+    padding: 0 4px;
+}
+
+.header-top-address {
+    padding: 0 4px;
+    text-align: center;
+}
+
+.header-phone, .header-address-mail {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.header-phone-desc, .header-address-desc {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: .8rem;
+    line-height: 1;
+}
+
+.header-top-social {
+    padding: 0 8px;
+    text-align: right;
+}
+
+.top-icon {
+    color: rgb(173, 26, 39);
+    font-size: 1.5em;
+}
+
+.header-top a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.header-top a:hover {
+    color: rgba(255, 255, 255, .8);
+}
+
+/* NAVBAR */
+.navbar .nav-link, .dropdown-item {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: .8rem;
+    text-transform: uppercase;
+}
+
+a.nav-link {
+    color: rgb(255, 255, 255) !important;
+}
+
+a.nav-link:hover {
+    color: rgba(255, 255, 255, .8) !important;
+}
+
+li.active a.nav-link {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.dropdown-menu {
+    border-radius: 0;
+}
+
+.dropdown-menu > a.active {
+    background-color: transparent;
+    color: rgb(33, 37, 41);
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+a.dropdown-item:hover {
+    background-color: rgb(221, 221, 224);
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+/* MEDIA */
+@media (min-width: 992px) {
+    .navbar-nav {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+    }
+
+    .navbar-nav .nav-item {
+        -ms-flex: 1 0 auto;
+        -webkit-box-flex: 1;
+        flex: 1 0 auto;
+    }
+}
+
+@media (max-width: 991px) {
+    .header-logo {
+        text-align: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .header-top-address {
+        display: none;
+    }
+
+    .header-top-social {
+        display: none;
+    }
+}
+
+@media (max-width: 575px) {
+    .header-top-phone-1, .header-top-phone-2 {
+        width: 50%;
+    }
+}

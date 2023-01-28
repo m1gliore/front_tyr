@@ -1,0 +1,111 @@
+@charset "utf-8";
+
+
+/* BUTTONS */
+.btn {
+    font-size: 14px;
+    color: rgb(23, 44, 65);
+    line-height: 1;
+    padding: 5px 8px;
+    border: 1px solid rgb(23, 44, 65);
+    border-radius: 14px;
+    background-color: transparent;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.btn-red {
+    background-color: rgb(173, 26, 39);
+    border-color: rgb(173, 26, 39);
+    color: rgb(255, 255, 255);
+}
+
+.btn-red:hover {
+    background-color: rgba(173, 26, 39, .75);
+    color: rgb(255, 255, 255);
+}
+
+/* SLIDER */
+#mainCarousel .carousel-indicators {
+    justify-content: flex-start;
+    right: auto;
+    margin-right: 0;
+    margin-bottom: 15px;
+}
+
+#mainCarousel .carousel-indicators li {
+    height: 30px;
+    border-radius: 15px;
+    background-color: transparent;
+    border: 1px rgb(255, 255, 255) solid;
+    cursor: pointer;
+}
+
+#mainCarousel .carousel-indicators li.active {
+    background-color: rgb(255, 255, 255);
+}
+
+#mainCarousel .carousel-item img {
+    width: 100%;
+}
+
+#mainCarousel .carousel-item .caption {
+    position: absolute;
+    /* top: 40px; */
+    right: 50%;
+    bottom: 80px;
+    left: 15%;
+    z-index: 10;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, .8);
+    border-bottom: 10px solid rgb(173, 26, 39);
+}
+
+#mainCarousel .carousel-item-title {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 32px;
+    line-height: 1;
+}
+
+#mainCarousel .carousel-item-description {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    line-height: 1;
+}
+
+#mainCarousel .carousel-item .btn {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 15px;
+    margin-left: 112px;
+    left: 16%;
+    z-index: 15;
+    height: 30px;
+    border-radius: 15px;
+    padding: 7px;
+}
+
+/* MEDIA */
+@media (max-width: 991px) {
+    #mainCarousel .carousel-item .caption {
+        right: 15%;
+    }
+
+    #mainCarousel .carousel-item-title {
+        font-size: 24px;
+    }
+
+    #mainCarousel .carousel-item-description {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 767px) {
+    #mainCarousel .carousel-item img {
+        width: auto;
+        height: 235px;
+    }
+
+    #mainCarousel .carousel-item-title {
+        display: none;
+    }
+}

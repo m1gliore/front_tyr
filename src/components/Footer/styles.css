@@ -1,0 +1,132 @@
+@charset "utf-8";
+
+/* HEADER */
+.header-phone, .header-address-mail {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.header-phone-desc, .header-address-desc {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: .8rem;
+    line-height: 1;
+}
+
+/* NAVBAR */
+a.nav-link {
+    color: rgb(255, 255, 255) !important;
+}
+
+a.nav-link:hover {
+    color: rgba(255, 255, 255, .8) !important;
+}
+
+/* PAYMENT */
+.payment-system {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    padding: 16px 0;
+    text-align: center;
+}
+
+.payment-system-logo {
+    width: 50%;
+    height: auto;
+}
+
+/* FOOTER */
+.footer {
+    padding-top: 20px;
+    padding-bottom: 60px;
+    color: rgb(255, 255, 255);
+}
+
+.footer .nav {
+    display: block;
+}
+
+.footer .nav-link {
+    font-size: .8rem;
+    display: inline;
+}
+
+.footer-contact {
+}
+
+.footer-phone-1 {
+    padding: 0 4px;
+}
+
+.footer-phone-2 {
+    border-left: rgb(255, 255, 255) 1px solid;
+    padding: 0 4px;
+}
+
+.footer-address {
+    padding: 0 4px;
+}
+
+.footer-social {
+    padding: 0 4px;
+}
+
+.footer-icon {
+    color: rgb(52, 58, 64);
+    font-size: 1.5em;
+}
+
+.footer a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: rgba(255, 255, 255, .8);
+}
+
+.footer-company {
+    margin-top: 24px;
+    text-align: center;
+    font-size: .8rem;
+}
+
+.footer-not-oferta {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 8px;
+    text-align: center;
+}
+
+.bot-icon {
+    color: rgb(52, 58, 64);
+    font-size: 1.5em;
+}
+
+/* MEDIA */
+@media (max-width: 991px) {
+    .footer-nav {
+        display: none;
+    }
+
+    .payment-system-logo {
+        width: 75%;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer-phone-1, .footer-phone-2 {
+        display: none;
+    }
+
+    .home-news .card-deck {
+        flex-direction: column;
+    }
+
+    .payment-system-logo {
+        width: 100%;
+    }
+}
+
+@media (max-width: 575px) {
+    .footer-address, .footer-social {
+        width: 50%;
+    }
+}
