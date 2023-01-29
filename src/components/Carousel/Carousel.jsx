@@ -20,7 +20,6 @@ const Carousel = () => {
                         <p className="carousel-item-description">Самый большой выбор пневматики в Беларуси (и не
                             только). Пистолеты, револьверы, винтовки.</p>
                     </div>
-                    <a className="btn btn-red" href="/oruzhie-v-tire/pnevmatika">Подробнее</a>
                 </div>
                 <div className="carousel-item">
                     <img className="d-block"
@@ -31,8 +30,6 @@ const Carousel = () => {
                         <p className="carousel-item-description">Большой выбор страйкбольных приводов: от
                             обычных до эксклюзивных. Пистолеты с отдачей.</p>
                     </div>
-                    <a className="btn btn-red"
-                       href="/oruzhie-v-tire/strajkbol">Подробнее</a>
                 </div>
                 <div className="carousel-item">
                     <img className="d-block"
@@ -43,7 +40,6 @@ const Carousel = () => {
                         <p className="carousel-item-description">Лазерный тир с реалистичными копиями реального
                             оружия - для самых маленьких.</p>
                     </div>
-                    <a className="btn btn-red" href="/oruzhie-v-tire/lazernoe">Подробнее</a>
                 </div>
 
             </div>

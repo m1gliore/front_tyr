@@ -1,26 +1,14 @@
 import './styles.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircle, faEnvelope} from "@fortawesome/free-solid-svg-icons";
-import {faFacebookF, faInstagram, faVk} from "@fortawesome/free-brands-svg-icons";
+import {faInstagram} from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
     return (
         <footer>
-            <div className="payment-system">
-                <div className="container">
-                    <img src="https://tir-centr.by/assets/template/images/pay-logo.png" alt="payment"
-                         className="payment-system-logo"/>
-                </div>
-            </div>
             <div className="footer bg-dark">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-3 footer-nav">
-                            <ul className="nav">
-                                <li className="nav-item"><a href="/novosti" className="nav-link">Новости</a></li>
-                                <li className="nav-item"><a href="/czenyi" className="nav-link">Услуги и цены</a></li>
-                            </ul>
-                        </div>
                         <div className="col-lg-9 footer-contact">
                             <div className="row">
                                 <div className="col-md-3 footer-phone-1">
@@ -55,15 +43,6 @@ const Footer = () => {
                                            rel="noreferrer">
                                             <FontAwesomeIcon icon={faCircle} className="fa-stack-2x"/>
                                             <FontAwesomeIcon icon={faInstagram} className="fa-stack-1x bot-icon"/>
-                                        </a>
-                                        <a href="https://www.facebook.com" target="_blank" className="fa-stack"
-                                           rel="noreferrer">
-                                            <FontAwesomeIcon icon={faCircle} className="fa-stack-2x"/>
-                                            <FontAwesomeIcon icon={faFacebookF} className="fa-stack-1x bot-icon"/>
-                                        </a>
-                                        <a href="https://vk.com" target="_blank" className="fa-stack" rel="noreferrer">
-                                            <FontAwesomeIcon icon={faCircle} className="fa-stack-2x"/>
-                                            <FontAwesomeIcon icon={faVk} className="fa-stack-1x bot-icon"/>
                                         </a>
                                     </div>
                                 </div>

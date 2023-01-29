@@ -3,32 +3,6 @@ import './styles.css'
 const Main = () => {
     return (
         <main role="main">
-            <section className="overview">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-3 col-md-6 text-center">
-                            <img src="https://tir-centr.by/assets/images/homepage/overview/home-soldier.png"
-                                 alt="Несколько стрелковых галерей"/>
-                            <p>Несколько стрелковых галерей</p>
-                        </div>
-                        <div className="col-lg-3 col-md-6 text-center">
-                            <img src="https://tir-centr.by/assets/images/homepage/overview/home-corp.png"
-                                 alt="Индивидуальное и групповое обучение"/>
-                            <p>Индивидуальное и групповое обучение</p>
-                        </div>
-                        <div className="col-lg-3 col-md-6 text-center">
-                            <img src="https://tir-centr.by/assets/images/homepage/overview/home-gift.png"
-                                 alt="Подарочные сертификаты в наличии"/>
-                            <p>Подарочные сертификаты в наличии</p>
-                        </div>
-                        <div className="col-lg-3 col-md-6 text-center">
-                            <img src="https://tir-centr.by/assets/images/homepage/overview/home-look.png"
-                                 alt="Ждем Вас ежедневно с 13 до 21 часов"/>
-                            <p>Ждем Вас ежедневно с 13 до 21 часов</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
             <section className="review">
                 <div className="container">
                     <div id="tirReview"
@@ -420,49 +394,6 @@ const Main = () => {
                                  top: "100px",
                                  display: "none"
                              }}></div>
-                    </div>
-                </div>
-            </section>
-            <section className="home-news">
-                <div className="container">
-                    <div className="row">
-                        <div className="col">
-                            <h2>Новости</h2>
-                        </div>
-                        <div className="col-auto text-right">
-                            <a href="/novosti" className="btn btn-gray" role="button">Все
-                                новости</a>
-                        </div>
-                    </div>
-                    <div className="card-deck">
-                        <div className="card bg-gray">
-                            <div className="card-header">
-                                02.08.2022
-                            </div>
-                            <div className="card-body">
-                                <p className="card-title">Выходные в августе</p>
-                                <p className="card-text">Выходные в августе: по техническим причинам не будем
-                                    работать 8, 15 и 22 августа (это понедельники).</p>
-                            </div>
-                            <div className="card-footer">
-                                <a href="novosti/vyixodnyie-v-avguste" className="btn btn-red"
-                                   role="button">Подробнее</a>
-                            </div>
-                        </div>
-                        <div className="card bg-white">
-                            <div className="card-header">
-                                10.02.2022
-                            </div>
-                            <div className="card-body">
-                                <p className="card-title">Подарочные сертификаты на 23 февраля</p>
-                                <p className="card-text">Напоминаем, что у нас есть отличный подарок на 23 февраля
-                                    для любого мужчины: подарочные сертификаты номиналом 30, 50 и 100 руб.</p>
-                            </div>
-                            <div className="card-footer">
-                                <a href="novosti/podarochnyie-sertifikatyi-na-23-fevralya" className="btn btn-red"
-                                   role="button">Подробнее</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>

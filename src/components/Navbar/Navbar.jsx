@@ -1,7 +1,7 @@
 import './styles.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCircle, faEnvelope} from '@fortawesome/free-solid-svg-icons'
-import {faFacebookF, faInstagram, faVk} from '@fortawesome/free-brands-svg-icons'
+import {faInstagram} from '@fortawesome/free-brands-svg-icons'
 
 const Navbar = () => {
     return (
@@ -41,16 +41,6 @@ const Navbar = () => {
                                        className="fa-stack">
                                         <FontAwesomeIcon icon={faCircle} className="fa-stack-2x"/>
                                         <FontAwesomeIcon icon={faInstagram} className="fa-stack-1x top-icon"/>
-                                    </a>
-                                    <a href="https://www.facebook.com" target="_blank" rel="noreferrer"
-                                       className="fa-stack">
-                                        <FontAwesomeIcon icon={faCircle} className="fa-stack-2x"/>
-                                        <FontAwesomeIcon icon={faFacebookF} className="fa-stack-1x top-icon"/>
-                                    </a>
-                                    <a href="https://vk.com" target="_blank" rel="noreferrer"
-                                       className="fa-stack">
-                                        <FontAwesomeIcon icon={faCircle} className="fa-stack-2x"/>
-                                        <FontAwesomeIcon icon={faVk} className="fa-stack-1x top-icon"/>
                                     </a>
                                 </div>
                             </div>
@@ -99,18 +89,8 @@ const Navbar = () => {
                                         праздникам</a><a className="dropdown-item" href="/uslugi/zapis-onlajn"
                                                          target="_blank">Запись онлайн</a></div>
                                 </li>
-                                <li className="nav-item dropdown"><a className="nav-link dropdown-toggle"
-                                                                     href="/dokumentyi" id="topMenu92"
-                                                                     data-bs-toggle="dropdown" aria-haspopup="true"
-                                                                     aria-expanded="false">Документы</a>
-                                    <div className="dropdown-menu" aria-labelledby="topMenu92"><a
-                                        className="dropdown-item" href="/dokumentyi/dogovor">Договор оказания
-                                        услуг</a><a className="dropdown-item"
-                                                    href="/dokumentyi/pravila-poseshheniya-i-tb">Правила посещения и
-                                        ТБ</a><a className="dropdown-item" href="/dokumentyi/otdelnyie-uslugi">Отдельные
-                                        услуги</a><a className="dropdown-item" href="/dokumentyi/oplata-uslug">Оплата
-                                        услуг</a></div>
-                                </li>
+                                <li className="nav-item active"><a className="nav-link" href="/shooters">Лучшие
+                                    стрелки</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/kontaktyi">Контакты тира</a>
                                 </li>
                             </ul>
