@@ -9,6 +9,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import OruzhieVTire from "./pages/OruzhieVTire/OruzhieVTire";
 import Lazernoe from "./pages/Lazernoe/Lazernoe";
+import Strajkbol from "./pages/Strajkbol/Strajkbol";
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
                 <Route exact path="/register" element={<Register/>}/>
                 <Route exact path="/oruzhie-v-tire" element={<OruzhieVTire/>}/>
                 <Route exact path="/oruzhie-v-tire/lazernoe" element={<Lazernoe/>}/>
+                <Route exact path="/oruzhie-v-tire/strajkbol" element={<Strajkbol/>}/>
             </Routes>
         </Router>
     )
