@@ -13,7 +13,9 @@ import Strajkbol from "./pages/Strajkbol/Strajkbol";
 import Pnevmatika from "./pages/Pnevmatika/Pnevmatika";
 import SignalnoeOruzhie from "./pages/SignalnoeOruzhie/SignalnoeOruzhie";
 import Czenyi from "./pages/Czenyi/Czenyi";
+import Uslugi from "./pages/Uslugi/Uslugi";
 import Kontaktyi from "./pages/Kontaktyi/Kontaktyi";
+import VidyiUslug from "./pages/VidyiUslug/VidyiUslug";
 
 const App = () => {
     return (
@@ -28,6 +30,13 @@ const App = () => {
                 <Route exact path="/oruzhie-v-tire/pnevmatika" element={<Pnevmatika/>}/>
                 <Route exact path="/oruzhie-v-tire/signalnoe-oruzhie" element={<SignalnoeOruzhie/>}/>
                 <Route exact path="/czenyi" element={<Czenyi/>}/>
+                <Route exact path="/uslugi" element={<Uslugi/>}/>
+                <Route exact path="/uslugi/osnovnyie-uslugi-tira" element={<VidyiUslug/>}/>
+                <Route exact path="/uslugi/obuchenie-i-kursyi-strelbyi" element={<VidyiUslug/>}/>
+                <Route exact path="/uslugi/yuridicheskim-liczam" element={<VidyiUslug/>}/>
+                <Route exact path="/uslugi/podarochnyie-sertifikatyi" element={<VidyiUslug/>}/>
+                <Route exact path="/uslugi/razvlecheniya-dlya-vsej-semi" element={<VidyiUslug/>}/>
+                <Route exact path="/uslugi/poznanie-i-razvitie" element={<VidyiUslug/>}/>
                 <Route exact path="/kontaktyi" element={<Kontaktyi/>}/>
             </Routes>
         </Router>
