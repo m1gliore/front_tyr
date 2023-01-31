@@ -89,8 +89,7 @@ const Navbar = () => {
                                                                      aria-haspopup="true"
                                                                      aria-expanded="false">Услуги</a>
                                     <div className="dropdown-menu" aria-labelledby="topMenu89"><a
-                                        className="dropdown-item" href="/uslugi/standartnyie-pkey">Стандартные
-                                        пакеты</a><a className="dropdown-item" href="/uslugi/osnovnyie-uslugi-tira">Основные
+                                        className="dropdown-item" href="/uslugi/osnovnyie-uslugi-tira">Основные
                                         услуги тира</a><a className="dropdown-item"
                                                           href="/uslugi/obuchenie-i-cursor-strelbyi">Обучение и курсы
                                         стрельбы</a><a className="dropdown-item" href="/uslugi/yuridicheskim-liczam">Юридическим
@@ -98,10 +97,7 @@ const Navbar = () => {
                                         сертификаты</a><a className="dropdown-item"
                                                           href="/uslugi/razvlecheniya-dlya-vsej-semi">Развлечения для
                                         всей семьи</a><a className="dropdown-item" href="/uslugi/poznanie-i-razvitie">Познание
-                                        и развитие</a><a className="dropdown-item" href="/uslugi/skidki">Скидки</a><a
-                                        className="dropdown-item" href="/uslugi/podarki-k-prazdnikam">Подарки к
-                                        праздникам</a><a className="dropdown-item" href="/uslugi/zapis-onlajn"
-                                                         target="_blank">Запись онлайн</a></div>
+                                        и развитие</a></div>
                                 </li>
                                 <li className="nav-item active"><a className="nav-link" href="/shooters">Лучшие
                                     стрелки</a></li>
