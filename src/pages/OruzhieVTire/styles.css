@@ -1,0 +1,92 @@
+@charset "utf-8";
+
+/* MAIN */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1, .h1 {
+    font-size: 2.25rem;
+}
+
+h2, .h2 {
+    font-size: 2rem;
+}
+
+h3, .h3 {
+    font-size: 1.75rem;
+}
+
+.breadcrumb {
+    background-color: transparent;
+}
+
+.breadcrumb a {
+    color: rgb(133, 137, 138);
+}
+
+.breadcrumb li.active {
+    color: rgb(23, 44, 65);
+}
+
+/* BUTTONS */
+.btn {
+    font-size: 14px;
+    color: rgb(23, 44, 65);
+    line-height: 1;
+    padding: 5px 8px;
+    border: 1px solid rgb(23, 44, 65);
+    border-radius: 14px;
+    background-color: transparent;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.btn-red {
+    background-color: rgb(173, 26, 39);
+    border-color: rgb(173, 26, 39);
+    color: rgb(255, 255, 255);
+}
+
+.btn-red:hover {
+    background-color: rgba(173, 26, 39, .75);
+    color: rgb(255, 255, 255);
+}
+
+/* TIR */
+.tir {
+    padding: 1.5rem 0 2.5rem;
+    background-color: rgb(221, 221, 224);
+}
+
+.tir .category-card {
+    margin-bottom: 1rem;
+    padding: 1rem 1.5rem;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(194, 194, 194);
+    border-bottom: 2px solid rgb(173, 26, 39);
+}
+
+.tir .category-card h2 {
+    color: rgb(173, 26, 39);
+}
+
+.tir .category-card img {
+    margin-bottom: 1rem;
+}
+
+/* MEDIA */
+
+@media (max-width: 767px) {
+    .h1, h1 {
+        font-size: 2rem;
+    }
+
+    .h2, h2 {
+        font-size: 1.75rem;
+    }
+
+    .h3, h3 {
+        font-size: 1.5rem;
+    }
+}
