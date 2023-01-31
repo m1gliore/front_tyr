@@ -1,0 +1,81 @@
+@charset "utf-8";
+
+/* MAIN */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Myriad Pro Regular', sans-serif;
+}
+
+h1, .h1 {
+    font-size: 2.25rem;
+}
+
+h2, .h2 {
+    font-size: 2rem;
+}
+
+h3, .h3 {
+    font-size: 1.75rem;
+}
+
+.breadcrumb {
+    background-color: transparent;
+}
+
+.breadcrumb a {
+    color: rgb(133, 137, 138);
+}
+
+.breadcrumb li.active {
+    color: rgb(23, 44, 65);
+}
+
+.bg-gray {
+    background-color: rgb(221, 221, 224) !important;
+}
+
+.text-danger {
+    color: rgb(173, 26, 39) !important;
+}
+
+/* BASE */
+.base {
+    padding: 1.5rem 0 2.5rem;
+    background-color: rgb(221, 221, 224);
+}
+
+.base-card {
+    padding: 1rem;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(194, 194, 194);
+    border-bottom: 2px solid rgb(173, 26, 39);
+}
+
+/* MODEL */
+.price-table td {
+    border-top: none;
+    border-bottom: 1px solid rgb(221, 221, 224);
+}
+
+.price-table td.price-cell-price {
+    text-align: right;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: rgb(173, 26, 39);
+}
+
+.tr-href {
+    cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    .h1, h1 {
+        font-size: 2rem;
+    }
+
+    .h2, h2 {
+        font-size: 1.75rem;
+    }
+
+    .h3, h3 {
+        font-size: 1.5rem;
+    }
+}

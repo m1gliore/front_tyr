@@ -12,6 +12,7 @@ import Lazernoe from "./pages/Lazernoe/Lazernoe";
 import Strajkbol from "./pages/Strajkbol/Strajkbol";
 import Pnevmatika from "./pages/Pnevmatika/Pnevmatika";
 import SignalnoeOruzhie from "./pages/SignalnoeOruzhie/SignalnoeOruzhie";
+import Czenyi from "./pages/Czenyi/Czenyi";
 
 const App = () => {
     return (
@@ -25,6 +26,7 @@ const App = () => {
                 <Route exact path="/oruzhie-v-tire/strajkbol" element={<Strajkbol/>}/>
                 <Route exact path="/oruzhie-v-tire/pnevmatika" element={<Pnevmatika/>}/>
                 <Route exact path="/oruzhie-v-tire/signalnoe-oruzhie" element={<SignalnoeOruzhie/>}/>
+                <Route exact path="/czenyi" element={<Czenyi/>}/>
             </Routes>
         </Router>
     )
