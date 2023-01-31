@@ -14,13 +14,13 @@ const Navbar = () => {
                         </div>
                         <div className="col-lg-9 header-contact">
                             <div className="row">
-                                <div className="col-md-3 col-sm-6 header-top-phone-1">
+                                <div className="col-md-2 col-sm-6 header-top-phone-1">
                                     <div className="text-right">
                                         <div className="header-phone">+ 375 29 8594040</div>
                                         <div className="header-phone-desc">(моб.МТС/Viber)</div>
                                     </div>
                                 </div>
-                                <div className="col-md-3 col-sm-6 header-top-phone-2">
+                                <div className="col-md-2 col-sm-6 header-top-phone-2">
                                     <div className="text-left">
                                         <div className="header-phone">+ 375 29 6694040</div>
                                         <div className="header-phone-desc">(моб.ВЕЛ/Viber)</div>
@@ -34,6 +34,20 @@ const Navbar = () => {
                                         </a>
                                     </div>
                                     <div className="header-address-desc">г. Минск, пр-т Дзержинского, 9
+                                    </div>
+                                </div>
+                                <div className="col-md-1 footer-auth">
+                                    <div className="text-center">
+                                        <a href="/login">
+                                            Войти
+                                        </a>
+                                    </div>
+                                </div>
+                                <div className="col-md-1 footer-auth">
+                                    <div className="text-center">
+                                        <a href="/register">
+                                            Зарегистрироваться
+                                        </a>
                                     </div>
                                 </div>
                                 <div className="col-md-2 header-top-social">

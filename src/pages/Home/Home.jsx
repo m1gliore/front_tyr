@@ -1,6 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import 'bootstrap/dist/js/bootstrap';
-import 'unitegallery/dist/css/unite-gallery.css';
 import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Carousel from "../../components/Carousel/Carousel";
