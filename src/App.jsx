@@ -16,6 +16,7 @@ import Czenyi from "./pages/Czenyi/Czenyi";
 import Uslugi from "./pages/Uslugi/Uslugi";
 import Kontaktyi from "./pages/Kontaktyi/Kontaktyi";
 import VidyiUslug from "./pages/VidyiUslug/VidyiUslug";
+import UserProfile from "./pages/UserProfile/UserProfile";
 
 const App = () => {
     return (
@@ -38,6 +39,7 @@ const App = () => {
                 <Route exact path="/uslugi/razvlecheniya-dlya-vsej-semi" element={<VidyiUslug/>}/>
                 <Route exact path="/uslugi/poznanie-i-razvitie" element={<VidyiUslug/>}/>
                 <Route exact path="/kontaktyi" element={<Kontaktyi/>}/>
+                <Route exact path="/user-profile" element={<UserProfile/>}/>
             </Routes>
         </Router>
     )
