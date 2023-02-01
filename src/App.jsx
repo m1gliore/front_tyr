@@ -3,6 +3,8 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import 'unitegallery/dist/css/unite-gallery.css';
 import 'unitegallery/dist/themes/default/ug-theme-default.css'
 import 'jquery/dist/jquery.min.js'
+import 'lightbox2/dist/js/lightbox-plus-jquery.js'
+import 'lightbox2/dist/css/lightbox.css'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
@@ -18,6 +20,7 @@ import Kontaktyi from "./pages/Kontaktyi/Kontaktyi";
 import VidyiUslug from "./pages/VidyiUslug/VidyiUslug";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import LuchshieStrelki from "./pages/LuchshieStrelki/LuchshieStrelki";
+import Galereya from "./pages/Galereya/Galereya";
 
 const App = () => {
     return (
@@ -31,6 +34,7 @@ const App = () => {
                 <Route exact path="/oruzhie-v-tire/strajkbol" element={<Strajkbol/>}/>
                 <Route exact path="/oruzhie-v-tire/pnevmatika" element={<Pnevmatika/>}/>
                 <Route exact path="/oruzhie-v-tire/signalnoe-oruzhie" element={<SignalnoeOruzhie/>}/>
+                <Route exact path="/galereya" element={<Galereya/>}/>
                 <Route exact path="/czenyi" element={<Czenyi/>}/>
                 <Route exact path="/uslugi" element={<Uslugi/>}/>
                 <Route exact path="/uslugi/osnovnyie-uslugi-tira" element={<VidyiUslug/>}/>

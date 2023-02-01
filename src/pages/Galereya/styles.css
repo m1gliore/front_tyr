@@ -1,0 +1,18 @@
+.galleryContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 10px 50px;
+    background-color: #fff;
+}
+
+.galleryContainer img {
+    width: 25vw;
+    padding: 15px;
+    transition: .5s;
+}
+
+.galleryContainer img:hover {
+    transform: scale(1.1);
+}
