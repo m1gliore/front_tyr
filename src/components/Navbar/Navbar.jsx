@@ -99,7 +99,7 @@ const Navbar = () => {
                                         всей семьи</a><a className="dropdown-item" href="/uslugi/poznanie-i-razvitie">Познание
                                         и развитие</a></div>
                                 </li>
-                                <li className="nav-item active"><a className="nav-link" href="/shooters">Лучшие
+                                <li className="nav-item active"><a className="nav-link" href="/luchshie-strelki">Лучшие
                                     стрелки</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/kontaktyi">Контакты тира</a>
                                 </li>
