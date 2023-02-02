@@ -2,6 +2,8 @@ import './styles.css';
 import lightbox from 'lightbox2/dist/js/lightbox-plus-jquery.js'
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
+import {useEffect, useState} from "react";
+// import axios from "axios";
 
 const Galereya = () => {
     lightbox.option({
@@ -9,35 +11,62 @@ const Galereya = () => {
         "wrapAround": true
     })
 
+    const [images, setImages] = useState([])
+
+    useEffect(() => {
+        // (async () => {
+        //     try {
+        //         const response = await axios.get('')
+        //         setImages(response.data)
+        //     } catch (e) {
+        //
+        //     }
+        // })()
+        setImages(
+            [{
+                "id": 1,
+                "title": "Первая",
+                "url": "https://tir-centr.by/assets/images/gallery/015.jpg"
+            },
+                {
+                    "id": 2,
+                    "title": "Вторая",
+                    "url": "https://tir-centr.by/assets/images/gallery/023.jpg"
+                },
+                {
+                    "id": 3,
+                    "title": "Третья",
+                    "url": "https://tir-centr.by/assets/images/gallery/024.jpg"
+                },
+                {
+                    "id": 4,
+                    "title": "Четверая",
+                    "url": "https://tir-centr.by/assets/images/gallery/033.jpg"
+                },
+                {
+                    "id": 5,
+                    "title": "Пятая",
+                    "url": "https://tir-centr.by/assets/images/gallery/034.jpg"
+                },
+                {
+                    "id": 6,
+                    "title": "Шестая",
+                    "url": "https://tir-centr.by/assets/images/gallery/035.jpg"
+                }])
+    }, [])
+
+
+
     return (
         <>
             <Navbar/>
             <main role="main">
                 <div className="galleryContainer">
-                    <a href="https://tir-centr.by/assets/images/gallery/015.jpg" data-lightbox="images"
-                       data-title="Первая">
-                        <img src="https://tir-centr.by/assets/images/gallery/015.jpg" alt="one"/>
-                    </a>
-                    <a href="https://tir-centr.by/assets/images/gallery/023.jpg" data-lightbox="images"
-                       data-title="Вторая">
-                        <img src="https://tir-centr.by/assets/images/gallery/023.jpg" alt="two"/>
-                    </a>
-                    <a href="https://tir-centr.by/assets/images/gallery/024.jpg" data-lightbox="images"
-                       data-title="Третья">
-                        <img src="https://tir-centr.by/assets/images/gallery/024.jpg" alt="three"/>
-                    </a>
-                    <a href="https://tir-centr.by/assets/images/gallery/033.jpg" data-lightbox="images"
-                       data-title="Четвёртая">
-                        <img src="https://tir-centr.by/assets/images/gallery/033.jpg" alt="four"/>
-                    </a>
-                    <a href="https://tir-centr.by/assets/images/gallery/034.jpg" data-lightbox="images"
-                       data-title="Пятая">
-                        <img src="https://tir-centr.by/assets/images/gallery/034.jpg" alt="five"/>
-                    </a>
-                    <a href="https://tir-centr.by/assets/images/gallery/035.jpg" data-lightbox="images"
-                       data-title="Шестая">
-                        <img src="https://tir-centr.by/assets/images/gallery/035.jpg" alt="six"/>
-                    </a>
+                    {images.map((image) =>
+                        <a key={image.id} href={image.url} data-lightbox="images" data-title={image.title}>
+                            <img src={image.url} alt={image.id}/>
+                        </a>
+                    )}
                 </div>
             </main>
             <Footer/>
