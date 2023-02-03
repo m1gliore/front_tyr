@@ -1,8 +1,137 @@
 import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
+import {useEffect, useState} from "react";
 
 const Lazernoe = () => {
+    const [categories, setCategories] = useState([])
+    const [guns, setGuns] = useState([])
+
+    useEffect(() => {
+        // (async () => {
+        //     try {
+        //         const response = await axios.get('')
+        //         setImages(response.data)
+        //     } catch (e) {
+        //
+        //     }
+        // })()
+        setCategories(
+            [{
+                "id": 1,
+                "title": "Автоматы",
+                "type": "assault rifles"
+            },
+                {
+                    "id": 2,
+                    "title": "Пистолеты",
+                    "type": "pistols"
+                },
+                {
+                    "id": 3,
+                    "title": "Винтовки",
+                    "type": "rifles"
+                },
+                {
+                    "id": 4,
+                    "title": "Пистолеты-пулеметы",
+                    "type": "submachine guns"
+                }])
+
+        setGuns(
+            [{
+                "id": 1,
+                "url": "https://tir-centr.by/assets/cache_image/lazernoe/ak74/1_250x250_040.jpg",
+                "alt": "Лазертаг с автоматом Калашникова - лазертаг с АК",
+                "title": "Автомат Калашникова АК-74",
+                "desc": "Отличная модель оружия для лазертага, сделанная из стали с деревянным прикладом. Красивый, " +
+                    "солидный. Подойдет и детям, и взрослым. Лазертаг с АК – впервые в Минске. Без отдачи. Одиночный " +
+                    "огонь.",
+                "cost": 3,
+                "quantity": 20,
+                "link": "oruzhie-v-tire/lazernoe/avtomat-kalashnikova-ak-74",
+                "type": "assault rifles"
+            },
+                {
+                    "id": 2,
+                    "url": "https://tir-centr.by/assets/cache_image/lazernoe/ak-105/1_250x250_040.jpg",
+                    "alt": "Лазертаг с автоматом Калашникова АК-105",
+                    "title": "Автомат Калашникова АК-105",
+                    "desc": "Копия автомата Калашникова АК-105, предназначенная для лазертага. Металл и пластик. " +
+                        "Соответствует реальному АК 105-й версии (последняя модель). Без отдачи, одиночный огонь. " +
+                        "Компактный вариант АК.",
+                    "cost": 3,
+                    "quantity": 20,
+                    "link": "oruzhie-v-tire/lazernoe/avtomat-kalashnikova-ak-105",
+                    "type": "assault rifles"
+                },
+                {
+                    "id": 3,
+                    "url": "https://tir-centr.by/assets/cache_image/lazernoe/grach/1_250x250_040.jpg",
+                    "alt": 'Пистолет Ярыгина "Грач"',
+                    "title": 'Пистолет Ярыгина "Грач"',
+                    "desc": "Цельнометаллическая копия пистолета Ярыгина в нашем лазерном тире. Проверьте, чем " +
+                        "отличается новый армейский пистолет Ярыгина от старого пистолета Макарова. Большой выбор " +
+                        "упражнений для стрельбы.",
+                    "cost": 2,
+                    "quantity": 15,
+                    "link": "/oruzhie-v-tire/oruzhie-v-tire/lazernoe/grach",
+                    "type": "pistols"
+                },
+                {
+                    "id": 4,
+                    "url": "https://tir-centr.by/assets/cache_image/lazernoe/glock/1_250x250_040.jpg",
+                    "alt": "Лазертаг с пистолетом Глок",
+                    "title": "Пистолет Глок",
+                    "desc": "Соответствует по внешнему виду, габаритам и массе своему страйкбольному аналогу. Копия " +
+                        "огнестрельного «Глока». Невидимый лазерный импульс. Отдача отсутствует. Достаточно легкий – " +
+                        "оптимален для детей и новичков.",
+                    "cost": 2,
+                    "quantity": 15,
+                    "link": "/oruzhie-v-tire/oruzhie-v-tire/lazernoe/pistolet-glok",
+                    "type": "pistols"
+                },
+                {
+                    "id": 5,
+                    "url": "https://tir-centr.by/assets/cache_image/lazernoe/vss/1_250x250_040.jpg",
+                    "alt": "Лазертаг с ВСС Винторез - лазертаг со снайперской винтовкой",
+                    "title": "Снайперская винтовка ВСС Винторез",
+                    "desc": "Редкий экземпляр: лазертаг-версия винтовки снайперской специальной (ВСС Винторез). " +
+                        "Сделана из стали, приклад из дерева. Оптический прицел. Компактная, лучший выбор для юного " +
+                        "снайпера.",
+                    "cost": 3,
+                    "quantity": 20,
+                    "link": "/oruzhie-v-tire/lazernoe/snajperskaya-vintovka-vss-vintorez",
+                    "type": "rifles"
+                },
+                {
+                    "id": 6,
+                    "url": "https://tir-centr.by/assets/cache_image/lazernoe/mp-512-36/1_250x250_040.jpg",
+                    "alt": "Лазертаг с металлическим оружием",
+                    "title": "Винтовка МР-512",
+                    "desc": "Классическая модель отечественной пневматической винтовки МР-512 в лазертаг-исполнении. " +
+                        "Винтовка с обновленным дизайном. Идеальна для тренировки перед сдачей норм ГТО, участием в " +
+                        "соревнованиях по спортивной или стендовой стрельбе.",
+                    "cost": 3,
+                    "quantity": 20,
+                    "link": "/oruzhie-v-tire/lazernoe/vintovka-mr512",
+                    "type": "rifles"
+                },
+                {
+                    "id": 7,
+                    "url": "https://tir-centr.by/assets/cache_image/lazernoe/ppsh/1_250x250_040.jpg",
+                    "alt": "Лазерный пистолет-пулемет Шпагина ППШ ММГ",
+                    "title": "Пистолет-пулемет Шпагина ППШ",
+                    "desc": "Антуражный, увесистый, из дерева и стали: лазерный пистолет-пулемет Шпагина (ППШ). " +
+                        "Ощутите в руках тяжесть легендарного советского пистолета-пулемета! Не очень удобен для детей " +
+                        "из-за веса.",
+                    "cost": 3,
+                    "quantity": 20,
+                    "link": "/oruzhie-v-tire/lazernoe/lazernyij-pistolet-pulemet-shpagina-ppsh",
+                    "type": "submachine guns"
+                }])
+    }, [])
+
     return (
         <>
             <Navbar/>
@@ -105,333 +234,37 @@ const Lazernoe = () => {
                         </div>
                     </div>
                 </section>
-                <section className="models-list bg-white">
-                    <div className="container">
-                        <h2>Автоматы</h2>
-                        <div className="row">
-                            <div className="col-lg-4 col-md-6">
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
-                                         src="https://tir-centr.by/assets/cache_image/lazernoe/ak74/1_250x250_040.jpg"
-                                         alt="Лазертаг с автоматом Калашникова - лазертаг с АК"/>
-                                    <div className="card-body">
-                                        <p className="card-title">Автомат Калашникова АК-74</p>
-                                        <p className="card-text">Отличная модель оружия для лазертага, сделанная из
-                                            стали с деревянным прикладом. Красивый, солидный. Подойдет и детям, и
-                                            взрослым. Лазертаг с АК – впервые в Минске. Без отдачи. Одиночный
-                                            огонь.</p>
-                                    </div>
-                                    <div className="card-footer">
-                                        <div className="row">
-                                            <div className="col">
-                                                от <span className="price">3 руб.</span> / 20 выстр.
+                {categories.map((category) =>
+                    <section key={category.id}
+                             className={"models-list " + (category.id % 2 === 0 ? "bg-gray" : "bg-white")}>
+                        <div className="container">
+                            <h2>{category.title}</h2>
+                            <div className="row">
+                                {guns.map((gun) => category.type === gun.type &&
+                                    <div key={gun.id} className="col-lg-4 col-md-6">
+                                        <div className="card">
+                                            <img className="card-img-top mx-auto d-block" src={gun.url} alt={gun.alt}/>
+                                            <div className="card-body">
+                                                <p className="card-title">{gun.title}</p>
+                                                <p className="card-text">{gun.desc}</p>
                                             </div>
-                                            <div className="col-auto text-right">
-                                                <a href="oruzhie-v-tire/lazernoe/avtomat-kalashnikova-ak-74"
-                                                   className="btn btn-red" role="button">Подробнее</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6">
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
-                                         src="https://tir-centr.by/assets/cache_image/lazernoe/ak-105/1_250x250_040.jpg"
-                                         alt="Лазертаг с автоматом Калашникова АК-105"/>
-                                    <div className="card-body">
-                                        <p className="card-title">Автомат Калашникова АК-105</p>
-                                        <p className="card-text">Копия автомата Калашникова АК-105, предназначенная
-                                            для лазертага. Металл и пластик. Соответствует реальному АК 105-й версии
-                                            (последняя модель). Без отдачи, одиночный огонь. Компактный вариант
-                                            АК.</p>
-                                    </div>
-                                    <div className="card-footer">
-                                        <div className="row">
-                                            <div className="col">
-                                                от <span className="price">3 руб.</span> / 20 выстр.
-                                            </div>
-                                            <div className="col-auto text-right">
-                                                <a href="oruzhie-v-tire/lazernoe/avtomat-kalashnikova-ak-105"
-                                                   className="btn btn-red" role="button">Подробнее</a>
+                                            <div className="card-footer">
+                                                <div className="row">
+                                                    <div className="col">
+                                                        от <span
+                                                        className="price">{gun.cost} руб.</span> / {gun.quantity} выстр.
+                                                    </div>
+                                                    <div className="col-auto text-right">
+                                                        <a href={gun.link}
+                                                           className="btn btn-red" role="button">Подробнее</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6">
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
-                                         src="https://tir-centr.by/assets/cache_image/lazernoe/aks-74u/1_250x250_040.jpg"
-                                         alt="Лазертаг с автоматом Калашникова, лазертаг с АК"/>
-                                    <div className="card-body">
-                                        <p className="card-title">Автомат Калашникова АКС74У</p>
-                                        <p className="card-text">Реалистичная модель компактной версии автомата
-                                            АКС74У. Сталь, деревянные элементы. Возможны тренировки с
-                                            соответствующими упражнениями: для инкассаторов, сотрудников ОВД. Без
-                                            отдачи. Одиночный огонь.</p>
-                                    </div>
-                                    <div className="card-footer">
-                                        <div className="row">
-                                            <div className="col">
-                                                от <span className="price">3 руб.</span> / 20 выстр.
-                                            </div>
-                                            <div className="col-auto text-right">
-                                                <a href="oruzhie-v-tire/lazernoe/avtomat-kalashnikova-aks74u"
-                                                   className="btn btn-red" role="button">Подробнее</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6">
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
-                                         src="https://tir-centr.by/assets/cache_image/lazernoe/m4/1_250x250_040.jpg"
-                                         alt="Лазертаг с M4, лазерная винтовка M4"/>
-                                    <div className="card-body">
-                                        <p className="card-title">Автоматическая винтовка M4A1</p>
-                                        <p className="card-text">Компактный вариант винтовки M16: карабин (автомат)
-                                            M4 в лазертаг-исполнении. Качественная металлическая копия.
-                                            Соответствует реальной винтовке по размерам и массе. Без отдачи.
-                                            Одиночный огонь.</p>
-                                    </div>
-                                    <div className="card-footer">
-                                        <div className="row">
-                                            <div className="col">
-                                                от <span className="price">3 руб.</span> / 20 выстр.
-                                            </div>
-                                            <div className="col-auto text-right">
-                                                <a href="oruzhie-v-tire/lazernoe/avtomaticheskaya-vintovka-m4a1"
-                                                   className="btn btn-red" role="button">Подробнее</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6">
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
-                                         src="https://tir-centr.by/assets/cache_image/lazernoe/m16/1_250x250_040.jpg"
-                                         alt="Лазертаг с винтовкой M16"/>
-                                    <div className="card-body">
-                                        <p className="card-title">Автоматическая винтовка M16</p>
-                                        <p className="card-text">Классическая версия легендарной автоматической
-                                            винтовки армии США M16. Основной конкурент автомата Калашникова.
-                                            Соответствует реальной винтовке по размерам и массе. Без отдачи.
-                                            Одиночный огонь. Тактические планки.</p>
-                                    </div>
-                                    <div className="card-footer">
-                                        <div className="row">
-                                            <div className="col">
-                                                от <span className="price">3 руб.</span> / 20 выстр.
-                                            </div>
-                                            <div className="col-auto text-right">
-                                                <a href="oruzhie-v-tire/lazernoe/avtomaticheskaya-vintovka-m16"
-                                                   className="btn btn-red" role="button">Подробнее</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </div>)}
                             </div>
                         </div>
-                    </div>
-                </section>
-                <section className="models-list bg-gray">
-                    <div className="container">
-                        <h2>Пистолеты</h2>
-                        <div className="row">
-                            <div className="col-lg-4 col-md-6">
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
-                                         src="https://tir-centr.by/assets/cache_image/lazernoe/grach/1_250x250_040.jpg"
-                                         alt='Пистолет Ярыгина "Грач"'/>
-                                    <div className="card-body">
-                                        <p className="card-title">Пистолет Ярыгина "Грач"</p>
-                                        <p className="card-text">Цельнометаллическая копия пистолета Ярыгина в нашем
-                                            лазерном тире. Проверьте, чем отличается новый армейский пистолет
-                                            Ярыгина от старого пистолета Макарова. Большой выбор упражнений для
-                                            стрельбы. </p>
-                                    </div>
-                                    <div className="card-footer">
-                                        <div className="row">
-                                            <div className="col">
-                                                от <span className="price">2 руб.</span> / 15 выстр.
-                                            </div>
-                                            <div className="col-auto text-right">
-                                                <a href="oruzhie-v-tire/lazernoe/grach" className="btn btn-red"
-                                                   role="button">Подробнее</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6">
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
-                                         src="https://tir-centr.by/assets/cache_image/lazernoe/glock/1_250x250_040.jpg"
-                                         alt="Лазертаг с пистолетом Глок"/>
-                                    <div className="card-body">
-                                        <p className="card-title">Пистолет Глок</p>
-                                        <p className="card-text">Соответствует по внешнему виду, габаритам и массе
-                                            своему страйкбольному аналогу. Копия огнестрельного «Глока». Невидимый
-                                            лазерный импульс. Отдача отсутствует. Достаточно легкий – оптимален для
-                                            детей и новичков.</p>
-                                    </div>
-                                    <div className="card-footer">
-                                        <div className="row">
-                                            <div className="col">
-                                                от <span className="price">2 руб.</span> / 15 выстр.
-                                            </div>
-                                            <div className="col-auto text-right">
-                                                <a href="oruzhie-v-tire/lazernoe/pistolet-glok" className="btn btn-red"
-                                                   role="button">Подробнее</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6">
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
-                                         src="https://tir-centr.by/assets/cache_image/lazernoe/beretta/1_250x250_040.jpg"
-                                         alt="Лазертаг с пистолетом Беретта"/>
-                                    <div className="card-body">
-                                        <p className="card-title">Пистолет Беретта M9</p>
-                                        <p className="card-text">Соответствует по внешнему виду, габаритам и массе
-                                            своему страйкбольному аналогу. Копия огнестрельной «Беретты М9».
-                                            Невидимый лазерный импульс. Отдача отсутствует. Для детской руки
-                                            крупноват и тяжеловат.</p>
-                                    </div>
-                                    <div className="card-footer">
-                                        <div className="row">
-                                            <div className="col">
-                                                от <span className="price">2 руб.</span> / 15 выстр.
-                                            </div>
-                                            <div className="col-auto text-right">
-                                                <a href="oruzhie-v-tire/lazernoe/pistolet-beretta-m9"
-                                                   className="btn btn-red" role="button">Подробнее</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6">
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
-                                         src="https://tir-centr.by/assets/cache_image/lazernoe/pm/1_250x250_040.jpg"
-                                         alt="Лазертаг с пистолетом Макарова - ПМ лазертаг"/>
-                                    <div className="card-body">
-                                        <p className="card-title">Пистолет Макарова (ПМ)</p>
-                                        <p className="card-text">Легендарный пистолет Макаров в версии для
-                                            лазертага. Сделан из стали, соответствует огнестрельному прототипу.
-                                            Подойдет для тренировки обладателям служебной версии ПМ, курсантам.
-                                            Реальные упражнения с пистолетом в наличии!</p>
-                                    </div>
-                                    <div className="card-footer">
-                                        <div className="row">
-                                            <div className="col">
-                                                от <span className="price">2 руб.</span> / 15 выстр.
-                                            </div>
-                                            <div className="col-auto text-right">
-                                                <a href="oruzhie-v-tire/lazernoe/pistolet-makarova-(pm)"
-                                                   className="btn btn-red" role="button">Подробнее</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section className="models-list bg-white">
-                    <div className="container">
-                        <h2>Винтовки</h2>
-                        <div className="row">
-                            <div className="col-lg-4 col-md-6">
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
-                                         src="https://tir-centr.by/assets/cache_image/lazernoe/vss/1_250x250_040.jpg"
-                                         alt="Лазертаг с ВСС Винторез - лазертаг со снайперской винтовкой "/>
-                                    <div className="card-body">
-                                        <p className="card-title">Снайперская винтовка ВСС Винторез</p>
-                                        <p className="card-text">Редкий экземпляр: лазертаг-версия винтовки
-                                            снайперской специальной (ВСС Винторез). Сделана из стали, приклад из
-                                            дерева. Оптический прицел. Компактная, лучший выбор для юного
-                                            снайпера.</p>
-                                    </div>
-                                    <div className="card-footer">
-                                        <div className="row">
-                                            <div className="col">
-                                                от <span className="price">3 руб.</span> / 20 выстр.
-                                            </div>
-                                            <div className="col-auto text-right">
-                                                <a href="oruzhie-v-tire/lazernoe/snajperskaya-vintovka-vss-vintorez"
-                                                   className="btn btn-red" role="button">Подробнее</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-4 col-md-6">
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
-                                         src="https://tir-centr.by/assets/cache_image/lazernoe/mp-512-36/1_250x250_040.jpg"
-                                         alt="Лазертаг с металлическим оружием"/>
-                                    <div className="card-body">
-                                        <p className="card-title">Винтовка МР-512</p>
-                                        <p className="card-text">Классическая модель отечественной пневматической
-                                            винтовки МР-512 в лазертаг-исполнении. Винтовка с обновленным дизайном.
-                                            Идеальна для тренировки перед сдачей норм ГТО, участием в соревнованиях
-                                            по спортивной или стендовой стрельбе.</p>
-                                    </div>
-                                    <div className="card-footer">
-                                        <div className="row">
-                                            <div className="col">
-                                                от <span className="price">3 руб.</span> / 20 выстр.
-                                            </div>
-                                            <div className="col-auto text-right">
-                                                <a href="oruzhie-v-tire/lazernoe/vintovka-mr512"
-                                                   className="btn btn-red" role="button">Подробнее</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section className="models-list bg-gray">
-                    <div className="container">
-                        <h2>Пистолеты-пулеметы</h2>
-                        <div className="row">
-                            <div className="col-lg-4 col-md-6">
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
-                                         src="https://tir-centr.by/assets/cache_image/lazernoe/ppsh/1_250x250_040.jpg"
-                                         alt="Лазерный пистолет-пулемет Шпагина ППШ ММГ"/>
-                                    <div className="card-body">
-                                        <p className="card-title">Пистолет-пулемет Шпагина ППШ</p>
-                                        <p className="card-text">Антуражный, увесистый, из дерева и стали: лазерный
-                                            пистолет-пулемет Шпагина (ППШ). Ощутите в руках тяжесть легендарного
-                                            советского пистолета-пулемета! Не очень удобен для детей из-за веса.</p>
-                                    </div>
-                                    <div className="card-footer">
-                                        <div className="row">
-                                            <div className="col">
-                                                от <span className="price">3 руб.</span> / 20 выстр.
-                                            </div>
-                                            <div className="col-auto text-right">
-                                                <a href="oruzhie-v-tire/lazernoe/lazernyij-pistolet-pulemet-shpagina-ppsh"
-                                                   className="btn btn-red" role="button">Подробнее</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                    </section>)}
             </main>
             <Footer/>
         </>
