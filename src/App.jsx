@@ -10,10 +10,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import OruzhieVTire from "./pages/OruzhieVTire/OruzhieVTire";
-import Lazernoe from "./pages/Lazernoe/Lazernoe";
-import Strajkbol from "./pages/Strajkbol/Strajkbol";
-import Pnevmatika from "./pages/Pnevmatika/Pnevmatika";
-import SignalnoeOruzhie from "./pages/SignalnoeOruzhie/SignalnoeOruzhie";
+import Tyr from "./pages/Tyr/Tyr";
 import Czenyi from "./pages/Czenyi/Czenyi";
 import Uslugi from "./pages/Uslugi/Uslugi";
 import Kontaktyi from "./pages/Kontaktyi/Kontaktyi";
@@ -30,10 +27,7 @@ const App = () => {
                 <Route exact path="/login" element={<Login/>}/>
                 <Route exact path="/register" element={<Register/>}/>
                 <Route exact path="/oruzhie-v-tire" element={<OruzhieVTire/>}/>
-                <Route exact path="/oruzhie-v-tire/lazernoe" element={<Lazernoe/>}/>
-                <Route exact path="/oruzhie-v-tire/strajkbol" element={<Strajkbol/>}/>
-                <Route exact path="/oruzhie-v-tire/pnevmatika" element={<Pnevmatika/>}/>
-                <Route exact path="/oruzhie-v-tire/signalnoe-oruzhie" element={<SignalnoeOruzhie/>}/>
+                <Route exact path="/oruzhie-v-tire/:idTyr" element={<Tyr/>}/>
                 <Route exact path="/galereya" element={<Galereya/>}/>
                 <Route exact path="/czenyi" element={<Czenyi/>}/>
                 <Route exact path="/uslugi" element={<Uslugi/>}/>
