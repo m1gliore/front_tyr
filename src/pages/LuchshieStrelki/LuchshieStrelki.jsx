@@ -6,7 +6,7 @@ const LuchshieStrelki = () => {
     return (
         <>
             <Navbar/>
-            <section className="models-list bg-white">
+            <section className="shooters-list bg-white">
                 <div className="container">
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">

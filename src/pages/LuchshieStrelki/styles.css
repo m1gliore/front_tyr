@@ -81,11 +81,11 @@ a {
     line-height: 1.2rem;
 }
 
-.models-list {
+.shooters-list {
     padding: 1.5rem 0;
 }
 
-.models-list .card {
+.shooters-list .card {
     border: 1px solid rgb(194, 194, 194);
     border-bottom: 2px solid rgb(173, 26, 39);
     border-radius: 0;
@@ -93,21 +93,21 @@ a {
     height: 60vh;
 }
 
-.models-list .card-img-top {
+.shooters-list .card-img-top {
     width: 250px;
     height: 250px;
 }
 
-.models-list .card-img-overlay {
+.shooters-list .card-img-overlay {
     top: 39px;
     padding: 0;
 }
 
-.models-list .card-body {
+.shooters-list .card-body {
     padding: 1rem .75rem;
 }
 
-.models-list .card-desc {
+.shooters-list .card-desc {
     font-size: 1.2rem;
     line-height: 1;
     padding: 0 .5rem 1rem;
@@ -115,13 +115,12 @@ a {
     height: 4.2rem;
 }
 
-.models-list .card-title {
+.shooters-list .card-title {
     font-size: 1.5rem;
     font-weight: 700;
 }
 
 /* MEDIA */
-
 @media (max-width: 767px) {
     .h1, h1 {
         font-size: 2rem;

@@ -55,8 +55,6 @@ const Galereya = () => {
                 }])
     }, [])
 
-
-
     return (
         <>
             <Navbar/>
