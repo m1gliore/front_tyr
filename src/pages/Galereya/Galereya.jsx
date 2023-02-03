@@ -35,8 +35,7 @@ const Galereya = () => {
                 <div className="galleryContainer">
                     {images.map((image) =>
                         <a key={image.idImage} href={"data:image/" + image.url.split('.')[1] + ";base64," + image.file}
-                           data-lightbox="images"
-                           data-title={image.url}>
+                           data-lightbox="images" data-title={image.url}>
                             <img src={"data:image/" + image.url.split('.')[1] + ";base64," + image.file}
                                  alt={image.idImage}/>
                         </a>
