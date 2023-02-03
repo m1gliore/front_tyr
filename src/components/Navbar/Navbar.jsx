@@ -77,10 +77,8 @@ const Navbar = () => {
                                                                      aria-expanded="false">Оружие в тире</a>
                                     <div className="dropdown-menu" aria-labelledby="topMenu12"><a
                                         className="dropdown-item" href="/oruzhie-v-tire/lazernoe">Лазерный тир</a><a
-                                        className="dropdown-item" href="/oruzhie-v-tire/strajkbol">Страйкбольный тир</a><a
-                                        className="dropdown-item" href="/oruzhie-v-tire/pnevmatika">Пневматический
-                                        тир</a><a className="dropdown-item" href="/oruzhie-v-tire/signalnoe-oruzhie">Сигнальное
-                                        оружие</a></div>
+                                        className="dropdown-item" href="/oruzhie-v-tire/strajkbol">Страйкбольный тир</a>
+                                    </div>
                                 </li>
                                 <li className="nav-item"><a className="nav-link" href="/galereya">Галерея</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/czenyi">Цены</a></li>
