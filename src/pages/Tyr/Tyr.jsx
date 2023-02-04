@@ -2,9 +2,10 @@ import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
+import {useLocation} from "react-router-dom";
 
 const Tyr = () => {
-    const currentTyr = window.location.pathname.split('/')[2]
+    const currentTyr = useLocation().search.split('=')[1]
 
     const [tyrs, setTyrs] = useState([])
     const [categories, setCategories] = useState([])
@@ -108,37 +109,37 @@ const Tyr = () => {
             [{
                 "id": 1,
                 "title": "Автоматы",
-                "type": "assault rifles",
+                "type": "ASSAULT_RIFLES",
                 "tyr": ["lazernoe", "strajkbol"]
             },
                 {
                     "id": 2,
                     "title": "Пистолеты",
-                    "type": "pistols",
+                    "type": "PISTOLS",
                     "tyr": ["lazernoe", "strajkbol"]
                 },
                 {
                     "id": 3,
                     "title": "Винтовки",
-                    "type": "rifles",
+                    "type": "RIFLES",
                     "tyr": ["lazernoe", "strajkbol"]
                 },
                 {
                     "id": 4,
                     "title": "Пистолеты-пулеметы",
-                    "type": "submachine guns",
+                    "type": "SUBMACHINE_GUNS",
                     "tyr": ["lazernoe", "strajkbol"]
                 },
                 {
                     "id": 5,
                     "title": "Дробовики",
-                    "type": "shotguns",
+                    "type": "SHOTGUNS",
                     "tyr": ["strajkbol"]
                 },
                 {
                     "id": 6,
                     "title": "Пулеметы",
-                    "type": "machine guns",
+                    "type": "MACHINE_GUNS",
                     "tyr": ["strajkbol"]
                 }])
 
@@ -154,7 +155,7 @@ const Tyr = () => {
                 "cost": 3,
                 "quantity": 20,
                 "link": "oruzhie-v-tire/lazernoe/avtomat-kalashnikova-ak-74",
-                "type": "assault rifles",
+                "type": "ASSAULT_RIFLES",
                 "tyr": "lazernoe"
             },
                 {
@@ -168,7 +169,7 @@ const Tyr = () => {
                     "cost": 3,
                     "quantity": 20,
                     "link": "oruzhie-v-tire/lazernoe/avtomat-kalashnikova-ak-105",
-                    "type": "assault rifles",
+                    "type": "ASSAULT_RIFLES",
                     "tyr": "lazernoe"
                 },
                 {
@@ -182,7 +183,7 @@ const Tyr = () => {
                     "cost": 2,
                     "quantity": 15,
                     "link": "/oruzhie-v-tire/oruzhie-v-tire/lazernoe/grach",
-                    "type": "pistols",
+                    "type": "PISTOLS",
                     "tyr": "lazernoe"
                 },
                 {
@@ -196,7 +197,7 @@ const Tyr = () => {
                     "cost": 2,
                     "quantity": 15,
                     "link": "/oruzhie-v-tire/oruzhie-v-tire/lazernoe/pistolet-glok",
-                    "type": "pistols",
+                    "type": "PISTOLS",
                     "tyr": "lazernoe"
                 },
                 {
@@ -210,7 +211,7 @@ const Tyr = () => {
                     "cost": 3,
                     "quantity": 20,
                     "link": "/oruzhie-v-tire/lazernoe/snajperskaya-vintovka-vss-vintorez",
-                    "type": "rifles",
+                    "type": "RIFLES",
                     "tyr": "lazernoe"
                 },
                 {
@@ -224,7 +225,7 @@ const Tyr = () => {
                     "cost": 3,
                     "quantity": 20,
                     "link": "/oruzhie-v-tire/lazernoe/vintovka-mr512",
-                    "type": "rifles",
+                    "type": "RIFLES",
                     "tyr": "lazernoe"
                 },
                 {
@@ -238,7 +239,7 @@ const Tyr = () => {
                     "cost": 3,
                     "quantity": 20,
                     "link": "/oruzhie-v-tire/lazernoe/lazernyij-pistolet-pulemet-shpagina-ppsh",
-                    "type": "submachine guns",
+                    "type": "SUBMACHINE_GUNS",
                     "tyr": "lazernoe"
                 },
                 {
@@ -251,7 +252,7 @@ const Tyr = () => {
                     "cost": 5,
                     "quantity": 30,
                     "link": "/oruzhie-v-tire/strajkbol/pistolet-kolt-1911",
-                    "type": "pistols",
+                    "type": "PISTOLS",
                     "tyr": "strajkbol"
                 },
                 {
@@ -264,7 +265,7 @@ const Tyr = () => {
                     "cost": 6,
                     "quantity": 20,
                     "link": "/oruzhie-v-tire/strajkbol/avtomat-speczialnyij-val",
-                    "type": "assault rifles",
+                    "type": "ASSAULT_RIFLES",
                     "tyr": "strajkbol"
                 },
                 {
@@ -278,7 +279,7 @@ const Tyr = () => {
                     "cost": 12,
                     "quantity": 70,
                     "link": "/oruzhie-v-tire/strajkbol/mp5-k",
-                    "type": "submachine guns",
+                    "type": "SUBMACHINE_GUNS",
                     "tyr": "strajkbol"
                 },
                 {
@@ -292,7 +293,7 @@ const Tyr = () => {
                     "cost": 4,
                     "quantity": 7,
                     "link": "/oruzhie-v-tire/strajkbol/drobovik-benelli-m3-compact",
-                    "type": "shotguns",
+                    "type": "SHOTGUNS",
                     "tyr": "strajkbol"
                 },
                 {
@@ -306,7 +307,7 @@ const Tyr = () => {
                     "cost": 7,
                     "quantity": 20,
                     "link": "/oruzhie-v-tire/strajkbol/snajperskaya-vintovka-mk12-mod0",
-                    "type": "rifles",
+                    "type": "RIFLES",
                     "tyr": "strajkbol"
                 },
                 {
@@ -320,7 +321,7 @@ const Tyr = () => {
                     "cost": 17,
                     "quantity": 100,
                     "link": "/oruzhie-v-tire/strajkbol/rpk-74",
-                    "type": "machine guns",
+                    "type": "MACHINE_GUNS",
                     "tyr": "strajkbol"
                 }])
     }, [])
