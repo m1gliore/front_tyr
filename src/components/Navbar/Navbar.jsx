@@ -1,9 +1,11 @@
 import './styles.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCircle, faEnvelope} from '@fortawesome/free-solid-svg-icons'
+import {faCircle, faEnvelope, faPen, faPlus, faTrashCan} from '@fortawesome/free-solid-svg-icons'
 import {faInstagram} from '@fortawesome/free-brands-svg-icons'
 
 const Navbar = () => {
+    const admin = true
+
     return (
         <header>
             <div className="header-top">
@@ -78,6 +80,11 @@ const Navbar = () => {
                                     <div className="dropdown-menu" aria-labelledby="topMenu12"><a
                                         className="dropdown-item" href="/oruzhie-v-tire/type?catalog=lazernoe">Лазерный тир</a><a
                                         className="dropdown-item" href="/oruzhie-v-tire/type?catalog=strajkbol">Страйкбольный тир</a>
+                                        {admin && <>
+                                            <FontAwesomeIcon className="action" icon={faTrashCan}/>
+                                            <FontAwesomeIcon className="action" icon={faPen}/>
+                                            <FontAwesomeIcon className="action" icon={faPlus}/>
+                                        </>}
                                     </div>
                                 </li>
                                 <li className="nav-item"><a className="nav-link" href="/galereya">Галерея</a></li>
@@ -95,7 +102,12 @@ const Navbar = () => {
                                         сертификаты</a><a className="dropdown-item"
                                                           href="/uslugi/type?catalog=razvlecheniya-dlya-vsej-semi">Развлечения для
                                         всей семьи</a><a className="dropdown-item" href="/uslugi/type?catalog=poznanie-i-razvitie">Познание
-                                        и развитие</a></div>
+                                        и развитие</a>
+                                        {admin && <>
+                                            <FontAwesomeIcon className="action" icon={faTrashCan}/>
+                                            <FontAwesomeIcon className="action" icon={faPen}/>
+                                            <FontAwesomeIcon className="action" icon={faPlus}/>
+                                        </>}</div>
                                 </li>
                                 <li className="nav-item active"><a className="nav-link" href="/strelki/type?catalog=luchshie-strelki">Лучшие
                                     стрелки</a></li>
