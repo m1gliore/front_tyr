@@ -4,6 +4,9 @@ import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import axios from "axios";
+import Modal from "../../components/Modal/Modal";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPen, faPlus, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 
 const Tyr = () => {
     const currentTyr = useLocation().search.split('=')[1]
@@ -11,6 +14,10 @@ const Tyr = () => {
     const [tyrs, setTyrs] = useState([])
     const [categories, setCategories] = useState([])
     const [guns, setGuns] = useState([])
+    const [modalDeleteActive, setModalDeleteActive] = useState(false)
+    const [modalAddActive, setModalAddActive] = useState(false)
+    const [modalRedactActive, setModalRedactActive] = useState(false)
+    const admin = true
 
     useEffect(() => {
         (async () => {
@@ -30,6 +37,11 @@ const Tyr = () => {
     return (
         <>
             <Navbar/>
+            {admin && <>
+                <FontAwesomeIcon className="action fa-2x" icon={faTrashCan} onClick={() => setModalDeleteActive(true)}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => setModalRedactActive(true)}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPlus} onClick={() => setModalAddActive(true)}/>
+            </>}
             <main role="main">
                 {tyrs.map((tyr) =>
                     <section className="category">
@@ -132,6 +144,15 @@ const Tyr = () => {
                     </section>)}
             </main>
             <Footer/>
+            <Modal active={modalDeleteActive} setActive={setModalDeleteActive}>
+                <p>Удалить</p>
+            </Modal>
+            <Modal active={modalAddActive} setActive={setModalAddActive}>
+                <p>Добавить</p>
+            </Modal>
+            <Modal active={modalRedactActive} setActive={setModalRedactActive}>
+                <p>Изменить</p>
+            </Modal>
         </>
     )
 }

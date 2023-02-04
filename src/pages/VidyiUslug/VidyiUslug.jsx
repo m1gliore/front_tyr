@@ -4,12 +4,19 @@ import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import axios from "axios";
+import Modal from "../../components/Modal/Modal";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faPen, faPlus, faTrashCan} from "@fortawesome/free-solid-svg-icons";
 
 const VidyiUslug = () => {
     const currentService = useLocation().search.split('=')[1]
     const currentPath = useLocation().pathname
     const [services, setServices] = useState([])
     const [serviceNames, setServiceNames] = useState([])
+    const [modalDeleteActive, setModalDeleteActive] = useState(false)
+    const [modalAddActive, setModalAddActive] = useState(false)
+    const [modalRedactActive, setModalRedactActive] = useState(false)
+    const admin = true
 
     useEffect(() => {
         (async () => {
@@ -27,8 +34,12 @@ const VidyiUslug = () => {
     return (
         <>
             <Navbar/>
+            {admin && <>
+                <FontAwesomeIcon className="action fa-2x" icon={faTrashCan} onClick={() => setModalDeleteActive(true)}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => setModalRedactActive(true)}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPlus} onClick={() => setModalAddActive(true)}/>
+            </>}
             <main role="main">
-
                 <section key={services.idServiceCatalog} className="service-part">
                     <div className="container">
                         <nav aria-label="breadcrumb">
@@ -65,6 +76,15 @@ const VidyiUslug = () => {
                 </section>
             </main>
             <Footer/>
+            <Modal active={modalDeleteActive} setActive={setModalDeleteActive}>
+                <p>Удалить</p>
+            </Modal>
+            <Modal active={modalAddActive} setActive={setModalAddActive}>
+                <p>Добавить</p>
+            </Modal>
+            <Modal active={modalRedactActive} setActive={setModalRedactActive}>
+                <p>Изменить</p>
+            </Modal>
         </>
     )
 }

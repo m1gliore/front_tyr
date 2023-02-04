@@ -60,6 +60,13 @@ a {
     color: rgb(255, 255, 255);
 }
 
+.action {
+    margin: 10px;
+    float: right;
+    color: black;
+    cursor: pointer;
+}
+
 /* CATEGORY */
 .category {
     padding: 1.5rem 0 2.5rem;
