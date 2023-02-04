@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClock, faEnvelope, faMapMarkerAlt, faPhoneSquare} from "@fortawesome/free-solid-svg-icons";
+import {YMaps, Map, Placemark} from '@pbe/react-yandex-maps';
 
 const Kontaktyi = () => {
     return (
@@ -57,6 +58,20 @@ const Kontaktyi = () => {
                             </div>
                         </div>
                     </div>
+                    <YMaps>
+                        <div style={{
+                            marginTop: "20px",
+                            width: "100%",
+                            height: "100%",
+                            display: "flex",
+                            justifyContent: "center"
+                        }}>
+                            <Map style={{width: "80vw", height: "80vh"}}
+                                 defaultState={{center: [53.91156599620971, 27.595853956089268], zoom: 18}}>
+                                <Placemark geometry={[53.91156599620971, 27.595853956089268]}/>
+                            </Map>
+                        </div>
+                    </YMaps>
                 </section>
             </main>
             <Footer/>
