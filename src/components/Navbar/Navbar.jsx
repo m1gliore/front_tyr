@@ -87,14 +87,14 @@ const Navbar = () => {
                                                                      aria-haspopup="true"
                                                                      aria-expanded="false">Услуги</a>
                                     <div className="dropdown-menu" aria-labelledby="topMenu89"><a
-                                        className="dropdown-item" href="/uslugi/osnovnyie-uslugi-tira">Основные
+                                        className="dropdown-item" href="/uslugi/type?catalog=osnovnyie-uslugi-tira">Основные
                                         услуги тира</a><a className="dropdown-item"
-                                                          href="/uslugi/obuchenie-i-cursor-strelbyi">Обучение и курсы
-                                        стрельбы</a><a className="dropdown-item" href="/uslugi/yuridicheskim-liczam">Юридическим
-                                        лицам</a><a className="dropdown-item" href="/uslugi/podarochnyie-sertifikatyi">Подарочные
+                                                          href="/uslugi/type?catalog=obuchenie-i-cursor-strelbyi">Обучение и курсы
+                                        стрельбы</a><a className="dropdown-item" href="/uslugi/type?catalog=yuridicheskim-liczam">Юридическим
+                                        лицам</a><a className="dropdown-item" href="/uslugi/type?catalog=podarochnyie-sertifikatyi">Подарочные
                                         сертификаты</a><a className="dropdown-item"
-                                                          href="/uslugi/razvlecheniya-dlya-vsej-semi">Развлечения для
-                                        всей семьи</a><a className="dropdown-item" href="/uslugi/poznanie-i-razvitie">Познание
+                                                          href="/uslugi/type?catalog=razvlecheniya-dlya-vsej-semi">Развлечения для
+                                        всей семьи</a><a className="dropdown-item" href="/uslugi/type?catalog=poznanie-i-razvitie">Познание
                                         и развитие</a></div>
                                 </li>
                                 <li className="nav-item active"><a className="nav-link" href="/strelki/type?catalog=luchshie-strelki">Лучшие
