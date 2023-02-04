@@ -31,12 +31,7 @@ const App = () => {
                 <Route exact path="/galereya" element={<Galereya/>}/>
                 <Route exact path="/czenyi" element={<Czenyi/>}/>
                 <Route exact path="/uslugi" element={<Uslugi/>}/>
-                <Route exact path="/uslugi/osnovnyie-uslugi-tira" element={<VidyiUslug/>}/>
-                <Route exact path="/uslugi/obuchenie-i-kursyi-strelbyi" element={<VidyiUslug/>}/>
-                <Route exact path="/uslugi/yuridicheskim-liczam" element={<VidyiUslug/>}/>
-                <Route exact path="/uslugi/podarochnyie-sertifikatyi" element={<VidyiUslug/>}/>
-                <Route exact path="/uslugi/razvlecheniya-dlya-vsej-semi" element={<VidyiUslug/>}/>
-                <Route exact path="/uslugi/poznanie-i-razvitie" element={<VidyiUslug/>}/>
+                <Route exact path="/uslugi/type" element={<VidyiUslug/>}/>
                 <Route exact path="/strelki/type" element={<LuchshieStrelki/>}/>
                 <Route exact path="/kontaktyi" element={<Kontaktyi/>}/>
                 <Route exact path="/user-profile" element={<UserProfile/>}/>
