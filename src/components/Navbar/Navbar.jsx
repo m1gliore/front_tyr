@@ -76,8 +76,8 @@ const Navbar = () => {
                                                                      data-bs-toggle="dropdown" aria-haspopup="true"
                                                                      aria-expanded="false">Оружие в тире</a>
                                     <div className="dropdown-menu" aria-labelledby="topMenu12"><a
-                                        className="dropdown-item" href="/oruzhie-v-tire/lazernoe">Лазерный тир</a><a
-                                        className="dropdown-item" href="/oruzhie-v-tire/strajkbol">Страйкбольный тир</a>
+                                        className="dropdown-item" href="/oruzhie-v-tire/type?tyr=lazernoe">Лазерный тир</a><a
+                                        className="dropdown-item" href="/oruzhie-v-tire/type?tyr=strajkbol">Страйкбольный тир</a>
                                     </div>
                                 </li>
                                 <li className="nav-item"><a className="nav-link" href="/galereya">Галерея</a></li>
