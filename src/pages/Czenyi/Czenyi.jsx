@@ -2,51 +2,21 @@ import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
+import axios from "axios";
 
 const Czenyi = () => {
-    const [prices, setPrices] = useState([])
+    const [costs, setCosts] = useState([])
 
     useEffect(() => {
-        // (async () => {
-        //     try {
-        //         const response = await axios.get('')
-        //         setImages(response.data)
-        //     } catch (e) {
-        //
-        //     }
-        // })()
-        setPrices(
-            [{
-                "id": 1,
-                "title": "Пневматический тир (10 выстрелов)",
-                "quantity": 4
-            },
-                {
-                    "id": 2,
-                    "title": "Страйкбольный тир (20 выстрелов)",
-                    "quantity": 6
-                },
-                {
-                    "id": 3,
-                    "title": "Лазерный тир (15 выстрелов)",
-                    "quantity": 2
-                },
-                {
-                    "id": 4,
-                    "title": "Пристрелка страйкбольного привода",
-                    "quantity": 9
-                },
-                {
-                    "id": 5,
-                    "title": "Пристрелка пневматики",
-                    "quantity": 9
-                },
-                {
-                    "id": 6,
-                    "title": "Аренда тира (со своим оружием), 30 минут",
-                    "quantity": 25
-                }
-            ])
+        (async () => {
+            try {
+                const response = await axios.get('http://localhost:8040/api/homePage/getPriceCatalog')
+                setCosts(response.data)
+            } catch (e) {
+
+            }
+        })()
+
     }, [])
 
     return (
@@ -74,10 +44,10 @@ const Czenyi = () => {
                             </div>
                             <table className="table table-sm price-table">
                                 <tbody>
-                                {prices.map((price) =>
-                                    <tr className="tr-href">
-                                        <td>{price.title}</td>
-                                        <td className="price-cell-price">от&nbsp;{price.quantity}&nbsp;руб.</td>
+                                {costs.map((cost) =>
+                                    <tr key={cost.nameService} className="tr-href">
+                                        <td>{cost.nameService}</td>
+                                        <td className="price-cell-price">от&nbsp;{cost.price}&nbsp;руб.</td>
                                     </tr>
                                 )}
                                 </tbody>
