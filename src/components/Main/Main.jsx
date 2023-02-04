@@ -18,7 +18,7 @@ const Main = () => {
                         <div className="ug-overlay-disabled" style={{display: "none"}}></div>
                         <div className="ug-tiles-wrapper ug-tiletype-justified ug-tiles-transit ug-tiles-rest-mode"
                              style={{position: "relative", height: "416px", left: "15%"}}><a
-                            href="/uslugi/osnovnyie-uslugi-tira"
+                            href="/uslugi/type?catalog=osnovnyie-uslugi-tira"
                             className="ug-thumb-wrapper ug-tile ug-thumb-ratio-set"
                             style={{
                                 backgroundColor: "rgb(240, 240, 240)",
@@ -79,7 +79,7 @@ const Main = () => {
                                     </div>
                                 </div>
                             </div>
-                        </a><a href="/uslugi/obuchenie-i-kursyi-strelbyi"
+                        </a><a href="/uslugi/type?catalog=obuchenie-i-cursor-strelbyi"
                                className="ug-thumb-wrapper ug-tile ug-thumb-ratio-set"
                                style={{
                                    backgroundColor: "rgb(240, 240, 240)",
@@ -140,7 +140,7 @@ const Main = () => {
                                     </div>
                                 </div>
                             </div>
-                        </a><a href="/uslugi/yuridicheskim-liczam"
+                        </a><a href="/uslugi/type?catalog=yuridicheskim-liczam"
                                className="ug-thumb-wrapper ug-tile ug-thumb-ratio-set"
                                style={{
                                    backgroundColor: "rgb(240, 240, 240)",
@@ -201,7 +201,7 @@ const Main = () => {
                                     </div>
                                 </div>
                             </div>
-                        </a><a href="/uslugi/podarochnyie-sertifikatyi"
+                        </a><a href="/uslugi/type?catalog=podarochnyie-sertifikatyi"
                                className="ug-thumb-wrapper ug-tile ug-thumb-ratio-set"
                                style={{
                                    backgroundColor: "rgb(240, 240, 240)",
@@ -262,7 +262,7 @@ const Main = () => {
                                     </div>
                                 </div>
                             </div>
-                        </a><a href="/uslugi/razvlecheniya-dlya-vsej-semi"
+                        </a><a href="/uslugi/type?catalog=razvlecheniya-dlya-vsej-semi"
                                className="ug-thumb-wrapper ug-tile ug-thumb-ratio-set"
                                style={{
                                    backgroundColor: "rgb(240, 240, 240)",
@@ -323,7 +323,7 @@ const Main = () => {
                                     </div>
                                 </div>
                             </div>
-                        </a><a href="/uslugi/poznanie-i-razvitie"
+                        </a><a href="/uslugi/type?catalog=poznanie-i-razvitie"
                                className="ug-thumb-wrapper ug-tile ug-thumb-ratio-set"
                                style={{
                                    backgroundColor: "rgb(240, 240, 240)",
