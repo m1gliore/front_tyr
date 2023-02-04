@@ -76,8 +76,8 @@ const Navbar = () => {
                                                                      data-bs-toggle="dropdown" aria-haspopup="true"
                                                                      aria-expanded="false">Оружие в тире</a>
                                     <div className="dropdown-menu" aria-labelledby="topMenu12"><a
-                                        className="dropdown-item" href="/oruzhie-v-tire/type?tyr=lazernoe">Лазерный тир</a><a
-                                        className="dropdown-item" href="/oruzhie-v-tire/type?tyr=strajkbol">Страйкбольный тир</a>
+                                        className="dropdown-item" href="/oruzhie-v-tire/type?catalog=lazernoe">Лазерный тир</a><a
+                                        className="dropdown-item" href="/oruzhie-v-tire/type?catalog=strajkbol">Страйкбольный тир</a>
                                     </div>
                                 </li>
                                 <li className="nav-item"><a className="nav-link" href="/galereya">Галерея</a></li>
@@ -97,7 +97,7 @@ const Navbar = () => {
                                         всей семьи</a><a className="dropdown-item" href="/uslugi/poznanie-i-razvitie">Познание
                                         и развитие</a></div>
                                 </li>
-                                <li className="nav-item active"><a className="nav-link" href="/luchshie-strelki">Лучшие
+                                <li className="nav-item active"><a className="nav-link" href="/strelki/type?catalog=luchshie-strelki">Лучшие
                                     стрелки</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/kontaktyi">Контакты тира</a>
                                 </li>
