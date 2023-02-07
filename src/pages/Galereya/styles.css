@@ -17,6 +17,60 @@
     transform: scale(1.1);
 }
 
-.action {
+.modalAdd {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
 
+.leftContainer {
+    display: flex;
+    align-items: center;
+}
+
+.imgAdd {
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.labelAdd {
+    margin-bottom: 10px;
+    color: gray;
+    font-weight: 600;
+}
+
+.inputAdd {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.inputAdd:focus {
+    outline: none;
+}
+
+.inputAdd:hover {
+    background-color: #f1f1f1;
+}
+
+.rightContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonAdd {
+    width: 250px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    background-color: darkblue;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 30px;
+    cursor: pointer;
 }

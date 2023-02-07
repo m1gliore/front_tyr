@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faPen, faPlus, faTrashCan} from "@fortawesome/free-solid-svg-icons";
+import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
 
 const Galereya = () => {
     lightbox.option({
@@ -18,7 +18,25 @@ const Galereya = () => {
     const [modalDeleteActive, setModalDeleteActive] = useState(false)
     const [modalAddActive, setModalAddActive] = useState(false)
     const [modalRedactActive, setModalRedactActive] = useState(false)
+    const [file, setFile] = useState(null)
+    const [imageUrl, setImageUrl] = useState("https://members.hpd-collaborative.org/global_graphics/default-store-350x350.jpg")
     const admin = true
+    let encodedImage = ""
+
+    const handleFile = (event) => {
+        setFile(event.target.files[0])
+    }
+
+    const getBase64 = (file) => {
+        let reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+            console.log(reader.result)
+        }
+        reader.onerror = (error) => {
+            console.log('Error: ', error)
+        }
+    }
 
     useEffect(() => {
         (async () => {
@@ -29,11 +47,30 @@ const Galereya = () => {
 
             }
         })()
-    }, [])
+
+        if (file) {
+            setImageUrl(URL.createObjectURL(file))
+            encodedImage = getBase64(file)
+        }
+    }, [file])
 
     images.sort((a, b) => {
         return a.idImage - b.idImage
     })
+
+    const handleSubmit = async (event) => {
+        try {
+            event.preventDefault()
+            const formData = new FormData(event.target)
+            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery', {
+                name: file.name,
+                url: encodedImage,
+                title: formData
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     return (
         <>
@@ -59,7 +96,22 @@ const Galereya = () => {
                 <p>Удалить</p>
             </Modal>
             <Modal active={modalAddActive} setActive={setModalAddActive}>
-                <p>Добавить</p>
+                <h1>Добавить изображение в галерею</h1>
+                <form className="modalAdd" onSubmit={handleSubmit}>
+                    <div className="leftContainer">
+                        <img className="imgAdd" src={imageUrl} alt="foto"/>
+                        <label className="labelAdd" style={{cursor: "pointer"}} htmlFor="file">
+                            <FontAwesomeIcon icon={faUpload}/>
+                        </label>
+                        <input className="inputAdd" style={{display: "none"}} type="file" id="file"
+                               onChange={handleFile}/>
+                    </div>
+                    <div className="rightContainer">
+                        <input required className="inputAdd" type="text" name="title"
+                               placeholder="Введите подпись изображению"/>
+                        <button className="buttonAdd">Добавить</button>
+                    </div>
+                </form>
             </Modal>
             <Modal active={modalRedactActive} setActive={setModalRedactActive}>
                 <p>Изменить</p>
