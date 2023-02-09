@@ -78,8 +78,10 @@ const Navbar = () => {
                                                                      data-bs-toggle="dropdown" aria-haspopup="true"
                                                                      aria-expanded="false">Оружие в тире</a>
                                     <div className="dropdown-menu" aria-labelledby="topMenu12"><a
-                                        className="dropdown-item" href="/oruzhie-v-tire/type?catalog=lazernoe">Лазерный тир</a><a
-                                        className="dropdown-item" href="/oruzhie-v-tire/type?catalog=strajkbol">Страйкбольный тир</a>
+                                        className="dropdown-item" href="/oruzhie-v-tire/type?catalog=lazernoe">Лазерный
+                                        тир</a><a
+                                        className="dropdown-item" href="/oruzhie-v-tire/type?catalog=strajkbol">Страйкбольный
+                                        тир</a>
                                         {admin && <>
                                             <FontAwesomeIcon className="action" icon={faTrashCan}/>
                                             <FontAwesomeIcon className="action" icon={faPen}/>
@@ -87,7 +89,8 @@ const Navbar = () => {
                                         </>}
                                     </div>
                                 </li>
-                                <li className="nav-item"><a className="nav-link" href="/galereya">Галерея</a></li>
+                                <li className="nav-item"><a className="nav-link"
+                                                            href="/images/type?catalog=galereya">Галерея</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/czenyi">Цены</a></li>
                                 <li className="nav-item dropdown"><a className="nav-link dropdown-toggle" href="/uslugi"
                                                                      id="topMenu89" data-bs-toggle="dropdown"
@@ -96,12 +99,17 @@ const Navbar = () => {
                                     <div className="dropdown-menu" aria-labelledby="topMenu89"><a
                                         className="dropdown-item" href="/uslugi/type?catalog=osnovnyie-uslugi-tira">Основные
                                         услуги тира</a><a className="dropdown-item"
-                                                          href="/uslugi/type?catalog=obuchenie-i-cursor-strelbyi">Обучение и курсы
-                                        стрельбы</a><a className="dropdown-item" href="/uslugi/type?catalog=yuridicheskim-liczam">Юридическим
-                                        лицам</a><a className="dropdown-item" href="/uslugi/type?catalog=podarochnyie-sertifikatyi">Подарочные
+                                                          href="/uslugi/type?catalog=obuchenie-i-cursor-strelbyi">Обучение
+                                        и курсы
+                                        стрельбы</a><a className="dropdown-item"
+                                                       href="/uslugi/type?catalog=yuridicheskim-liczam">Юридическим
+                                        лицам</a><a className="dropdown-item"
+                                                    href="/uslugi/type?catalog=podarochnyie-sertifikatyi">Подарочные
                                         сертификаты</a><a className="dropdown-item"
-                                                          href="/uslugi/type?catalog=razvlecheniya-dlya-vsej-semi">Развлечения для
-                                        всей семьи</a><a className="dropdown-item" href="/uslugi/type?catalog=poznanie-i-razvitie">Познание
+                                                          href="/uslugi/type?catalog=razvlecheniya-dlya-vsej-semi">Развлечения
+                                        для
+                                        всей семьи</a><a className="dropdown-item"
+                                                         href="/uslugi/type?catalog=poznanie-i-razvitie">Познание
                                         и развитие</a>
                                         {admin && <>
                                             <FontAwesomeIcon className="action" icon={faTrashCan}/>
@@ -109,7 +117,8 @@ const Navbar = () => {
                                             <FontAwesomeIcon className="action" icon={faPlus}/>
                                         </>}</div>
                                 </li>
-                                <li className="nav-item active"><a className="nav-link" href="/strelki/type?catalog=luchshie-strelki">Лучшие
+                                <li className="nav-item active"><a className="nav-link"
+                                                                   href="/strelki/type?catalog=luchshie-strelki">Лучшие
                                     стрелки</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/kontaktyi">Контакты тира</a>
                                 </li>

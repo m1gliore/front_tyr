@@ -21,21 +21,10 @@ const Galereya = () => {
     const [file, setFile] = useState(null)
     const [imageUrl, setImageUrl] = useState("https://members.hpd-collaborative.org/global_graphics/default-store-350x350.jpg")
     const admin = true
-    let encodedImage = ""
+    const [encodedImage, setEncodedImage] = useState("")
 
     const handleFile = (event) => {
         setFile(event.target.files[0])
-    }
-
-    const getBase64 = (file) => {
-        let reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.onload = () => {
-            console.log(reader.result)
-        }
-        reader.onerror = (error) => {
-            console.log('Error: ', error)
-        }
     }
 
     useEffect(() => {
@@ -50,9 +39,16 @@ const Galereya = () => {
 
         if (file) {
             setImageUrl(URL.createObjectURL(file))
-            encodedImage = getBase64(file)
+            let reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onload = () => {
+                setEncodedImage(reader.result)
+            }
+            reader.onerror = (error) => {
+                console.log('Error: ', error)
+            }
         }
-    }, [file])
+    }, [file, encodedImage])
 
     images.sort((a, b) => {
         return a.idImage - b.idImage
@@ -63,9 +59,9 @@ const Galereya = () => {
             event.preventDefault()
             const formData = new FormData(event.target)
             await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery', {
-                name: file.name,
-                url: encodedImage,
-                title: formData
+                url: file.name,
+                file: encodedImage,
+                //title: formData
             })
         } catch (e) {
             console.log(e)
