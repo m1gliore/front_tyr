@@ -8,6 +8,7 @@ import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
 
+
 const Galereya = () => {
     lightbox.option({
         "albumLabel": "Изображение %1 из %2",
@@ -33,7 +34,7 @@ const Galereya = () => {
                 const response = await axios.get('http://localhost:8040/api/homePage/gallery')
                 setImages(response.data.imageResponseSet)
             } catch (e) {
-
+                console.log(e)
             }
         })()
 
@@ -58,16 +59,18 @@ const Galereya = () => {
         try {
             event.preventDefault()
             const formData = new FormData(event.target)
-            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery', {
+            const myJson = {
                 url: file.name,
                 file: encodedImage,
                 //title: formData
-            })
+            }
+            console.log(formData)
+            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery', myJson)
         } catch (e) {
             console.log(e)
         }
     }
-
+    const refresh = () => window.location.reload()
     return (
         <>
             <Navbar/>
@@ -105,7 +108,7 @@ const Galereya = () => {
                     <div className="rightContainer">
                         <input required className="inputAdd" type="text" name="title"
                                placeholder="Введите подпись изображению"/>
-                        <button className="buttonAdd">Добавить</button>
+                        <button className="buttonAdd" onClick={refresh}>Добавить</button>
                     </div>
                 </form>
             </Modal>

@@ -26,13 +26,13 @@ const Footer = () => {
                                 <div className="col-md-4 col-sm-6 footer-address">
                                     <div className="text-center">
                                         <div className="header-address-mail">
-                                            <a href="mailto:info@tir-centr.by">
+                                            <a href="mailto:tircaliber@gmail.com">
                                                 <FontAwesomeIcon icon={faEnvelope}/>
-                                                &nbsp;&nbsp; e-mail: info@tir-centr.by
+                                                &nbsp;&nbsp; e-mail: tircaliber@gmail.com
                                             </a>
                                         </div>
                                         <div className="header-address-desc">
-                                            РБ, г. Минск, пр-т Дзержинского, 9<br/>
+                                            Торговый центр Европа ул. Сурганова, д. 57Б, пом. 314а<br/>
                                             режим работы: 13.00 - 21.00
                                         </div>
                                     </div>

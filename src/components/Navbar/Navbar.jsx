@@ -1,4 +1,5 @@
 import './styles.css';
+import logo from '../../images/Group 1.png'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCircle, faEnvelope, faPen, faPlus, faTrashCan} from '@fortawesome/free-solid-svg-icons'
 import {faInstagram} from '@fortawesome/free-brands-svg-icons'
@@ -12,7 +13,7 @@ const Navbar = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 header-logo">
-                            <img src="https://tir-centr.by/assets/template/images/logo.png" alt="logo"/>
+                            <img className="logo" src={logo} alt="logo"/>
                         </div>
                         <div className="col-lg-9 header-contact">
                             <div className="row">
@@ -30,13 +31,13 @@ const Navbar = () => {
                                 </div>
                                 <div className="col-md-4 header-top-address">
                                     <div className="header-address-mail">
-                                        <a href="mailto:info@tir-centr.by">
+                                        <a href="mailto:tircaliber@gmail.com">
                                             <FontAwesomeIcon icon={faEnvelope}/>
-                                            &nbsp;&nbsp; e-mail: info@tir-centr.by
+                                            &nbsp;&nbsp; e-mail: tircaliber@gmail.com
                                         </a>
                                     </div>
-                                    <div className="header-address-desc">г. Минск, пр-т Дзержинского, 9
-                                    </div>
+                                    <div className="header-address-desc">Торговый центр Европа ул. Сурганова, д. 57Б,
+                                        пом. 314а</div>
                                 </div>
                                 <div className="col-md-1 footer-auth">
                                     <div className="text-center">
@@ -53,7 +54,7 @@ const Navbar = () => {
                                     </div>
                                 </div>
                                 <div className="col-md-2 header-top-social">
-                                    <a href="https://www.instagram.com" target="_blank" rel="noreferrer"
+                                    <a href="https://www.instagram.com/tircaliberr/" target="_blank" rel="noreferrer"
                                        className="fa-stack">
                                         <FontAwesomeIcon icon={faCircle} className="fa-stack-2x"/>
                                         <FontAwesomeIcon icon={faInstagram} className="fa-stack-1x top-icon"/>
@@ -64,9 +65,9 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-            <div className="header-nav bg-dark">
+            <div className="header-nav bg-light">
                 <div className="container">
-                    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
                                 aria-label="Toggle navigation"><span className="navbar-toggler-icon"></span></button>

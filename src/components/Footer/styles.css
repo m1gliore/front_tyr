@@ -20,11 +20,11 @@
 
 }
 
-a.nav-link {
+.footer a.nav-link {
     color: rgb(255, 255, 255) !important;
 }
 
-a.nav-link:hover {
+.footer a.nav-link:hover {
     color: rgba(255, 255, 255, .8) !important;
 }
 

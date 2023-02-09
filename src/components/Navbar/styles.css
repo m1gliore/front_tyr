@@ -1,8 +1,13 @@
 @charset "utf-8";
 
 /* HEADER */
+.logo {
+    width: 370px;
+    height: 80px;
+}
+
 .header-top {
-    background-color: rgb(173, 26, 39);
+    background-color: rgb(49, 55, 194);
     padding-top: .5rem;
     padding-bottom: .5rem;
 }
@@ -42,7 +47,7 @@
 }
 
 .top-icon {
-    color: rgb(173, 26, 39);
+    color: rgb(49, 55, 194);
     font-size: 1.5em;
 }
 
@@ -60,14 +65,15 @@
     font-family: 'Source Sans Pro', sans-serif;
     font-size: .8rem;
     text-transform: uppercase;
+    color: black;
 }
 
 a.nav-link {
-    color: rgb(255, 255, 255) !important;
+    color: rgb(0, 0, 0) !important;
 }
 
 a.nav-link:hover {
-    color: rgba(255, 255, 255, .8) !important;
+    color: rgba(0, 0, 0, .8) !important;
 }
 
 li.active a.nav-link {

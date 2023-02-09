@@ -31,15 +31,13 @@ const Kontaktyi = () => {
                                         +375 17 364 15 66 (городской)</p>
                                     <p>
                                         <FontAwesomeIcon icon={faEnvelope} className="faIcon"/>&nbsp;
-                                        <a href="mailto:info@tir-centr.by">info@tir-centr.by</a>
+                                        <a href="mailto:tircaliber@gmail.com">tircaliber@gmail.com</a>
                                     </p>
                                 </div>
                                 <div className="col-lg-4 col-md-6">
                                     <p>
                                         <FontAwesomeIcon icon={faMapMarkerAlt} className="faIcon"/>&nbsp;
-                                        г. Минск, пр-т Дзержинского, 9, пом. 1011<br/>
-                                        <span className="fa-blank"></span> Первый отдельный вход со двора дома,<br/>
-                                        <span className="fa-blank"></span> торец со стороны м. «Грушевка»
+                                        Торговый центр Европа ул. Сурганова, д. 57Б, пом. 314а
                                     </p>
                                     <p>
                                         <FontAwesomeIcon icon={faClock} className="faIcon"/>&nbsp;
@@ -67,8 +65,8 @@ const Kontaktyi = () => {
                             justifyContent: "center"
                         }}>
                             <Map style={{width: "80vw", height: "80vh"}}
-                                 defaultState={{center: [53.91156599620971, 27.595853956089268], zoom: 18}}>
-                                <Placemark geometry={[53.91156599620971, 27.595853956089268]}/>
+                                 defaultState={{center: [53.92868412579576, 27.582801597724394], zoom: 18}}>
+                                <Placemark geometry={[53.92868412579576, 27.582801597724394]}/>
                             </Map>
                         </div>
                     </YMaps>
