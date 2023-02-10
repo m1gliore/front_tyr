@@ -58,13 +58,13 @@ const Galereya = () => {
     const handleSubmit = async (event) => {
         try {
             event.preventDefault()
-            const formData = new FormData(event.target)
+            const title = event.target.title.value
             const myJson = {
                 url: file.name,
                 file: encodedImage,
-                //title: formData
+                title
             }
-            console.log(formData)
+            console.log(myJson)
             await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery', myJson)
         } catch (e) {
             console.log(e)
