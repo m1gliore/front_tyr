@@ -7,6 +7,7 @@ import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
+import defaultImg from '../../images/default-store-350x350.jpg'
 
 
 const Galereya = () => {
@@ -20,7 +21,8 @@ const Galereya = () => {
     const [modalAddActive, setModalAddActive] = useState(false)
     const [modalRedactActive, setModalRedactActive] = useState(false)
     const [file, setFile] = useState(null)
-    const [imageUrl, setImageUrl] = useState("https://members.hpd-collaborative.org/global_graphics/default-store-350x350.jpg")
+    const [imageUrl, setImageUrl] = useState(defaultImg)
+    const [imageUrlDelete, setImageUrlDelete] = useState(defaultImg)
     const admin = true
     const [encodedImage, setEncodedImage] = useState("")
 
@@ -55,7 +57,7 @@ const Galereya = () => {
         return a.idImage - b.idImage
     })
 
-    const handleSubmit = async (event) => {
+    const handleSubmitAdd = async (event) => {
         try {
             event.preventDefault()
             const title = event.target.title.value
@@ -70,7 +72,57 @@ const Galereya = () => {
             console.log(e)
         }
     }
+
+    const handleSubmitDelete = async (event) => {
+        try {
+            event.preventDefault()
+            const id = event.target.id.value
+            const myJson = {
+                id
+            }
+            console.log(myJson)
+            await axios.post('', myJson)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleSubmitRedact = async (event) => {
+        try {
+            event.preventDefault()
+            const id = event.target.id.value
+            const title = event.target.title.value
+            const myJson = {
+                id,
+                url: file.name,
+                file: encodedImage,
+                title
+            }
+            console.log(myJson)
+            await axios.post('', myJson)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleSelectDelete = (event) => {
+        event.preventDefault()
+        console.log(event.target.value)
+        const selectedImage = images[event.target.value - 1]
+        const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
+        setImageUrlDelete(selectedImageUrl)
+    }
+    const handleSelectRedact = (event) => {
+        event.preventDefault()
+        console.log(event.target.value)
+        const selectedImage = images[event.target.value - 1]
+        const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
+        setImageUrl(selectedImageUrl)
+    }
+
+
     const refresh = () => window.location.reload()
+
     return (
         <>
             <Navbar/>
@@ -92,11 +144,27 @@ const Galereya = () => {
             </main>
             <Footer/>
             <Modal active={modalDeleteActive} setActive={setModalDeleteActive}>
-                <p>Удалить</p>
+                <h1>Удалить изображение из галереи</h1>
+                <form className="modalAdd" onSubmit={handleSubmitDelete}>
+                    <div className="leftContainer">
+                        <img className="imgAdd"
+                             src={imageUrlDelete}
+                             alt="foto"/>
+                    </div>
+                    <div className="rightContainer">
+                        <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
+                            <option disabled>Выберите один из вариантов</option>
+                            <option value="1" className="inputAdd">1</option>
+                            <option value="2" className="inputAdd">2</option>
+                            <option value="3" className="inputAdd">3</option>
+                        </select>
+                        <button className="buttonAdd" onClick={refresh}>Удалить</button>
+                    </div>
+                </form>
             </Modal>
             <Modal active={modalAddActive} setActive={setModalAddActive}>
                 <h1>Добавить изображение в галерею</h1>
-                <form className="modalAdd" onSubmit={handleSubmit}>
+                <form className="modalAdd" onSubmit={handleSubmitAdd}>
                     <div className="leftContainer">
                         <img className="imgAdd" src={imageUrl} alt="foto"/>
                         <label className="labelAdd" style={{cursor: "pointer"}} htmlFor="file">
@@ -113,7 +181,28 @@ const Galereya = () => {
                 </form>
             </Modal>
             <Modal active={modalRedactActive} setActive={setModalRedactActive}>
-                <p>Изменить</p>
+                <h1>Изменить изображение в галерее</h1>
+                <form className="modalAdd" onSubmit={handleSubmitRedact}>
+                    <div className="leftContainer">
+                        <img className="imgAdd" src={imageUrl} alt="foto"/>
+                        <label className="labelAdd" style={{cursor: "pointer"}} htmlFor="file">
+                            <FontAwesomeIcon icon={faUpload}/>
+                        </label>
+                        <input className="inputAdd" style={{display: "none"}} type="file" id="file"
+                               onChange={handleFile}/>
+                    </div>
+                    <div className="rightContainer">
+                        <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
+                            <option disabled>Выберите один из вариантов</option>
+                            <option value="1" className="inputAdd">1</option>
+                            <option value="2" className="inputAdd">2</option>
+                            <option value="3" className="inputAdd">3</option>
+                        </select>
+                        <input className="inputAdd" type="text" name="title"
+                               placeholder="Введите новую подпись изображению"/>
+                        <button className="buttonAdd" onClick={refresh}>Добавить</button>
+                    </div>
+                </form>
             </Modal>
         </>
     )
