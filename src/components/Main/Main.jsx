@@ -1,8 +1,17 @@
 import './styles.css'
+import {faPen} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useState} from "react";
+import Modal from "../Modal/Modal";
 
 const Main = () => {
+    const admin = true
+    const [modalRedactActive, setModalRedactActive] = useState(false)
+
     return (
         <main role="main">
+            {admin &&
+                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => setModalRedactActive(true)}/>}
             <section className="review">
                 <div className="container">
                     <div id="tirReview"
@@ -397,6 +406,10 @@ const Main = () => {
                     </div>
                 </div>
             </section>
+            {admin &&
+                <Modal active={modalRedactActive} setActive={setModalRedactActive}>
+                    <h1>Изменить изображения слайдера</h1>
+                </Modal>}
         </main>
     )
 }
