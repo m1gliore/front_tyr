@@ -3,8 +3,16 @@ import logo from '../../images/Group 1.png'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCircle, faEnvelope, faPen, faPlus, faTrashCan} from '@fortawesome/free-solid-svg-icons'
 import {faInstagram} from '@fortawesome/free-brands-svg-icons'
+import Modal from "../Modal/Modal";
+import {useState} from "react";
 
 const Navbar = () => {
+    const [modalDeleteActiveTyr, setModalDeleteActiveTyr] = useState(false)
+    const [modalAddActiveTyr, setModalAddActiveTyr] = useState(false)
+    const [modalRedactActiveTyr, setModalRedactActiveTyr] = useState(false)
+    const [modalDeleteActiveService, setModalDeleteActiveService] = useState(false)
+    const [modalAddActiveService, setModalAddActiveService] = useState(false)
+    const [modalRedactActiveService, setModalRedactActiveService] = useState(false)
     const admin = true
 
     return (
@@ -37,7 +45,8 @@ const Navbar = () => {
                                         </a>
                                     </div>
                                     <div className="header-address-desc">Торговый центр Европа ул. Сурганова, д. 57Б,
-                                        пом. 314а</div>
+                                        пом. 314а
+                                    </div>
                                 </div>
                                 <div className="col-md-1 footer-auth">
                                     <div className="text-center">
@@ -84,9 +93,12 @@ const Navbar = () => {
                                         className="dropdown-item" href="/oruzhie-v-tire/type?catalog=strajkbol">Страйкбольный
                                         тир</a>
                                         {admin && <>
-                                            <FontAwesomeIcon className="action" icon={faTrashCan}/>
-                                            <FontAwesomeIcon className="action" icon={faPen}/>
-                                            <FontAwesomeIcon className="action" icon={faPlus}/>
+                                            <FontAwesomeIcon className="action" icon={faTrashCan}
+                                                             onClick={() => setModalDeleteActiveTyr(true)}/>
+                                            <FontAwesomeIcon className="action" icon={faPen}
+                                                             onClick={() => setModalRedactActiveTyr(true)}/>
+                                            <FontAwesomeIcon className="action" icon={faPlus}
+                                                             onClick={() => setModalAddActiveTyr(true)}/>
                                         </>}
                                     </div>
                                 </li>
@@ -113,9 +125,12 @@ const Navbar = () => {
                                                          href="/uslugi/type?catalog=poznanie-i-razvitie">Познание
                                         и развитие</a>
                                         {admin && <>
-                                            <FontAwesomeIcon className="action" icon={faTrashCan}/>
-                                            <FontAwesomeIcon className="action" icon={faPen}/>
-                                            <FontAwesomeIcon className="action" icon={faPlus}/>
+                                            <FontAwesomeIcon className="action" icon={faTrashCan}
+                                                             onClick={() => setModalDeleteActiveService(true)}/>
+                                            <FontAwesomeIcon className="action" icon={faPen}
+                                                             onClick={() => setModalRedactActiveService(true)}/>
+                                            <FontAwesomeIcon className="action" icon={faPlus}
+                                                             onClick={() => setModalAddActiveService(true)}/>
                                         </>}</div>
                                 </li>
                                 <li className="nav-item active"><a className="nav-link"
@@ -128,6 +143,26 @@ const Navbar = () => {
                     </nav>
                 </div>
             </div>
+            {admin && <>
+                <Modal active={modalDeleteActiveTyr} setActive={setModalDeleteActiveTyr}>
+                    <h1>Удалить категорию тира</h1>
+                </Modal>
+                <Modal active={modalAddActiveTyr} setActive={setModalAddActiveTyr}>
+                    <h1>Добавить категорию тира</h1>
+                </Modal>
+                <Modal active={modalRedactActiveTyr} setActive={setModalRedactActiveTyr}>
+                    <h1>Изменить категорию тира</h1>
+                </Modal>
+                <Modal active={modalDeleteActiveService} setActive={setModalDeleteActiveService}>
+                    <h1>Удалить тип услуг</h1>
+                </Modal>
+                <Modal active={modalAddActiveService} setActive={setModalAddActiveService}>
+                    <h1>Добавить тип услуг</h1>
+                </Modal>
+                <Modal active={modalRedactActiveService} setActive={setModalRedactActiveService}>
+                    <h1>Изменить тип услуг</h1>
+                </Modal>
+            </>}
         </header>
     )
 }
