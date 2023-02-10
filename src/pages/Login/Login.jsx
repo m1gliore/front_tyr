@@ -12,7 +12,7 @@ const Login = () => {
                     <form className="form">
                         <input type="email" placeholder="Эл. почта" className="input"/>
                         <input type="password" placeholder="Пароль" className="input"/>
-                        <button className="button">Войти</button>
+                        <button className="btn btn-blue">Войти</button>
                         <span className="error">Что-то пошло не так</span>
                         <a href="/restore-password" className="link">Забыли свой пароль?</a>
                         <a href="/register" className="link">Создать новую учётную запись</a>

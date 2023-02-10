@@ -23,6 +23,31 @@ h3, .h3 {
     padding: 2vw;
 }
 
+/* BUTTONS */
+.btn {
+    width: 50%;
+    height: 4vh;
+    font-size: 14px;
+    color: rgb(23, 44, 65);
+    line-height: 1;
+    padding: 5px 8px;
+    border: 1px solid rgb(23, 44, 65);
+    border-radius: 14px;
+    background-color: transparent;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.btn-blue {
+    background-color: rgb(49, 55, 194);
+    border-color: rgb(49, 55, 194);
+    color: rgb(255, 255, 255);
+}
+
+.btn-blue:hover {
+    background-color: rgba(49, 55, 194, .75);
+    color: rgb(255, 255, 255);
+}
+
 /* CONTACTS */
 .contact-form {
     padding: 1.5rem 0 2.5rem;

@@ -30,7 +30,7 @@ const UserProfile = () => {
                                     <small className="form-text text-danger error_email"></small>
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-red">Оформить</button>
+                            <button type="submit" className="btn btn-blue">Оформить</button>
                         </form>
                     </div>
                 </section>
@@ -55,7 +55,7 @@ const UserProfile = () => {
                                 <textarea className="form-control" id="fa_message" name="message" rows="3"></textarea>
                                 <small className="form-text text-danger error_message"></small>
                             </div>
-                            <button type="submit" className="btn btn-red">Отправить</button>
+                            <button type="submit" className="btn btn-blue">Отправить</button>
                         </form>
                     </div>
                 </section>

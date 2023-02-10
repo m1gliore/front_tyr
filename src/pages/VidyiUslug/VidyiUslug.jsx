@@ -65,7 +65,7 @@ const VidyiUslug = () => {
                                         <div className="col">
                                             <h2>{serviceName.serviceResponse.name}</h2>
                                             <p>{serviceName.serviceResponse.description}</p>
-                                            <a className="btn btn-red" href={currentPath + "/" + serviceName.serviceResponse.name}
+                                            <a className="btn btn-blue" href={currentPath + "/" + serviceName.serviceResponse.name}
                                                role="button">Подробнее</a>
                                         </div>
                                     </div>

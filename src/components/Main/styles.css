@@ -34,17 +34,6 @@ h3, .h3 {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-.btn-red {
-    background-color: rgb(173, 26, 39);
-    border-color: rgb(173, 26, 39);
-    color: rgb(255, 255, 255);
-}
-
-.btn-red:hover {
-    background-color: rgba(173, 26, 39, .75);
-    color: rgb(255, 255, 255);
-}
-
 .btn-gray {
     background-color: rgb(221, 221, 224);
     border-color: rgb(221, 221, 224);
@@ -82,92 +71,6 @@ h3, .h3 {
     font-weight: 400;
     font-size: 16px;
     text-align: center;
-}
-
-/* HOME NEWS */
-.home-news {
-    padding: 32px 0 16px;
-    background-color: rgb(255, 255, 255);
-}
-
-.home-news .btn-gray {
-    margin-top: .4rem;
-}
-
-.home-news .card {
-    border-radius: 0;
-    border: 1px solid rgb(221, 221, 224);
-    margin-bottom: 1rem;
-}
-
-.home-news .card-header {
-    font-size: 1rem;
-    line-height: 1rem;
-    padding: 1rem 1.5rem 0;
-    background-color: transparent;
-    border: none;
-}
-
-.home-news .card-body {
-    padding: 1rem 1.5rem 0;
-    font-size: .9rem;
-    line-height: 1rem;
-}
-
-.home-news .card-title {
-    font-size: 1.2rem;
-    line-height: 1;
-    height: 3rem;
-    color: rgb(173, 26, 39);
-}
-
-.home-news .card-footer {
-    padding: 1rem 1.5rem;
-    border: none;
-    background-color: transparent;
-}
-
-/* NEWS */
-.news {
-    padding: 1.5rem 0;
-    background-color: rgb(221, 221, 224);
-}
-
-.news .card {
-    border-radius: 0;
-    margin-bottom: 1rem;
-    border: 1px solid rgb(194, 194, 194);
-    border-bottom: 2px solid rgb(173, 26, 39);
-}
-
-.news .card-header {
-    padding: 1rem 1.5rem 0;
-    background-color: transparent;
-    border: none;
-    font-size: 1.2rem;
-    line-height: 1;
-}
-
-.news .card-body {
-    padding: .5rem 1.5rem 0;
-    font-size: .9rem;
-    line-height: 1rem;
-}
-
-.news h2 {
-    font-size: 1.25rem;
-    line-height: 1;
-    color: rgb(173, 26, 39);
-}
-
-.news .card-text {
-    text-align: justify;
-}
-
-.news .card-footer {
-    padding: 1rem 1.5rem;
-    border: none;
-    background-color: transparent;
 }
 
 /* MEDIA */

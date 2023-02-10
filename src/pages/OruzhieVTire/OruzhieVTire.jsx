@@ -28,7 +28,7 @@ const OruzhieVTire = () => {
                                         потренироваться на множестве интерактивных мишеней. Со своим или нашим приводом.
                                         Теплое, комфортное помещение. Обучение страйкболу, тренировки. Для новичков и
                                         профессионалов.</p>
-                                    <a href="oruzhie-v-tire/strajkbol" className="btn btn-red"
+                                    <a href="oruzhie-v-tire/strajkbol" className="btn btn-blue"
                                        role="button">Подробнее</a>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@ const OruzhieVTire = () => {
                                     <p className="text-justify">Никогда не стреляли из огнестрельного оружия и хотите
                                         узнать, на что это похоже? Начните с сигнальных пистолетов и револьверов.
                                         Реалистичный процесс зарядки и выстрела (холостой патрон).</p>
-                                    <a href="oruzhie-v-tire/signalnoe-oruzhie" className="btn btn-red"
+                                    <a href="oruzhie-v-tire/signalnoe-oruzhie" className="btn btn-blue"
                                        role="button">Подробнее</a>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@ const OruzhieVTire = () => {
                                         провести время и соприкоснуться с историей оружия. Для детей и взрослых, мужчин
                                         и женщин. От 6 лет и старше. Большой выбор пневматики (пистолеты, револьверы,
                                         винтовки). От недорогих до эксклюзива.</p>
-                                    <a href="oruzhie-v-tire/pnevmatika" className="btn btn-red"
+                                    <a href="oruzhie-v-tire/pnevmatika" className="btn btn-blue"
                                        role="button">Подробнее</a>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@ const OruzhieVTire = () => {
                                         максимально недорого отработать базовые навыки стрельбы, подготовиться к важной
                                         игре в лазертаг или просто приятно провести время. Металлическое оружие, копии
                                         огнестрельных прототипов. От детей до военнослужащих.</p>
-                                    <a href="oruzhie-v-tire/lazernoe" className="btn btn-red"
+                                    <a href="oruzhie-v-tire/lazernoe" className="btn btn-blue"
                                        role="button">Подробнее</a>
                                 </div>
                             </div>

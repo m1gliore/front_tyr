@@ -28,7 +28,7 @@ const Uslugi = () => {
                                     аренда всего тира.</p>
                             </div>
                             <div className="card-footer">
-                                <a href="/uslugi/yuridicheskim-liczam" className="btn btn-red"
+                                <a href="/uslugi/yuridicheskim-liczam" className="btn btn-blue"
                                    role="button">Подробнее</a>
                             </div>
                         </div>
@@ -42,7 +42,7 @@ const Uslugi = () => {
                                     в том числе и зимой.</p>
                             </div>
                             <div className="card-footer">
-                                <a href="/uslugi/razvlecheniya-dlya-vsej-semi" className="btn btn-red"
+                                <a href="/uslugi/razvlecheniya-dlya-vsej-semi" className="btn btn-blue"
                                    role="button">Подробнее</a>
                             </div>
                         </div>
@@ -56,7 +56,7 @@ const Uslugi = () => {
                                 </p>
                             </div>
                             <div className="card-footer">
-                                <a href="/uslugi/poznanie-i-razvitie" className="btn btn-red" role="button">Подробнее</a>
+                                <a href="/uslugi/poznanie-i-razvitie" className="btn btn-blue" role="button">Подробнее</a>
                             </div>
                         </div>
                         <div className="card">
@@ -69,7 +69,7 @@ const Uslugi = () => {
                                     100 руб.</p>
                             </div>
                             <div className="card-footer">
-                                <a href="/uslugi/podarochnyie-sertifikatyi" className="btn btn-red"
+                                <a href="/uslugi/podarochnyie-sertifikatyi" className="btn btn-blue"
                                    role="button">Подробнее</a>
                             </div>
                         </div>
@@ -82,7 +82,7 @@ const Uslugi = () => {
                                     Пристрелка оружия. Аренда тира. Измерение дульной энергии пневматики.</p>
                             </div>
                             <div className="card-footer">
-                                <a href="/uslugi/osnovnyie-uslugi-tira" className="btn btn-red"
+                                <a href="/uslugi/osnovnyie-uslugi-tira" className="btn btn-blue"
                                    role="button">Подробнее</a>
                             </div>
                         </div>
@@ -96,7 +96,7 @@ const Uslugi = () => {
                                     взрослых и детей. До 2-х человек одновременно.</p>
                             </div>
                             <div className="card-footer">
-                                <a href="/uslugi/obuchenie-i-kursyi-strelbyi" className="btn btn-red"
+                                <a href="/uslugi/obuchenie-i-kursyi-strelbyi" className="btn btn-blue"
                                    role="button">Подробнее</a>
                             </div>
                         </div>

@@ -34,7 +34,7 @@ h3, .h3 {
 }
 
 .text-danger {
-    color: rgb(173, 26, 39) !important;
+    color: rgb(49, 55, 194) !important;
 }
 
 /* BASE */
@@ -47,7 +47,7 @@ h3, .h3 {
     padding: 1rem;
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(194, 194, 194);
-    border-bottom: 2px solid rgb(173, 26, 39);
+    border-bottom: 2px solid rgb(49, 55, 194);
 }
 
 /* MODEL */
@@ -59,7 +59,7 @@ h3, .h3 {
 .price-table td.price-cell-price {
     text-align: right;
     font-family: 'Source Sans Pro', sans-serif;
-    color: rgb(173, 26, 39);
+    color: rgb(49, 55, 194);
 }
 
 @media (max-width: 767px) {

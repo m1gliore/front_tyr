@@ -37,29 +37,6 @@ a {
     background-color: rgb(221, 221, 224) !important;
 }
 
-/* BUTTONS */
-.btn {
-    font-size: 14px;
-    color: rgb(23, 44, 65);
-    line-height: 1;
-    padding: 5px 8px;
-    border: 1px solid rgb(23, 44, 65);
-    border-radius: 14px;
-    background-color: transparent;
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-.btn-red {
-    background-color: rgb(173, 26, 39);
-    border-color: rgb(173, 26, 39);
-    color: rgb(255, 255, 255);
-}
-
-.btn-red:hover {
-    background-color: rgba(173, 26, 39, .75);
-    color: rgb(255, 255, 255);
-}
-
 /* CATEGORY */
 .category {
     padding: 1.5rem 0 2.5rem;
@@ -70,7 +47,7 @@ a {
     background-color: rgb(255, 255, 255);
     padding: 1rem;
     border: 1px solid rgb(194, 194, 194);
-    border-bottom: 2px solid rgb(173, 26, 39);
+    border-bottom: 2px solid rgb(49, 55, 194);
 }
 
 .category-image-container {
@@ -87,7 +64,7 @@ a {
 
 .shooters-list .card {
     border: 1px solid rgb(194, 194, 194);
-    border-bottom: 2px solid rgb(173, 26, 39);
+    border-bottom: 2px solid rgb(49, 55, 194);
     border-radius: 0;
     margin-top: 1.25rem;
     height: 60vh;

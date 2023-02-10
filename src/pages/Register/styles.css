@@ -34,12 +34,30 @@
     font-size: 20px;
 }
 
-.button {
-    width: 40%;
-    border: none;
+/* BUTTONS */
+.btn {
+    width: 50%;
+    height: 4vh;
+    color: rgb(23, 44, 65);
     padding: 10px;
-    background-color: #212529;
-    color: white;
+    border: 1px solid rgb(23, 44, 65);
     border-radius: 5px;
-    cursor: pointer;
+    background-color: transparent;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.btn-blue {
+    background-color: rgb(49, 55, 194);
+    border-color: rgb(49, 55, 194);
+    color: rgb(255, 255, 255);
+}
+
+.btn-blue:hover {
+    background-color: rgba(49, 55, 194, .75);
+    color: rgb(255, 255, 255);
+}
+
+.btn-blue:disabled {
+    background-color: rgba(49, 55, 194, .5);
+    cursor: not-allowed;
 }
