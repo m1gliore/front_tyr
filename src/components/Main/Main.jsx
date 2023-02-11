@@ -5,6 +5,12 @@ import {useEffect, useState} from "react";
 import Modal from "../Modal/Modal";
 import axios from "axios";
 import defaultImg from "../../images/default-store-350x350.jpg";
+import first from "../../images/1.jpg";
+import second from "../../images/2.jpg";
+import third from "../../images/3.jpg";
+import fourth from "../../images/4.jpg";
+import fifth from "../../images/5.jpg";
+import sixth from "../../images/6.jpg";
 
 const Main = () => {
     const [sliderImages, setSliderImages] = useState([])
@@ -85,40 +91,28 @@ const Main = () => {
             <section className="review">
                 <div className="mainGallery">
                     <div className="imageContainer">
-                        <a href="/uslugi/type?catalog=osnovnyie-uslugi-tira">
-                            <img src="https://tir-centr.by/assets/images/homepage/review/1.jpg" alt="one"/>
-                            <div className="bottomText">Основные услуги тира</div>
-                        </a>
+                        <img src={first} alt="one"/>
+                        <div className="bottomText">Основные услуги тира</div>
                     </div>
                     <div className="imageContainer">
-                        <a href="/uslugi/type?catalog=obuchenie-i-cursor-strelbyi">
-                            <img src="https://tir-centr.by/assets/images/homepage/review/2.jpg" alt="two"/>
-                            <div className="bottomText">Обучение и курсы стрельбы</div>
-                        </a>
+                        <img src={second} alt="two"/>
+                        <div className="bottomText">Обучение и курсы стрельбы</div>
                     </div>
                     <div className="imageContainer">
-                        <a href="/uslugi/type?catalog=yuridicheskim-liczam">
-                            <img src="https://tir-centr.by/assets/images/homepage/review/3.jpg" alt="three"/>
-                            <div className="bottomText">Корпоративы и тимбилдинги</div>
-                        </a>
+                        <img src={third} alt="three"/>
+                        <div className="bottomText">Корпоративы и тимбилдинги</div>
                     </div>
                     <div className="imageContainer">
-                        <a href="/uslugi/type?catalog=podarochnyie-sertifikatyi">
-                            <img src="https://tir-centr.by/assets/images/homepage/review/4.jpg" alt="four"/>
-                            <div className="bottomText">Подарочные серификаты</div>
-                        </a>
+                        <img src={fourth} alt="four"/>
+                        <div className="bottomText">Подарочные серификаты</div>
                     </div>
                     <div className="imageContainer">
-                        <a href="/uslugi/type?catalog=razvlecheniya-dlya-vsej-semi">
-                            <img src="https://tir-centr.by/assets/images/homepage/review/5.jpg" alt="five"/>
-                            <div className="bottomText">Развлечения для семьи и детей</div>
-                        </a>
+                        <img src={fifth} alt="five"/>
+                        <div className="bottomText">Развлечения для семьи и детей</div>
                     </div>
                     <div className="imageContainer">
-                        <a href="/uslugi/type?catalog=poznanie-i-razvitie">
-                            <img src="https://tir-centr.by/assets/images/homepage/review/6.jpg" alt="six"/>
-                            <div className="bottomText">Экскурсии и познание</div>
-                        </a>
+                        <img src={sixth} alt="six"/>
+                        <div className="bottomText">Экскурсии и познание</div>
                     </div>
                 </div>
             </section>
