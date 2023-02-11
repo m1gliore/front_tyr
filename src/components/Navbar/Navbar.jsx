@@ -18,8 +18,8 @@ const Navbar = () => {
     return (
         <header>
             <div className="header-top">
-                <div className="container">
-                    <div className="row">
+                <div className="container" style={{marginLeft: "10px", marginRight: "10px"}}>
+                    <div className="flexRow">
                         <div className="col-lg-3 header-logo">
                             <img className="logo" src={logo} alt="logo"/>
                         </div>
