@@ -153,6 +153,11 @@ a {
     padding-left: 5px;
 }
 
+.iconIcon {
+    width: 84px;
+    height: 84px;
+}
+
 /* MEDIA */
 
 @media (max-width: 767px) {

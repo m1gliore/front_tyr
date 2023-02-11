@@ -8,6 +8,10 @@ import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
 import defaultImg from "../../images/default-store-350x350.jpg";
+import first from "../../images/NicePng_bullseye-icon-png_3253558.png";
+import second from "../../images/gun-2-128.png";
+import third from "../../images/pngegg.png";
+
 
 const Tyr = () => {
     const currentTyr = useLocation().search.split('=')[1]
@@ -207,27 +211,24 @@ const Tyr = () => {
                                 <div className="col-lg">
                                     <ul className="list-unstyled summary">
                                         <li className="media mt-3">
-                                            <img className="align-self-center mr-3"
-                                                 alt={tyrsName[0]?.gunResponse.firstIconTitle}
-                                                 src="https://tir-centr.by/assets/images/categories/Icons_1.png"/>
+                                            <img className="align-self-center mr-3 iconIcon"
+                                                 alt={tyrsName[0]?.gunResponse.firstIconTitle} src={first}/>
                                             <div className="media-body">
                                                 <h3>{tyrsName[0]?.gunResponse.firstIconTitle}</h3>
                                                 <p>{tyrsName[0]?.gunResponse.firstIconDesc}</p>
                                             </div>
                                         </li>
                                         <li className="media mt-3">
-                                            <img className="align-self-center mr-3"
-                                                 alt={tyrsName[0]?.gunResponse.secondIconTitle}
-                                                 src="https://tir-centr.by/assets/images/categories/Icons_4.png"/>
+                                            <img className="align-self-center mr-3 iconIcon"
+                                                 alt={tyrsName[0]?.gunResponse.secondIconTitle} src={second}/>
                                             <div className="media-body">
                                                 <h3>{tyrsName[0]?.gunResponse.secondIconTitle}</h3>
                                                 <p>{tyrsName[0]?.gunResponse.secondIconDesc}</p>
                                             </div>
                                         </li>
                                         <li className="media mt-3">
-                                            <img className="align-self-center mr-3"
-                                                 alt={tyrsName[0]?.gunResponse.thirdIconTitle}
-                                                 src="https://tir-centr.by/assets/images/categories/Icons_3.png"/>
+                                            <img className="align-self-center mr-3 iconIcon"
+                                                 alt={tyrsName[0]?.gunResponse.thirdIconTitle} src={third}/>
                                             <div className="media-body">
                                                 <h3>{tyrsName[0]?.gunResponse.thirdIconTitle}</h3>
                                                 <p>{tyrsName[0]?.gunResponse.thirdIconDesc}</p>
