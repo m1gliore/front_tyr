@@ -67,7 +67,7 @@ const Galereya = () => {
                 title
             }
             console.log(myJson)
-            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery', myJson)
+            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery/galereya', myJson)
         } catch (e) {
             console.log(e)
         }

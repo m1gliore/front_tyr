@@ -71,7 +71,7 @@ const LuchshieStrelki = () => {
                 }
             }
             console.log(myJson)
-            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery', myJson)
+            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery/luchshie-strelki', myJson)
         } catch (e) {
             console.log(e)
         }
