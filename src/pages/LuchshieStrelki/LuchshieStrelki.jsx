@@ -81,28 +81,37 @@ const LuchshieStrelki = () => {
         try {
             event.preventDefault()
             const id = event.target.id.value
-            const idShooter = shooters[id].idImage
+            const idImage = shooters[id].idImage
             const myJson = {
-                idShooter
+                idImage
             }
             console.log(myJson)
-            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson)
+            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImage, myJson)
         } catch (e) {
             console.log(e)
         }
     }
-
     const handleSubmitRedact = async (event) => {
         try {
             event.preventDefault()
             const id = event.target.id.value
-            const idImg = shooters[id].idImage
-            const title = event.target.title.value
+            const idImage = shooters[id].idImage
+            const name = event.target.name.value
+            const surname = event.target.surname.value
+            const patronymic = event.target.patronymic.value
+            const result = event.target.result.value
+            const successfulHits = event.target.successfulHits.value
             const myJson = {
-                idImage: idImg,
+                idImage,
                 url: file.name,
                 file: encodedImage,
-                title
+                shooterRequest: {
+                    name,
+                    surname,
+                    patronymic,
+                    result,
+                    successfulHits
+                }
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
@@ -112,11 +121,8 @@ const LuchshieStrelki = () => {
     }
     const handleSelectDelete = (event) => {
         event.preventDefault()
-        console.log(event.target.value)
         const selectedImage = shooters[event.target.value]
-        console.log(selectedImage)
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
-        console.log(selectedImageUrl)
         setImageUrlDelete(selectedImageUrl)
     }
     const handleSelectRedact = (event) => {
@@ -126,7 +132,6 @@ const LuchshieStrelki = () => {
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
         setImageUrl(selectedImageUrl)
     }
-
 
     const refresh = () => window.location.reload()
 
@@ -138,7 +143,7 @@ const LuchshieStrelki = () => {
                 <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => setModalRedactActive(true)}/>
                 <FontAwesomeIcon className="action fa-2x" icon={faPlus} onClick={() => setModalAddActive(true)}/>
             </>}
-            <section className="shooters-list bg-white">
+            <section className="shooters-list-str bg-white">
                 <div className="container">
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
@@ -150,17 +155,17 @@ const LuchshieStrelki = () => {
                     <div className="row">
                         {shooters.map((shooter) =>
                             <div className="col-lg-4 col-md-6" key={shooter.shooterResponse.idShooter}>
-                                <div className="card">
-                                    <img className="card-img-top mx-auto d-block"
+                                <div className="cardStr">
+                                    <img className="card-img-top-str mx-auto d-block"
                                          src={"data:image/" + shooter.url.split('.')[1] + ";base64," + shooter.file}
                                          alt={shooter.title}/>
-                                    <div className="card-body">
-                                        <p className="card-title card-desc">{shooter.shooterResponse.name + " "
+                                    <div className="card-body-str">
+                                        <p className="card-title-str card-desc-str">{shooter.shooterResponse.surname + " " + shooter.shooterResponse.name + " "
                                             + shooter.shooterResponse.patronymic}</p>
-                                        <p className="card-desc">Количество
+                                        <p className="card-desc-str">Количество
                                             выстрелов: {shooter.shooterResponse.result}</p>
-                                        <p className="card-desc">Процент
-                                            попаданий: {shooter.shooterResponse.successfulHits}</p>
+                                        <p className="card-desc-str">Процент
+                                            попаданий: {shooter.shooterResponse.successfulHits} %</p>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +176,7 @@ const LuchshieStrelki = () => {
             <Footer/>
             {admin && <>
                 <Modal active={modalDeleteActive} setActive={setModalDeleteActive}>
-                    <h1>Удалить изображение из галереи</h1>
+                    <h1>Удалить стрелка</h1>
                     <form className="modalAdd" onSubmit={handleSubmitDelete}>
                         <div className="leftContainer">
                             <img className="imgAdd"
@@ -190,7 +195,7 @@ const LuchshieStrelki = () => {
                     </form>
                 </Modal>
                 <Modal active={modalAddActive} setActive={setModalAddActive}>
-                    <h1>Добавить изображение в галерею</h1>
+                    <h1>Добавить стрелка</h1>
                     <form className="modalAdd" onSubmit={handleSubmitAdd}>
                         <div className="leftContainer">
                             <img className="imgAdd" src={imageUrl} alt="foto"/>
@@ -201,14 +206,22 @@ const LuchshieStrelki = () => {
                                    onChange={handleFile}/>
                         </div>
                         <div className="rightContainer">
-                            <input required className="inputAdd" type="text" name="title"
-                                   placeholder="Введите подпись изображению"/>
+                            <input required className="inputAdd" type="text" name="surname"
+                                   placeholder="Введите фамилию"/>
+                            <input required className="inputAdd" type="text" name="name"
+                                   placeholder="Введите имя"/>
+                            <input required className="inputAdd" type="text" name="patronymic"
+                                   placeholder="Введите отчество"/>
+                            <input required className="inputAdd" type="number" name="result"
+                                   placeholder="Введите количество выстрелов"/>
+                            <input required className="inputAdd" type="number" name="successfulHits"
+                                   placeholder="Введите количество успешных попаданий"/>
                             <button className="buttonAdd" onClick={refresh}>Добавить</button>
                         </div>
                     </form>
                 </Modal>
                 <Modal active={modalRedactActive} setActive={setModalRedactActive}>
-                    <h1>Изменить изображение в галерее</h1>
+                    <h1>Изменить стрелка</h1>
                     <form className="modalAdd" onSubmit={handleSubmitRedact}>
                         <div className="leftContainer">
                             <img className="imgAdd" src={imageUrl} alt="foto"/>
@@ -225,8 +238,16 @@ const LuchshieStrelki = () => {
                                     <option key={item.idImage}
                                             value={shooters.indexOf(item)}>{shooters.indexOf(item) + 1}</option>)}
                             </select>
-                            <input className="inputAdd" type="text" name="title"
-                                   placeholder="Введите новую подпись изображению"/>
+                            <input required className="inputAdd" type="text" name="surname"
+                                   placeholder="Введите фамилию"/>
+                            <input required className="inputAdd" type="text" name="name"
+                                   placeholder="Введите имя"/>
+                            <input required className="inputAdd" type="text" name="patronymic"
+                                   placeholder="Введите отчество"/>
+                            <input required className="inputAdd" type="number" name="result"
+                                   placeholder="Введите количество выстрелов"/>
+                            <input required className="inputAdd" type="number" name="successfulHits"
+                                   placeholder="Введите количество успешных попаданий"/>
                             <button className="buttonAdd" onClick={refresh}>Добавить</button>
                         </div>
                     </form>

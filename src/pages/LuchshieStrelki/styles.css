@@ -38,31 +38,12 @@ a {
 }
 
 /* CATEGORY */
-.category {
-    padding: 1.5rem 0 2.5rem;
-    background-color: rgb(221, 221, 224);
-}
 
-.category .category-card {
-    background-color: rgb(255, 255, 255);
-    padding: 1rem;
-    border: 1px solid rgb(194, 194, 194);
-    border-bottom: 2px solid rgb(49, 55, 194);
-}
-
-.category-image-container {
-    text-align: center;
-}
-
-.category .summary p {
-    line-height: 1.2rem;
-}
-
-.shooters-list {
+.shooters-list-str {
     padding: 1.5rem 0;
 }
 
-.shooters-list .card {
+.shooters-list-str .cardStr {
     border: 1px solid rgb(194, 194, 194);
     border-bottom: 2px solid rgb(49, 55, 194);
     border-radius: 0;
@@ -70,31 +51,29 @@ a {
     height: 60vh;
 }
 
-.shooters-list .card-img-top {
-    width: 250px;
-    height: 250px;
+.shooters-list-str .card-img-top-str {
+    width: 150px;
+    height: 150px;
 }
 
-.shooters-list .card-img-overlay {
-    top: 39px;
-    padding: 0;
-}
-
-.shooters-list .card-body {
+.shooters-list-str .card-body-str {
     padding: 1rem .75rem;
 }
 
-.shooters-list .card-desc {
+.shooters-list-str .card-desc-str {
     font-size: 1.2rem;
     line-height: 1;
-    padding: 0 .5rem 1rem;
     border-bottom: none;
-    height: 4.2rem;
+    height: 3rem;
+    padding: 0;
+    margin: 0;
 }
 
-.shooters-list .card-title {
+.shooters-list-str .card-title-str {
     font-size: 1.5rem;
     font-weight: 700;
+    padding: 0;
+    margin: 0;
 }
 
 /* MEDIA */

@@ -9,6 +9,7 @@
 
 .galleryContainer img {
     width: 25vw;
+    height: 50vh;
     padding: 15px;
     transition: .5s;
 }
