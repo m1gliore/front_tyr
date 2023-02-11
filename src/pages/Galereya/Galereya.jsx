@@ -51,12 +51,12 @@ const Galereya = () => {
                 console.log('Error: ', error)
             }
         }
-    }, [file, encodedImage])
+    }, [file])
 
     images.sort((a, b) => {
         return a.idImage - b.idImage
     })
-    console.log(images)
+
     const handleSubmitAdd = async (event) => {
         try {
             event.preventDefault()
