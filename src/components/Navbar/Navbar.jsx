@@ -25,16 +25,12 @@ const Navbar = () => {
                         </div>
                         <div className="col-lg-9 header-contact">
                             <div className="row">
-                                <div className="col-md-2 col-sm-6 header-top-phone-1">
-                                    <div className="text-right">
-                                        <div className="header-phone">+ 375 29 8594040</div>
-                                        <div className="header-phone-desc">(моб.МТС/Viber)</div>
-                                    </div>
+                                <div className="col-md-1 col-sm-6 header-top-phone-1">
                                 </div>
                                 <div className="col-md-2 col-sm-6 header-top-phone-2">
                                     <div className="text-left">
-                                        <div className="header-phone">+ 375 29 6694040</div>
-                                        <div className="header-phone-desc">(моб.ВЕЛ/Viber)</div>
+                                        <div className="header-phone">+375 44 769-84-98</div>
+                                        <div className="header-phone-desc">(моб.A1)</div>
                                     </div>
                                 </div>
                                 <div className="col-md-4 header-top-address">
