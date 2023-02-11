@@ -56,7 +56,7 @@ const Galereya = () => {
     images.sort((a, b) => {
         return a.idImage - b.idImage
     })
-
+    console.log(images)
     const handleSubmitAdd = async (event) => {
         try {
             event.preventDefault()
@@ -77,11 +77,12 @@ const Galereya = () => {
         try {
             event.preventDefault()
             const id = event.target.id.value
+            const idImg = images[id].idImage
             const myJson = {
-                id
+                idImg
             }
             console.log(myJson)
-            await axios.post('', myJson)
+            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson)
         } catch (e) {
             console.log(e)
         }
@@ -91,31 +92,33 @@ const Galereya = () => {
         try {
             event.preventDefault()
             const id = event.target.id.value
+            const idImg = images[id].idImage
             const title = event.target.title.value
             const myJson = {
-                id,
+                idImage: idImg,
                 url: file.name,
                 file: encodedImage,
                 title
             }
             console.log(myJson)
-            await axios.post('', myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
         } catch (e) {
             console.log(e)
         }
     }
-
     const handleSelectDelete = (event) => {
         event.preventDefault()
         console.log(event.target.value)
-        const selectedImage = images[event.target.value - 1]
+        const selectedImage = images[event.target.value]
+        console.log(selectedImage)
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
+        console.log(selectedImageUrl)
         setImageUrlDelete(selectedImageUrl)
     }
     const handleSelectRedact = (event) => {
         event.preventDefault()
         console.log(event.target.value)
-        const selectedImage = images[event.target.value - 1]
+        const selectedImage = images[event.target.value]
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
         setImageUrl(selectedImageUrl)
     }
@@ -135,7 +138,7 @@ const Galereya = () => {
                 <div className="galleryContainer">
                     {images.map((image) =>
                         <a key={image.idImage} href={"data:image/" + image.url.split('.')[1] + ";base64," + image.file}
-                           data-lightbox="images" data-title={image.url}>
+                           data-lightbox="images" data-title={image.title}>
                             <img src={"data:image/" + image.url.split('.')[1] + ";base64," + image.file}
                                  alt={image.idImage}/>
                         </a>
@@ -154,10 +157,10 @@ const Galereya = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
-                                <option disabled>Выберите один из вариантов</option>
-                                <option value="1" className="inputAdd">1</option>
-                                <option value="2" className="inputAdd">2</option>
-                                <option value="3" className="inputAdd">3</option>
+                                <option selected disabled>Выберите один из вариантов</option>
+                                {images.map((item) =>
+                                    <option key={item.idImage}
+                                            value={images.indexOf(item)}>{images.indexOf(item) + 1}</option>)}
                             </select>
                             <button className="buttonAdd" onClick={refresh}>Удалить</button>
                         </div>
@@ -194,10 +197,10 @@ const Galereya = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
-                                <option disabled>Выберите один из вариантов</option>
-                                <option value="1" className="inputAdd">1</option>
-                                <option value="2" className="inputAdd">2</option>
-                                <option value="3" className="inputAdd">3</option>
+                                <option selected disabled>Выберите один из вариантов</option>
+                                {images.map((item) =>
+                                    <option key={item.idImage}
+                                            value={images.indexOf(item)}>{images.indexOf(item) + 1}</option>)}
                             </select>
                             <input className="inputAdd" type="text" name="title"
                                    placeholder="Введите новую подпись изображению"/>
