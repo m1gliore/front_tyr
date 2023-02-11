@@ -67,7 +67,7 @@ const Galereya = () => {
                 title
             }
             console.log(myJson)
-            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery', myJson)
+            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery/galereya', myJson)
         } catch (e) {
             console.log(e)
         }
@@ -204,7 +204,7 @@ const Galereya = () => {
                             </select>
                             <input className="inputAdd" type="text" name="title"
                                    placeholder="Введите новую подпись изображению"/>
-                            <button className="buttonAdd" onClick={refresh}>Добавить</button>
+                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
                         </div>
                     </form>
                 </Modal>

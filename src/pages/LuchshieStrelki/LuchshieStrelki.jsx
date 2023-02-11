@@ -71,7 +71,7 @@ const LuchshieStrelki = () => {
                 }
             }
             console.log(myJson)
-            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery', myJson)
+            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery/luchshie-strelki', myJson)
         } catch (e) {
             console.log(e)
         }
@@ -248,7 +248,7 @@ const LuchshieStrelki = () => {
                                    placeholder="Введите количество выстрелов"/>
                             <input required className="inputAdd" type="number" name="successfulHits"
                                    placeholder="Введите количество успешных попаданий"/>
-                            <button className="buttonAdd" onClick={refresh}>Добавить</button>
+                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
                         </div>
                     </form>
                 </Modal>
