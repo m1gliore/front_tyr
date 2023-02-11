@@ -4,16 +4,191 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCircle, faEnvelope, faPen, faPlus, faTrashCan} from '@fortawesome/free-solid-svg-icons'
 import {faInstagram} from '@fortawesome/free-brands-svg-icons'
 import Modal from "../Modal/Modal";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import translit from "../../makeLink";
 
 const Navbar = () => {
+    const [tyrTypes, setTyrTypes] = useState([])
     const [modalDeleteActiveTyr, setModalDeleteActiveTyr] = useState(false)
     const [modalAddActiveTyr, setModalAddActiveTyr] = useState(false)
     const [modalRedactActiveTyr, setModalRedactActiveTyr] = useState(false)
     const [modalDeleteActiveService, setModalDeleteActiveService] = useState(false)
     const [modalAddActiveService, setModalAddActiveService] = useState(false)
     const [modalRedactActiveService, setModalRedactActiveService] = useState(false)
+    const [imageUrlDelete, setImageUrlDelete] = useState("Категория")
+    const [imageUrl, setImageUrl] = useState("Категория")
     const admin = true
+
+    useEffect(() => {
+        (async () => {
+            try {
+                //тут как-то подгрузи типы тиров
+                const response = await axios.get(`http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=`)
+                setTyrTypes(response.data.imageResponseSet)
+            } catch (e) {
+                console.log(e)
+            }
+        })()
+    }, [])
+
+    tyrTypes.sort((a, b) => {
+        return a.idImage - b.idImage
+    })
+
+    const handleSubmitAdd = async (event) => {
+        try {
+            event.preventDefault()
+            const title = event.target.title.value
+            const description = event.target.description.value
+            const firstIconTitle = event.target.firstIconTitle.value
+            const firstIconDesc = event.target.firstIconDesc.value
+            const secondIconTitle = event.target.secondIconTitle.value
+            const secondIconDesc = event.target.secondIconDesc.value
+            const thirdIconTitle = event.target.thirdIconTitle.value
+            const thirdIconDesc = event.target.thirdIconDesc.value
+            const myJson = {
+                title,
+                translit: translit(title),
+                description,
+                gunRequest: {
+                    firstIconTitle,
+                    firstIconDesc,
+                    secondIconTitle,
+                    secondIconDesc,
+                    thirdIconTitle,
+                    thirdIconDesc
+                }
+            }
+            console.log(myJson)
+            //добавь чё надо в url
+            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/`, myJson)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleSubmitDelete = async (event) => {
+        try {
+            event.preventDefault()
+            const id = event.target.id.value
+            const idImg = tyrTypes[id].idImage
+            const myJson = {
+                idImg
+            }
+            console.log(myJson)
+            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleSubmitRedact = async (event) => {
+        try {
+            event.preventDefault()
+            const id = event.target.id.value
+            const idImg = tyrTypes[id].idImage
+            const title = event.target.title.value
+            const description = event.target.description.value
+            const firstIconTitle = event.target.firstIconTitle.value
+            const firstIconDesc = event.target.firstIconDesc.value
+            const secondIconTitle = event.target.secondIconTitle.value
+            const secondIconDesc = event.target.secondIconDesc.value
+            const thirdIconTitle = event.target.thirdIconTitle.value
+            const thirdIconDesc = event.target.thirdIconDesc.value
+            const myJson = {
+                title,
+                translit: translit(title),
+                description,
+                gunRequest: {
+                    idImage: idImg,
+                    firstIconTitle,
+                    firstIconDesc,
+                    secondIconTitle,
+                    secondIconDesc,
+                    thirdIconTitle,
+                    thirdIconDesc
+                }
+            }
+            console.log(myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleSubmitAddService = async (event) => {
+        try {
+            event.preventDefault()
+            const title = event.target.title.value
+            const myJson = {
+                title,
+                translit: translit(title)
+            }
+            console.log(myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleSubmitDeleteService = async (event) => {
+        try {
+            event.preventDefault()
+            const id = event.target.id.value
+            const idImg = tyrTypes[id].idImage
+            const myJson = {
+                serviceRequest: {
+                    idImage: idImg
+                }
+            }
+            console.log(myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleSubmitRedactService = async (event) => {
+        try {
+            event.preventDefault()
+            const id = event.target.id.value
+            const idImg = tyrTypes[id].idImage
+            const title = event.target.title.value
+            const myJson = {
+                title,
+                translit: translit(title),
+                serviceRequest: {
+                    idImage: idImg
+                }
+            }
+            console.log(myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    //если тут удалять по id, то выводить буду тайтл, а не картинку
+    const handleSelectDelete = (event) => {
+        event.preventDefault()
+        console.log(event.target.value)
+        const selectedImage = tyrTypes[event.target.value]
+        console.log(selectedImage)
+        const selectedImageUrl = selectedImage.title
+        console.log(selectedImageUrl)
+        setImageUrlDelete(selectedImageUrl)
+    }
+
+    const handleSelectRedact = (event) => {
+        event.preventDefault()
+        console.log(event.target.value)
+        const selectedImage = tyrTypes[event.target.value]
+        const selectedImageUrl = selectedImage.title
+        setImageUrl(selectedImageUrl)
+    }
+
+    const refresh = () => window.location.reload()
 
     return (
         <header>
@@ -142,21 +317,123 @@ const Navbar = () => {
             {admin && <>
                 <Modal active={modalDeleteActiveTyr} setActive={setModalDeleteActiveTyr}>
                     <h1>Удалить категорию тира</h1>
+                    <form className="modalAdd" onSubmit={handleSubmitDelete}>
+                        <div className="leftContainer">
+                            <div>{imageUrlDelete}</div>
+                        </div>
+                        <div className="rightContainer">
+                            <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
+                                <option selected disabled>Выберите один из вариантов</option>
+                                {tyrTypes.map((item) =>
+                                    <option key={item.idImage}
+                                            value={tyrTypes.indexOf(item)}>{tyrTypes.indexOf(item) + 1}</option>)}
+                            </select>
+                            <button className="buttonAdd" onClick={refresh}>Удалить</button>
+                        </div>
+                    </form>
                 </Modal>
                 <Modal active={modalAddActiveTyr} setActive={setModalAddActiveTyr}>
                     <h1>Добавить категорию тира</h1>
+                    <form className="modalAdd" onSubmit={handleSubmitAdd}>
+                        <div className="rightContainer">
+                            <input required className="inputAdd" type="text" name="title"
+                                   placeholder="Введите наименование категории"/>
+                            <input required className="inputAdd" type="text" name="description"
+                                   placeholder="Введите описание категории"/>
+                            <input required className="inputAdd" type="text" name="firstIconTitle"
+                                   placeholder="Введите наименование первой иконки"/>
+                            <input required className="inputAdd" type="text" name="firstIconDesc"
+                                   placeholder="Введите описание первой иконки"/>
+                            <input required className="inputAdd" type="text" name="secondIconTitle"
+                                   placeholder="Введите наименование второй иконки"/>
+                            <input required className="inputAdd" type="text" name="secondIconDesc"
+                                   placeholder="Введите описание второй иконки"/>
+                            <input required className="inputAdd" type="text" name="thirdIconTitle"
+                                   placeholder="Введите наименование третьей иконки"/>
+                            <input required className="inputAdd" type="text" name="thirdIconDesc"
+                                   placeholder="Введите описание третьей иконки"/>
+                            <button className="buttonAdd" onClick={refresh}>Добавить</button>
+                        </div>
+                    </form>
                 </Modal>
                 <Modal active={modalRedactActiveTyr} setActive={setModalRedactActiveTyr}>
                     <h1>Изменить категорию тира</h1>
+                    <form className="modalAdd" onSubmit={handleSubmitRedact}>
+                        <div className="leftContainer">
+                            <div>{imageUrl}</div>
+                        </div>
+                        <div className="rightContainer">
+                            <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
+                                <option selected disabled>Выберите один из вариантов</option>
+                                {tyrTypes.map((item) =>
+                                    <option key={item.idImage}
+                                            value={tyrTypes.indexOf(item)}>{tyrTypes.indexOf(item) + 1}</option>)}
+                            </select>
+                            <input required className="inputAdd" type="text" name="title"
+                                   placeholder="Введите наименование категории"/>
+                            <input required className="inputAdd" type="text" name="description"
+                                   placeholder="Введите описание категории"/>
+                            <input required className="inputAdd" type="text" name="firstIconTitle"
+                                   placeholder="Введите наименование первой иконки"/>
+                            <input required className="inputAdd" type="text" name="firstIconDesc"
+                                   placeholder="Введите описание первой иконки"/>
+                            <input required className="inputAdd" type="text" name="secondIconTitle"
+                                   placeholder="Введите наименование второй иконки"/>
+                            <input required className="inputAdd" type="text" name="secondIconDesc"
+                                   placeholder="Введите описание второй иконки"/>
+                            <input required className="inputAdd" type="text" name="thirdIconTitle"
+                                   placeholder="Введите наименование третьей иконки"/>
+                            <input required className="inputAdd" type="text" name="thirdIconDesc"
+                                   placeholder="Введите описание третьей иконки"/>
+                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
+                        </div>
+                    </form>
                 </Modal>
                 <Modal active={modalDeleteActiveService} setActive={setModalDeleteActiveService}>
                     <h1>Удалить тип услуг</h1>
+                    <form className="modalAdd" onSubmit={handleSubmitDeleteService}>
+                        <div className="leftContainer">
+                            <div>{imageUrlDelete}</div>
+                        </div>
+                        <div className="rightContainer">
+                            <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
+                                <option selected disabled>Выберите один из вариантов</option>
+                                {tyrTypes.map((item) =>
+                                    <option key={item.idImage}
+                                            value={tyrTypes.indexOf(item)}>{tyrTypes.indexOf(item) + 1}</option>)}
+                            </select>
+                            <button className="buttonAdd" onClick={refresh}>Удалить</button>
+                        </div>
+                    </form>
                 </Modal>
                 <Modal active={modalAddActiveService} setActive={setModalAddActiveService}>
                     <h1>Добавить тип услуг</h1>
+                    <form className="modalAdd" onSubmit={handleSubmitAddService}>
+                        <div className="rightContainer">
+                            <input required className="inputAdd" type="text" name="title"
+                                   placeholder="Введите наименование типа услуг"/>
+                            <button className="buttonAdd" onClick={refresh}>Добавить</button>
+                        </div>
+                    </form>
                 </Modal>
                 <Modal active={modalRedactActiveService} setActive={setModalRedactActiveService}>
                     <h1>Изменить тип услуг</h1>
+                    <form className="modalAdd" onSubmit={handleSubmitRedactService}>
+                        <div className="leftContainer">
+                            <div>{imageUrl}</div>
+                        </div>
+                        <div className="rightContainer">
+                            <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
+                                <option selected disabled>Выберите один из вариантов</option>
+                                {tyrTypes.map((item) =>
+                                    <option key={item.idImage}
+                                            value={tyrTypes.indexOf(item)}>{tyrTypes.indexOf(item) + 1}</option>)}
+                            </select>
+                            <input required className="inputAdd" type="text" name="title"
+                                   placeholder="Введите наименование типа услуг"/>
+                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
+                        </div>
+                    </form>
                 </Modal>
             </>}
         </header>
