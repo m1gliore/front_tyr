@@ -60,15 +60,18 @@ const VidyiUslug = () => {
         try {
             event.preventDefault()
             const name = event.target.name.value
-            const desc = event.target.desc.value
+            const description = event.target.desc.value
             const myJson = {
                 url: file.name,
                 file: encodedImage,
-                name,
-                desc
+                serviceRequest:
+                    {
+                        name,
+                        description
+                    }
             }
             console.log(myJson)
-            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery/uslugi', myJson)
+            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/${currentService}`, myJson)
         } catch (e) {
             console.log(e)
         }
@@ -95,13 +98,16 @@ const VidyiUslug = () => {
             const id = event.target.id.value
             const idImg = serviceNames[id].idImage
             const name = event.target.name.value
-            const desc = event.target.desc.value
+            const description = event.target.desc.value
             const myJson = {
                 idImage: idImg,
-                url: file.name,
+                url: file?.name,
                 file: encodedImage,
-                name,
-                desc
+                serviceRequest:
+                    {
+                        name,
+                        description
+                    }
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
@@ -109,7 +115,6 @@ const VidyiUslug = () => {
             console.log(e)
         }
     }
-
     const handleSelectDelete = (event) => {
         event.preventDefault()
         console.log(event.target.value)
@@ -164,7 +169,8 @@ const VidyiUslug = () => {
                                         <div className="col">
                                             <h2>{serviceName.serviceResponse.name}</h2>
                                             <p>{serviceName.serviceResponse.description}</p>
-                                            <a className="btn btn-blue" href={currentPath + "/" + serviceName.serviceResponse.name}
+                                            <a className="btn btn-blue"
+                                               href={currentPath + "/" + serviceName.serviceResponse.name}
                                                role="button">Подробнее</a>
                                         </div>
                                     </div>
@@ -237,7 +243,7 @@ const VidyiUslug = () => {
                                    placeholder="Введите наименование услуги"/>
                             <input required className="inputAdd" type="text" name="desc"
                                    placeholder="Введите описание услуги"/>
-                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
+                            <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
                 </Modal>

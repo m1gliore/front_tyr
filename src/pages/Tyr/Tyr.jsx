@@ -90,15 +90,23 @@ const Tyr = () => {
         try {
             event.preventDefault()
             const name = event.target.name.value
-            const desc = event.target.desc.value
+            const gunType = event.target.gunType.value
+            const price = event.target.price.value
+            const quantity = event.target.quantity.value
+            const description = event.target.description.value
             const myJson = {
                 url: file.name,
                 file: encodedImage,
-                name,
-                desc
+                gunRequest: {
+                    name,
+                    gunType,
+                    price,
+                    quantity,
+                    description
+                }
             }
             console.log(myJson)
-            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery/uslugi', myJson)
+            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/${currentTyr}`, myJson)
         } catch (e) {
             console.log(e)
         }
@@ -125,13 +133,21 @@ const Tyr = () => {
             const id = event.target.id.value
             const idImg = tyrsName[id].idImage
             const name = event.target.name.value
-            const desc = event.target.desc.value
+            const gunType = event.target.gunType.value
+            const price = event.target.price.value
+            const quantity = event.target.quantity.value
+            const description = event.target.description.value
             const myJson = {
                 idImage: idImg,
                 url: file.name,
                 file: encodedImage,
-                name,
-                desc
+                gunRequest: {
+                    name,
+                    gunType,
+                    price,
+                    quantity,
+                    description
+                }
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
@@ -271,7 +287,7 @@ const Tyr = () => {
             <Footer/>
             {admin && <>
                 <Modal active={modalDeleteActive} setActive={setModalDeleteActive}>
-                    <h1>Удалить услугу</h1>
+                    <h1>Удалить оружие</h1>
                     <form className="modalAdd" onSubmit={handleSubmitDelete}>
                         <div className="leftContainer">
                             <img className="imgAdd"
@@ -290,7 +306,7 @@ const Tyr = () => {
                     </form>
                 </Modal>
                 <Modal active={modalAddActive} setActive={setModalAddActive}>
-                    <h1>Добавить услугу</h1>
+                    <h1>Добавить оружие</h1>
                     <form className="modalAdd" onSubmit={handleSubmitAdd}>
                         <div className="leftContainer">
                             <img className="imgAdd" src={imageUrl} alt="foto"/>
@@ -302,15 +318,28 @@ const Tyr = () => {
                         </div>
                         <div className="rightContainer">
                             <input required className="inputAdd" type="text" name="name"
-                                   placeholder="Введите наименование услуги"/>
-                            <input required className="inputAdd" type="text" name="desc"
-                                   placeholder="Введите описание услуги"/>
+                                   placeholder="Введите наименование оружия"/>
+                            <input required className="inputAdd" type="text" name="description"
+                                   placeholder="Введите описание оружия"/>
+                            <input required className="inputAdd" type="number" name="price"
+                                   placeholder="Введите цену оружия за выстрелы"/>
+                            <input required className="inputAdd" type="number" name="quantity"
+                                   placeholder="Введите количество выстрелов"/>
+                            <select required className="inputAdd" name="gunType" onChange={handleSelectRedact}>
+                                <option selected disabled>Выберите один из типов оружия</option>
+                                <option value="ASSAULT_RIFLES">Автоматы</option>
+                                <option value="PISTOLS">Пистолеты</option>
+                                <option value="RIFLES">Винтовки</option>
+                                <option value="SUBMACHINE_GUNS">Пистолеты-пулеметы</option>
+                                <option value="SHOTGUNS">Дробовики</option>
+                                <option value="MACHINE_GUNS">Пулеметы</option>
+                            </select>
                             <button className="buttonAdd" onClick={refresh}>Добавить</button>
                         </div>
                     </form>
                 </Modal>
                 <Modal active={modalRedactActive} setActive={setModalRedactActive}>
-                    <h1>Изменить услугу</h1>
+                    <h1>Изменить оружие</h1>
                     <form className="modalAdd" onSubmit={handleSubmitRedact}>
                         <div className="leftContainer">
                             <img className="imgAdd" src={imageUrl} alt="foto"/>
@@ -328,9 +357,22 @@ const Tyr = () => {
                                             value={tyrsName.indexOf(item)}>{tyrsName.indexOf(item) + 1}</option>)}
                             </select>
                             <input required className="inputAdd" type="text" name="name"
-                                   placeholder="Введите наименование услуги"/>
-                            <input required className="inputAdd" type="text" name="desc"
-                                   placeholder="Введите описание услуги"/>
+                                   placeholder="Введите наименование оружия"/>
+                            <input required className="inputAdd" type="text" name="description"
+                                   placeholder="Введите описание оружия"/>
+                            <input required className="inputAdd" type="number" name="price"
+                                   placeholder="Введите цену оружия за выстрелы"/>
+                            <input required className="inputAdd" type="number" name="quantity"
+                                   placeholder="Введите количество выстрелов"/>
+                            <select required className="inputAdd" name="gunType" onChange={handleSelectRedact}>
+                                <option selected disabled>Выберите один из типов оружия</option>
+                                <option value="ASSAULT_RIFLES">Автоматы</option>
+                                <option value="PISTOLS">Пистолеты</option>
+                                <option value="RIFLES">Винтовки</option>
+                                <option value="SUBMACHINE_GUNS">Пистолеты-пулеметы</option>
+                                <option value="SHOTGUNS">Дробовики</option>
+                                <option value="MACHINE_GUNS">Пулеметы</option>
+                            </select>
                             <button className="buttonAdd" onClick={refresh}>Изменить</button>
                         </div>
                     </form>
