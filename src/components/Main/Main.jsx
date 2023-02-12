@@ -10,7 +10,6 @@ import second from "../../images/2.jpg";
 import third from "../../images/3.jpg";
 import fourth from "../../images/4.jpg";
 import fifth from "../../images/5.jpg";
-import sixth from "../../images/6.jpg";
 
 const Main = () => {
     const [sliderImages, setSliderImages] = useState([])
@@ -92,7 +91,7 @@ const Main = () => {
                 <div className="mainGallery">
                     <div className="imageContainer">
                         <img src={first} alt="one"/>
-                        <div className="bottomText">Основные услуги тира</div>
+                        <div className="bottomText">Услуги тира</div>
                     </div>
                     <div className="imageContainer">
                         <img src={second} alt="two"/>
@@ -100,7 +99,7 @@ const Main = () => {
                     </div>
                     <div className="imageContainer">
                         <img src={third} alt="three"/>
-                        <div className="bottomText">Корпоративы и тимбилдинги</div>
+                        <div className="bottomText">Предложения для корпоративов</div>
                     </div>
                     <div className="imageContainer">
                         <img src={fourth} alt="four"/>
@@ -108,11 +107,7 @@ const Main = () => {
                     </div>
                     <div className="imageContainer">
                         <img src={fifth} alt="five"/>
-                        <div className="bottomText">Развлечения для семьи и детей</div>
-                    </div>
-                    <div className="imageContainer">
-                        <img src={sixth} alt="six"/>
-                        <div className="bottomText">Экскурсии и познание</div>
+                        <div className="bottomText">Развлечения</div>
                     </div>
                 </div>
             </section>

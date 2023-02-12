@@ -41,24 +41,10 @@ const Navbar = () => {
             event.preventDefault()
             const title = event.target.title.value
             const description = event.target.description.value
-            const firstIconTitle = event.target.firstIconTitle.value
-            const firstIconDesc = event.target.firstIconDesc.value
-            const secondIconTitle = event.target.secondIconTitle.value
-            const secondIconDesc = event.target.secondIconDesc.value
-            const thirdIconTitle = event.target.thirdIconTitle.value
-            const thirdIconDesc = event.target.thirdIconDesc.value
             const myJson = {
                 title,
                 translit: translit(title),
-                description,
-                gunRequest: {
-                    firstIconTitle,
-                    firstIconDesc,
-                    secondIconTitle,
-                    secondIconDesc,
-                    thirdIconTitle,
-                    thirdIconDesc
-                }
+                description
             }
             console.log(myJson)
             //добавь чё надо в url
@@ -86,29 +72,12 @@ const Navbar = () => {
     const handleSubmitRedact = async (event) => {
         try {
             event.preventDefault()
-            const id = event.target.id.value
-            const idImg = tyrTypes[id].idImage
             const title = event.target.title.value
             const description = event.target.description.value
-            const firstIconTitle = event.target.firstIconTitle.value
-            const firstIconDesc = event.target.firstIconDesc.value
-            const secondIconTitle = event.target.secondIconTitle.value
-            const secondIconDesc = event.target.secondIconDesc.value
-            const thirdIconTitle = event.target.thirdIconTitle.value
-            const thirdIconDesc = event.target.thirdIconDesc.value
             const myJson = {
                 title,
                 translit: translit(title),
-                description,
-                gunRequest: {
-                    idImage: idImg,
-                    firstIconTitle,
-                    firstIconDesc,
-                    secondIconTitle,
-                    secondIconDesc,
-                    thirdIconTitle,
-                    thirdIconDesc
-                }
+                description
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
@@ -304,10 +273,14 @@ const Navbar = () => {
                                                              onClick={() => setModalAddActiveService(true)}/>
                                         </>}</div>
                                 </li>
-                                <li className="nav-item active"><a className="nav-link"
+                                <li className="nav-item"><a className="nav-link"
                                                                    href="/strelki/type?catalog=luchshie-strelki">Лучшие
                                     стрелки</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/kontaktyi">Контакты тира</a>
+                                </li>
+                                <li className="nav-item"><a className="nav-link" href="/sertifikatyi">Сертификаты</a>
+                                </li>
+                                <li className="nav-item"><a className="nav-link" href="/otzyivyi">Отзывы</a>
                                 </li>
                             </ul>
                         </div>
@@ -373,18 +346,6 @@ const Navbar = () => {
                                    placeholder="Введите наименование категории"/>
                             <input required className="inputAdd" type="text" name="description"
                                    placeholder="Введите описание категории"/>
-                            <input required className="inputAdd" type="text" name="firstIconTitle"
-                                   placeholder="Введите наименование первой иконки"/>
-                            <input required className="inputAdd" type="text" name="firstIconDesc"
-                                   placeholder="Введите описание первой иконки"/>
-                            <input required className="inputAdd" type="text" name="secondIconTitle"
-                                   placeholder="Введите наименование второй иконки"/>
-                            <input required className="inputAdd" type="text" name="secondIconDesc"
-                                   placeholder="Введите описание второй иконки"/>
-                            <input required className="inputAdd" type="text" name="thirdIconTitle"
-                                   placeholder="Введите наименование третьей иконки"/>
-                            <input required className="inputAdd" type="text" name="thirdIconDesc"
-                                   placeholder="Введите описание третьей иконки"/>
                             <button className="buttonAdd" onClick={refresh}>Изменить</button>
                         </div>
                     </form>
