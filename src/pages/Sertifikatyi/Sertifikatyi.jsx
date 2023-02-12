@@ -6,12 +6,11 @@ import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen} from "@fortawesome/free-solid-svg-icons";
-import defaultImg from "../../images/default-store-350x350.jpg";
 
 const Sertifikatyi = () => {
     const [certificates, setCertificates] = useState([])
     const [modalRedactActive, setModalRedactActive] = useState(false)
-    const [imageUrl, setImageUrl] = useState(defaultImg)
+    const [imageUrl, setImageUrl] = useState("")
     const admin = true
 
     useEffect(() => {
