@@ -123,7 +123,6 @@ const Galereya = () => {
         setImageUrl(selectedImageUrl)
     }
 
-
     const refresh = () => window.location.reload()
 
     return (
