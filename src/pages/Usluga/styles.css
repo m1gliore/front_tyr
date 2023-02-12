@@ -1,0 +1,34 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Myriad Pro Regular', sans-serif;
+}
+
+h1, .h1 {
+    font-size: 2.25rem;
+}
+
+h2, .h2 {
+    font-size: 2rem;
+}
+
+h3, .h3 {
+    font-size: 1.75rem;
+}
+
+.breadcrumb {
+    background-color: transparent;
+}
+
+.breadcrumb a {
+    color: rgb(133, 137, 138);
+}
+
+.breadcrumb li.active {
+    color: rgb(23, 44, 65);
+}
+
+.base-card {
+    padding: 1rem;
+    background-color: rgb(255,255,255);
+    border: 1px solid rgb(194,194,194);
+    border-bottom: 2px solid rgb(49, 55, 194);
+}

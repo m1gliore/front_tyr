@@ -20,6 +20,8 @@ import LuchshieStrelki from "./pages/LuchshieStrelki/LuchshieStrelki";
 import Galereya from "./pages/Galereya/Galereya";
 import Sertifikatyi from "./pages/Sertifikatyi/Sertifikatyi";
 import Otzyivyi from "./pages/Otzyivyi/Otzyivyi";
+import Usluga from "./pages/Usluga/Usluga";
+import Oruzhie from "./pages/Oruzhie/Oruzhie";
 
 const App = () => {
     return (
@@ -30,10 +32,12 @@ const App = () => {
                 <Route exact path="/register" element={<Register/>}/>
                 <Route exact path="/oruzhie-v-tire" element={<OruzhieVTire/>}/>
                 <Route exact path="/oruzhie-v-tire/type" element={<Tyr/>}/>
+                <Route exact path="/oruzhie-v-tire/:idOruzhie" element={<Oruzhie/>}/>
                 <Route exact path="/images/type" element={<Galereya/>}/>
                 <Route exact path="/czenyi" element={<Czenyi/>}/>
                 <Route exact path="/uslugi" element={<Uslugi/>}/>
                 <Route exact path="/uslugi/type" element={<VidyiUslug/>}/>
+                <Route exact path="/uslugi/:idUsluga" element={<Usluga/>}/>
                 <Route exact path="/strelki/type" element={<LuchshieStrelki/>}/>
                 <Route exact path="/kontaktyi" element={<Kontaktyi/>}/>
                 <Route exact path="/sertifikatyi" element={<Sertifikatyi/>}/>
