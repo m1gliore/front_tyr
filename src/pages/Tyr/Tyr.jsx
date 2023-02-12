@@ -274,7 +274,7 @@ const Tyr = () => {
                                                         className="price">{gun.gunResponse.price} руб.</span> / {gun.gunResponse.quantity} выстр.
                                                     </div>
                                                     <div className="col-auto text-right">
-                                                        <a href={"/" + gun.gunResponse.v}
+                                                        <a href={"/oruzhie-v-tire/" + gun.gunResponse.v}
                                                            className="btn btn-blue" role="button">Подробнее</a>
                                                     </div>
                                                 </div>
