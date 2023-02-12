@@ -24,31 +24,33 @@ const Navbar = () => {
         (async () => {
             try {
                 //тут как-то подгрузи типы тиров
-                const response = await axios.get(`http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=`)
-                setTyrTypes(response.data.imageResponseSet)
+                const response = await axios.get(`http://localhost:8040/api/homePage/getHomePageTitle`)
+                setTyrTypes(response.data)
             } catch (e) {
                 console.log(e)
             }
         })()
     }, [])
 
+
     tyrTypes.sort((a, b) => {
-        return a.idImage - b.idImage
+        return a.idServiceCatalog - b.idServiceCatalog
     })
 
     const handleSubmitAdd = async (event) => {
         try {
             event.preventDefault()
-            const title = event.target.title.value
+            const nameCatalog = event.target.nameCatalog.value
             const description = event.target.description.value
+            const directoryType = 'TYR'
             const myJson = {
-                title,
-                translit: translit(title),
-                description
+                nameCatalog,
+                url: translit(nameCatalog),
+                description,
+                directoryType
             }
             console.log(myJson)
-            //добавь чё надо в url
-            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/`, myJson)
+            await axios.post(`http://localhost:8040/api/redact/saveNewServiceCatalog`, myJson)
         } catch (e) {
             console.log(e)
         }
@@ -58,12 +60,12 @@ const Navbar = () => {
         try {
             event.preventDefault()
             const id = event.target.id.value
-            const idImg = tyrTypes[id].idImage
+            const idServiceCatalog = tyrTypes[id].idServiceCatalog
             const myJson = {
-                idImg
+                idServiceCatalog
             }
             console.log(myJson)
-            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson)
+            await axios.delete('http://localhost:8040/api/homePage/deleteImage/', myJson)
         } catch (e) {
             console.log(e)
         }
@@ -72,12 +74,15 @@ const Navbar = () => {
     const handleSubmitRedact = async (event) => {
         try {
             event.preventDefault()
-            const title = event.target.title.value
+            const id = event.target.id.value
+            const idServiceCatalog = tyrTypes[id].idServiceCatalog
+            const nameCatalog = event.target.nameCatalog.value
             const description = event.target.description.value
             const myJson = {
-                title,
-                translit: translit(title),
-                description
+                idServiceCatalog,
+                nameCatalog,
+                url: translit(nameCatalog),
+                description,
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
@@ -89,27 +94,26 @@ const Navbar = () => {
     const handleSubmitAddService = async (event) => {
         try {
             event.preventDefault()
-            const title = event.target.title.value
+            const nameCatalog = event.target.nameCatalog.value
+            const directoryType = 'SERVICE'
             const myJson = {
-                title,
-                translit: translit(title)
+                nameCatalog,
+                url: translit(nameCatalog),
+                directoryType
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+            await axios.put('http://localhost:8040/api/redact/saveNewServiceCatalog', myJson)
         } catch (e) {
             console.log(e)
         }
     }
-
     const handleSubmitDeleteService = async (event) => {
         try {
             event.preventDefault()
             const id = event.target.id.value
-            const idImg = tyrTypes[id].idImage
+            const idServiceCatalog = tyrTypes[id].idServiceCatalog
             const myJson = {
-                serviceRequest: {
-                    idImage: idImg
-                }
+                idServiceCatalog
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
@@ -122,14 +126,12 @@ const Navbar = () => {
         try {
             event.preventDefault()
             const id = event.target.id.value
-            const idImg = tyrTypes[id].idImage
-            const title = event.target.title.value
+            const idServiceCatalog = tyrTypes[id].idServiceCatalog
+            const nameCatalog = event.target.nameCatalog.value
             const myJson = {
-                title,
-                translit: translit(title),
-                serviceRequest: {
-                    idImage: idImg
-                }
+                idServiceCatalog,
+                nameCatalog,
+                url: translit(nameCatalog)
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
@@ -144,7 +146,7 @@ const Navbar = () => {
         console.log(event.target.value)
         const selectedImage = tyrTypes[event.target.value]
         console.log(selectedImage)
-        const selectedImageUrl = selectedImage.title
+        const selectedImageUrl = selectedImage.nameCatalog
         console.log(selectedImageUrl)
         setImageUrlDelete(selectedImageUrl)
     }
@@ -153,7 +155,7 @@ const Navbar = () => {
         event.preventDefault()
         console.log(event.target.value)
         const selectedImage = tyrTypes[event.target.value]
-        const selectedImageUrl = selectedImage.title
+        const selectedImageUrl = selectedImage.nameCatalog
         setImageUrl(selectedImageUrl)
     }
 
@@ -273,14 +275,10 @@ const Navbar = () => {
                                                              onClick={() => setModalAddActiveService(true)}/>
                                         </>}</div>
                                 </li>
-                                <li className="nav-item"><a className="nav-link"
+                                <li className="nav-item active"><a className="nav-link"
                                                                    href="/strelki/type?catalog=luchshie-strelki">Лучшие
                                     стрелки</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/kontaktyi">Контакты тира</a>
-                                </li>
-                                <li className="nav-item"><a className="nav-link" href="/sertifikatyi">Сертификаты</a>
-                                </li>
-                                <li className="nav-item"><a className="nav-link" href="/otzyivyi">Отзывы</a>
                                 </li>
                             </ul>
                         </div>
@@ -313,19 +311,7 @@ const Navbar = () => {
                                    placeholder="Введите наименование категории"/>
                             <input required className="inputAdd" type="text" name="description"
                                    placeholder="Введите описание категории"/>
-                            <input required className="inputAdd" type="text" name="firstIconTitle"
-                                   placeholder="Введите наименование первой иконки"/>
-                            <input required className="inputAdd" type="text" name="firstIconDesc"
-                                   placeholder="Введите описание первой иконки"/>
-                            <input required className="inputAdd" type="text" name="secondIconTitle"
-                                   placeholder="Введите наименование второй иконки"/>
-                            <input required className="inputAdd" type="text" name="secondIconDesc"
-                                   placeholder="Введите описание второй иконки"/>
-                            <input required className="inputAdd" type="text" name="thirdIconTitle"
-                                   placeholder="Введите наименование третьей иконки"/>
-                            <input required className="inputAdd" type="text" name="thirdIconDesc"
-                                   placeholder="Введите описание третьей иконки"/>
-                            <button className="buttonAdd" onClick={refresh}>Добавить</button>
+                            <button className="buttonAdd">Добавить</button>
                         </div>
                     </form>
                 </Modal>
