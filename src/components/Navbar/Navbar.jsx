@@ -271,8 +271,9 @@ const Navbar = () => {
                                     стрелки</a></li>
                                 <li className="nav-item"><a className="nav-link" href="/kontaktyi">Контакты тира</a>
                                 </li>
-                                <li className="nav-item"><a className="nav-link" href="/sertifikatyi">Сертификаты</a>
-                                </li>
+                                {admin && <li className="nav-item"><a className="nav-link"
+                                                                      href="/sertifikatyi">Сертификаты</a>
+                                </li>}
                                 <li className="nav-item"><a className="nav-link" href="/otzyivyi">Отзывы </a>
                                 </li>
                             </ul>
