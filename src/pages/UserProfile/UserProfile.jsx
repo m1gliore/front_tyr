@@ -30,7 +30,32 @@ const UserProfile = () => {
                                     <small className="form-text text-danger error_email"></small>
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-blue">Оформить</button>
+                            <button type="submit" className="button btn-blue">Оформить</button>
+                        </form>
+                    </div>
+                </section>
+                <section className="contact-form">
+                    <div className="container">
+                        <h1>Оформить сертификат</h1>
+                        <form>
+                            <div className="row">
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="fa_name">ФИО</label>
+                                    <input type="text" className="form-control" id="fa_name" name="name" value=""/>
+                                    <small className="form-text text-danger error_name"></small>
+                                </div>
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="fa_email">E-mail</label>
+                                    <input type="text" className="form-control" id="fa_email" name="email" value=""/>
+                                    <small className="form-text text-danger error_email"></small>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="fa_message">Комментарий</label>
+                                <textarea className="form-control" id="fa_message" name="message" rows="3"></textarea>
+                                <small className="form-text text-danger error_message"></small>
+                            </div>
+                            <button type="submit" className="button btn-blue">Отправить</button>
                         </form>
                     </div>
                 </section>
@@ -55,7 +80,7 @@ const UserProfile = () => {
                                 <textarea className="form-control" id="fa_message" name="message" rows="3"></textarea>
                                 <small className="form-text text-danger error_message"></small>
                             </div>
-                            <button type="submit" className="btn btn-blue">Отправить</button>
+                            <button type="submit" className="button btn-blue">Отправить</button>
                         </form>
                     </div>
                 </section>
