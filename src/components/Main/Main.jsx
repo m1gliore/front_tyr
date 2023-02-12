@@ -26,7 +26,7 @@ const Main = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=luchshie-strelki')
+                const response = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=home')
                 setSliderImages(response.data.imageResponseSet)
                 console.log(response.data)
             } catch (e) {
@@ -56,16 +56,10 @@ const Main = () => {
             event.preventDefault()
             const id = event.target.id.value
             const idImage = sliderImages[id].idImage
-            const title = event.target.title.value
-            const desc = event.target.desc.value
             const myJson = {
                 idImage,
                 url: file.name,
                 file: encodedImage,
-                shooterRequest: {
-                    title,
-                    desc
-                }
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
@@ -81,7 +75,6 @@ const Main = () => {
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
         setImageUrl(selectedImageUrl)
     }
-
     const refresh = () => window.location.reload()
     return (
         <main role="main">

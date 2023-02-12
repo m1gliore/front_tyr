@@ -26,6 +26,7 @@ const Navbar = () => {
                 //тут как-то подгрузи типы тиров
                 const response = await axios.get(`http://localhost:8040/api/homePage/getHomePageTitle`)
                 setTyrTypes(response.data)
+                console.log(response.data)
             } catch (e) {
                 console.log(e)
             }
@@ -33,9 +34,9 @@ const Navbar = () => {
     }, [])
 
 
-    tyrTypes.sort((a, b) => {
-        return a.idServiceCatalog - b.idServiceCatalog
-    })
+    // tyrTypes.sort((a, b) => {
+    //     return a.idServiceCatalog - b.idServiceCatalog
+    // })
 
     const handleSubmitAdd = async (event) => {
         try {
@@ -90,7 +91,6 @@ const Navbar = () => {
             console.log(e)
         }
     }
-
     const handleSubmitAddService = async (event) => {
         try {
             event.preventDefault()
@@ -140,13 +140,12 @@ const Navbar = () => {
         }
     }
 
-    //если тут удалять по id, то выводить буду тайтл, а не картинку
     const handleSelectDelete = (event) => {
         event.preventDefault()
         console.log(event.target.value)
-        const selectedImage = tyrTypes[event.target.value]
+        const selectedImage = tyrTypes.titleHomePageResponseSetGun[event.target.value]
         console.log(selectedImage)
-        const selectedImageUrl = selectedImage.nameCatalog
+        const selectedImageUrl = selectedImage.title
         console.log(selectedImageUrl)
         setImageUrlDelete(selectedImageUrl)
     }
@@ -154,13 +153,12 @@ const Navbar = () => {
     const handleSelectRedact = (event) => {
         event.preventDefault()
         console.log(event.target.value)
-        const selectedImage = tyrTypes[event.target.value]
-        const selectedImageUrl = selectedImage.nameCatalog
+        const selectedImage = tyrTypes.titleHomePageResponseSetService[event.target.value]
+        const selectedImageUrl = selectedImage.title
         setImageUrl(selectedImageUrl)
     }
 
     const refresh = () => window.location.reload()
-
     return (
         <header>
             <div className="header-top">
@@ -229,11 +227,13 @@ const Navbar = () => {
                                                                      href="/oruzhie-v-tire" id="topMenu12"
                                                                      data-bs-toggle="dropdown" aria-haspopup="true"
                                                                      aria-expanded="false">Оружие в тире</a>
-                                    <div className="dropdown-menu" aria-labelledby="topMenu12"><a
-                                        className="dropdown-item" href="/oruzhie-v-tire/type?catalog=lazernoe">Лазерный
-                                        тир</a><a
-                                        className="dropdown-item" href="/oruzhie-v-tire/type?catalog=strajkbol">Страйкбольный
-                                        тир</a>
+                                    <div className="dropdown-menu" aria-labelledby="topMenu12">
+                                        {tyrTypes?.titleHomePageResponseSetGun?.map((item) =>
+                                            <a key={tyrTypes.titleHomePageResponseSetGun.indexOf(item)}
+                                               className="dropdown-item"
+                                               href={"/oruzhie-v-tire/type?catalog=" + item.url}>{item.title}</a>
+                                        )}
+
                                         {admin && <>
                                             <FontAwesomeIcon className="action" icon={faTrashCan}
                                                              onClick={() => setModalDeleteActiveTyr(true)}/>
@@ -251,21 +251,12 @@ const Navbar = () => {
                                                                      id="topMenu89" data-bs-toggle="dropdown"
                                                                      aria-haspopup="true"
                                                                      aria-expanded="false">Услуги</a>
-                                    <div className="dropdown-menu" aria-labelledby="topMenu89"><a
-                                        className="dropdown-item" href="/uslugi/type?catalog=osnovnyie-uslugi-tira">Основные
-                                        услуги тира</a><a className="dropdown-item"
-                                                          href="/uslugi/type?catalog=obuchenie-i-cursor-strelbyi">Обучение
-                                        и курсы
-                                        стрельбы</a><a className="dropdown-item"
-                                                       href="/uslugi/type?catalog=yuridicheskim-liczam">Юридическим
-                                        лицам</a><a className="dropdown-item"
-                                                    href="/uslugi/type?catalog=podarochnyie-sertifikatyi">Подарочные
-                                        сертификаты</a><a className="dropdown-item"
-                                                          href="/uslugi/type?catalog=razvlecheniya-dlya-vsej-semi">Развлечения
-                                        для
-                                        всей семьи</a><a className="dropdown-item"
-                                                         href="/uslugi/type?catalog=poznanie-i-razvitie">Познание
-                                        и развитие</a>
+                                    <div className="dropdown-menu" aria-labelledby="topMenu89">
+                                        {tyrTypes?.titleHomePageResponseSetService?.map((item) =>
+                                            <a key={tyrTypes.titleHomePageResponseSetService.indexOf(item)}
+                                               className="dropdown-item"
+                                               href={"/uslugi/type?catalog=" + item.url}>{item.title}</a>
+                                        )}
                                         {admin && <>
                                             <FontAwesomeIcon className="action" icon={faTrashCan}
                                                              onClick={() => setModalDeleteActiveService(true)}/>
@@ -299,9 +290,9 @@ const Navbar = () => {
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
                                 <option selected disabled>Выберите один из вариантов</option>
-                                {tyrTypes.map((item) =>
-                                    <option key={item.idImage}
-                                            value={tyrTypes.indexOf(item)}>{tyrTypes.indexOf(item) + 1}</option>)}
+                                {tyrTypes?.titleHomePageResponseSetGun?.map((item) =>
+                                    <option key={tyrTypes.titleHomePageResponseSetGun.indexOf(item)}
+                                            value={tyrTypes.titleHomePageResponseSetGun.indexOf(item)}>{tyrTypes.titleHomePageResponseSetGun.indexOf(item) + 1}</option>)}
                             </select>
                             <button className="buttonAdd" onClick={refresh}>Удалить</button>
                         </div>
@@ -328,9 +319,9 @@ const Navbar = () => {
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
                                 <option selected disabled>Выберите один из вариантов</option>
-                                {tyrTypes.map((item) =>
-                                    <option key={item.idImage}
-                                            value={tyrTypes.indexOf(item)}>{tyrTypes.indexOf(item) + 1}</option>)}
+                                {tyrTypes?.titleHomePageResponseSetGun?.map((item) =>
+                                    <option key={tyrTypes.titleHomePageResponseSetGun.indexOf(item)}
+                                            value={tyrTypes.titleHomePageResponseSetGun.indexOf(item)}>{tyrTypes.titleHomePageResponseSetGun.indexOf(item) + 1}</option>)}
                             </select>
                             <input required className="inputAdd" type="text" name="title"
                                    placeholder="Введите наименование категории"/>
@@ -349,9 +340,9 @@ const Navbar = () => {
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
                                 <option selected disabled>Выберите один из вариантов</option>
-                                {tyrTypes.map((item) =>
-                                    <option key={item.idImage}
-                                            value={tyrTypes.indexOf(item)}>{tyrTypes.indexOf(item) + 1}</option>)}
+                                {tyrTypes?.titleHomePageResponseSetService?.map((item) =>
+                                    <option key={tyrTypes.titleHomePageResponseSetService.indexOf(item)}
+                                            value={tyrTypes.titleHomePageResponseSetService.indexOf(item)}>{tyrTypes.titleHomePageResponseSetService.indexOf(item) + 1}</option>)}
                             </select>
                             <button className="buttonAdd" onClick={refresh}>Удалить</button>
                         </div>
@@ -376,9 +367,9 @@ const Navbar = () => {
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
                                 <option selected disabled>Выберите один из вариантов</option>
-                                {tyrTypes.map((item) =>
-                                    <option key={item.idImage}
-                                            value={tyrTypes.indexOf(item)}>{tyrTypes.indexOf(item) + 1}</option>)}
+                                {tyrTypes?.titleHomePageResponseSetService?.map((item) =>
+                                    <option key={tyrTypes.titleHomePageResponseSetService.indexOf(item)}
+                                            value={tyrTypes.titleHomePageResponseSetService.indexOf(item)}>{tyrTypes.titleHomePageResponseSetService.indexOf(item) + 1}</option>)}
                             </select>
                             <input required className="inputAdd" type="text" name="title"
                                    placeholder="Введите наименование типа услуг"/>

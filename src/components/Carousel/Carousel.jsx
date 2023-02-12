@@ -1,8 +1,25 @@
 import './styles.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons'
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 const Carousel = () => {
+
+    const [sliderImages, setSliderImages] = useState([])
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=home')
+                setSliderImages(response.data.imageResponseSet)
+                console.log(response.data)
+            } catch (e) {
+                console.log(e)
+            }
+        })()
+    }, [])
+
     return (
         <div id="mainCarousel" className="carousel slide" data-bs-ride="carousel">
             <ol className="carousel-indicators">
@@ -13,32 +30,29 @@ const Carousel = () => {
             <div className="carousel-inner">
                 <div className="carousel-item active">
                     <img className="d-block"
-                         src="https://tir-centr.by/assets/images/homepage/slider/slider-pnevmatika.jpg"
-                         alt="Пневматический тир в Минске"/>
+                         src={"data:image/" + sliderImages[0]?.url.split('.')[1] + ";base64," + sliderImages[0]?.file}
+                         alt="one"/>
                     <div className="caption">
-                        <p className="carousel-item-title">Пневматический тир в Минске</p>
-                        <p className="carousel-item-description">Самый большой выбор пневматики в Беларуси (и не
-                            только). Пистолеты, револьверы, винтовки.</p>
+                        <p className="carousel-item-title">{sliderImages[0]?.title}</p>
+                        <p className="carousel-item-description">{sliderImages[0]?.description}</p>
                     </div>
                 </div>
                 <div className="carousel-item">
                     <img className="d-block"
-                         src="https://tir-centr.by/assets/images/homepage/slider/slider-strikeball.jpg"
-                         alt="Страйкбольный тир в Минске"/>
+                         src={"data:image/" + sliderImages[1]?.url.split('.')[1] + ";base64," + sliderImages[1]?.file}
+                         alt="two"/>
                     <div className="caption">
-                        <p className="carousel-item-title">Страйкбольный тир в Минске</p>
-                        <p className="carousel-item-description">Большой выбор страйкбольных приводов: от
-                            обычных до эксклюзивных. Пистолеты с отдачей.</p>
+                        <p className="carousel-item-title">{sliderImages[1]?.title}</p>
+                        <p className="carousel-item-description">{sliderImages[1]?.description}</p>
                     </div>
                 </div>
                 <div className="carousel-item">
                     <img className="d-block"
-                         src="https://tir-centr.by/assets/images/homepage/slider/slider-lasertag.jpg"
-                         alt="Лазертаг и лазерный тир"/>
+                         src={"data:image/" + sliderImages[2]?.url.split('.')[1] + ";base64," + sliderImages[2]?.file}
+                         alt="three"/>
                     <div className="caption">
-                        <p className="carousel-item-title">Лазертаг и лазерный тир</p>
-                        <p className="carousel-item-description">Лазерный тир с реалистичными копиями реального
-                            оружия - для самых маленьких.</p>
+                        <p className="carousel-item-title">{sliderImages[2]?.title}</p>
+                        <p className="carousel-item-description">{sliderImages[2]?.description}</p>
                     </div>
                 </div>
 
