@@ -19,6 +19,7 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 import LuchshieStrelki from "./pages/LuchshieStrelki/LuchshieStrelki";
 import Galereya from "./pages/Galereya/Galereya";
 import Sertifikatyi from "./pages/Sertifikatyi/Sertifikatyi";
+import Otzyivyi from "./pages/Otzyivyi/Otzyivyi";
 
 const App = () => {
     return (
@@ -36,6 +37,7 @@ const App = () => {
                 <Route exact path="/strelki/type" element={<LuchshieStrelki/>}/>
                 <Route exact path="/kontaktyi" element={<Kontaktyi/>}/>
                 <Route exact path="/sertifikatyi" element={<Sertifikatyi/>}/>
+                <Route exact path="/otzyivyi" element={<Otzyivyi/>}/>
                 <Route exact path="/user-profile" element={<UserProfile/>}/>
             </Routes>
         </Router>
