@@ -5,20 +5,23 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPen} from "@fortawesome/free-solid-svg-icons";
+import {faCheckCircle, faPen} from "@fortawesome/free-solid-svg-icons";
 
 const Sertifikatyi = () => {
     const [certificates, setCertificates] = useState([])
+    const [certificateTemplates, setCertificateTemplates] = useState([])
     const [modalRedactActive, setModalRedactActive] = useState(false)
+    const [modalAcceptActive, setModalAcceptActive] = useState(false)
     const [imageUrl, setImageUrl] = useState("")
     const admin = true
 
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=sertifikatyi')
-                setCertificates(response.data)
-                console.log(response.data)
+                const responseCertificate = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=sertifikatyi')
+                const responseTemplate = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=template')
+                setCertificates(responseCertificate.data)
+                setCertificateTemplates(responseTemplate.data)
             } catch (e) {
                 console.log(e)
             }
@@ -29,7 +32,7 @@ const Sertifikatyi = () => {
         return a.idCertificate - b.idCertificate
     })
 
-    const handleSubmitRedact = async (event) => {
+    const handleSubmitAccept = async (event) => {
         try {
             event.preventDefault()
             const id = event.target.id.value
@@ -38,6 +41,25 @@ const Sertifikatyi = () => {
             const myJson = {
                 idCertificate,
                 status
+            }
+            console.log(myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleSubmitRedact = async (event) => {
+        try {
+            event.preventDefault()
+            const id = event.target.id.value
+            const idTemplate = certificates[id].idTemplate
+            const nominal = event.target.nominal.value
+            const discount = event.target.discount.value
+            const myJson = {
+                idTemplate,
+                nominal,
+                discount
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
@@ -59,8 +81,12 @@ const Sertifikatyi = () => {
     return (
         <>
             <Navbar/>
-            {admin &&
-                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => setModalRedactActive(true)}/>}
+            {admin && <>
+                <FontAwesomeIcon className="action fa-2x" icon={faCheckCircle}
+                                 onClick={() => setModalRedactActive(true)}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPen}
+                                 onClick={() => setModalAcceptActive(true)}/>
+            </>}
             <section className="shooters-list-str bg-white">
                 <div className="container">
                     <nav aria-label="breadcrumb">
@@ -88,7 +114,7 @@ const Sertifikatyi = () => {
             {admin && <>
                 <Modal active={modalRedactActive} setActive={setModalRedactActive}>
                     <h1>Изменить статус сертификата</h1>
-                    <form className="modalAdd" onSubmit={handleSubmitRedact}>
+                    <form className="modalAdd" onSubmit={handleSubmitAccept}>
                         <div className="leftContainer">{imageUrl}</div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
@@ -102,6 +128,25 @@ const Sertifikatyi = () => {
                                 <option value="accept">Принять</option>
                                 <option value="reject">Отклонить</option>
                             </select>
+                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
+                        </div>
+                    </form>
+                </Modal>
+                <Modal active={modalAcceptActive} setActive={setModalAcceptActive}>
+                    <h1>Изменить шаблон сертификата</h1>
+                    <form className="modalAdd" onSubmit={handleSubmitRedact}>
+                        <div className="leftContainer">{imageUrl}</div>
+                        <div className="rightContainer">
+                            <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
+                                <option selected disabled>Выберите один из вариантов</option>
+                                {certificateTemplates.map((item) =>
+                                    <option key={item.idTemplate}
+                                            value={certificateTemplates.indexOf(item)}>{certificateTemplates.indexOf(item) + 1}</option>)}
+                            </select>
+                            <input required className="inputAdd" type="number" name="nominal"
+                                   placeholder="Введите номинал"/>
+                            <input required className="inputAdd" type="number" name="discount"
+                                   placeholder="Введите скидку(%)"/>
                             <button className="buttonAdd" onClick={refresh}>Изменить</button>
                         </div>
                     </form>
