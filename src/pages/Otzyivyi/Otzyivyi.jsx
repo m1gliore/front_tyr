@@ -5,11 +5,11 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPen} from "@fortawesome/free-solid-svg-icons";
+import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 
 const Otzyivyi = () => {
     const [replies, setReplies] = useState([])
-    const [modalRedactActive, setModalRedactActive] = useState(false)
+    const [modalAcceptActive, setModalAcceptActive] = useState(false)
     const [imageUrl, setImageUrl] = useState("")
     const admin = true
 
@@ -60,7 +60,7 @@ const Otzyivyi = () => {
         <>
             <Navbar/>
             {admin &&
-                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => setModalRedactActive(true)}/>}
+                <FontAwesomeIcon className="action fa-2x" icon={faCheckCircle} onClick={() => setModalAcceptActive(true)}/>}
             <section className="shooters-list-str bg-white">
                 <div className="container">
                     <nav aria-label="breadcrumb">
@@ -86,7 +86,7 @@ const Otzyivyi = () => {
             </section>
             <Footer/>
             {admin && <>
-                <Modal active={modalRedactActive} setActive={setModalRedactActive}>
+                <Modal active={modalAcceptActive} setActive={setModalAcceptActive}>
                     <h1>Изменить статус отзыва</h1>
                     <form className="modalAdd" onSubmit={handleSubmitRedact}>
                         <div className="leftContainer">{imageUrl}</div>
