@@ -7,7 +7,7 @@ import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen} from "@fortawesome/free-solid-svg-icons";
 
-const Sertifikatyi = () => {
+const Otzyivyi = () => {
     const [replies, setReplies] = useState([])
     const [modalRedactActive, setModalRedactActive] = useState(false)
     const [imageUrl, setImageUrl] = useState("")
@@ -111,4 +111,4 @@ const Sertifikatyi = () => {
     )
 }
 
-export default Sertifikatyi
+export default Otzyivyi
