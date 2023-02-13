@@ -18,16 +18,19 @@ const Sertifikatyi = () => {
     useEffect(() => {
         (async () => {
             try {
-                const responseCertificate = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=sertifikatyi')
-                const responseTemplate = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=template')
+                const responseCertificate = await axios.get('http://localhost:8040/api/redact/allCertificates')
+                const responseTemplate = await axios.get('http://localhost:8040/api/redact/allCertificateTypes')
                 setCertificates(responseCertificate.data)
                 setCertificateTemplates(responseTemplate.data)
+
             } catch (e) {
                 console.log(e)
             }
         })()
     }, [])
 
+    console.log(certificates)
+    console.log(certificateTemplates)
     certificates.sort((a, b) => {
         return a.idCertificate - b.idCertificate
     })
@@ -43,7 +46,7 @@ const Sertifikatyi = () => {
                 status
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+            await axios.put('http://localhost:8040/api/redact/updateCertificate', myJson)
         } catch (e) {
             console.log(e)
         }
@@ -53,16 +56,18 @@ const Sertifikatyi = () => {
         try {
             event.preventDefault()
             const id = event.target.id.value
-            const idTemplate = certificates[id].idTemplate
+            const idCertificateType = certificateTemplates[id].idCertificateType
             const nominal = event.target.nominal.value
             const discount = event.target.discount.value
+            const countCertificate = event.target.countCertificate.value
             const myJson = {
-                idTemplate,
+                idCertificateType,
                 nominal,
-                discount
+                discount,
+                countCertificate
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+            await axios.put('http://localhost:8040/api/redact/updateCertificateType', myJson)
         } catch (e) {
             console.log(e)
         }
@@ -77,7 +82,6 @@ const Sertifikatyi = () => {
     }
 
     const refresh = () => window.location.reload()
-
     return (
         <>
             <Navbar/>
@@ -101,7 +105,7 @@ const Sertifikatyi = () => {
                             <div className="col-lg-4 col-md-6" key={certificate.idCertificate}>
                                 <div className="cardStr">
                                     <div className="card-body-str">
-                                        <p className="card-desc-str">Сумма: {certificate.summa}</p>
+                                        <p className="card-desc-str">Сумма: {certificate.price}</p>
                                         <p className="card-desc-str">Дата: {certificate.registration} %</p>
                                     </div>
                                 </div>
@@ -140,14 +144,16 @@ const Sertifikatyi = () => {
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
                                 <option selected disabled>Выберите один из вариантов</option>
                                 {certificateTemplates.map((item) =>
-                                    <option key={item.idTemplate}
+                                    <option key={item.idCertificateType}
                                             value={certificateTemplates.indexOf(item)}>{certificateTemplates.indexOf(item) + 1}</option>)}
                             </select>
                             <input required className="inputAdd" type="number" name="nominal"
                                    placeholder="Введите номинал"/>
                             <input required className="inputAdd" type="number" name="discount"
                                    placeholder="Введите скидку(%)"/>
-                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
+                            <input required className="inputAdd" type="number" name="countCertificate"
+                                   placeholder="Введите количнство сертификатов для действия скидки"/>
+                            <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
                 </Modal>
