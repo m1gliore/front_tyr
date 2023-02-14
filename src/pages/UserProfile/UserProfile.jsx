@@ -1,26 +1,86 @@
 import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 const UserProfile = () => {
 
+    const [user, setUser] = useState({})
     const [offer, setOffer] = useState("1")
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=user')
+                setUser(response.data)
+            } catch (e) {
+                console.log(e)
+            }
+        })()
+    }, [])
 
     const handleChangeOffer = (event) => {
         event.preventDefault()
         setOffer(event.target.value)
     }
 
+    const handleSubmitCorporate = async (event) => {
+        event.preventDefault()
+        try {
+            const date = event.target.date.value
+            const people = event.target.people.value
+            const phone = event.target.phone.value
+            const surname = event.target.surname.value
+            const myJson = {
+                date,
+                people,
+                phone,
+                surname
+            }
+            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/corporate`, myJson).then(() => navigate(0))
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleSubmitCertificate = async (event) => {
+        event.preventDefault()
+        try {
+            const certificate = event.target.certificate.value
+            const myJson = {
+                certificate
+            }
+            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/certificate`, myJson).then(() => navigate(0))
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const handleSubmitReply = async (event) => {
+        event.preventDefault()
+        try {
+            const message = event.target.message.value
+            const myJson = {
+                message
+            }
+            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/reply`, myJson).then(() => navigate(0))
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     return (
         <>
             <Navbar/>
             <main role="main">
-                <h1 className="username">Здравствуйте, Николай</h1>
+                <h1 className="username">Здравствуйте, {user.username}</h1>
                 <section className="contact-form">
                     <div className="containerProfile">
-                        <h2>Ваша текущая скидка: 0%</h2><br/>
-                        <h2>Осталось сертификатов до скидки: 3</h2>
+                        <h2>Ваша текущая скидка: {user.discount}%</h2><br/>
+                        <h2>Осталось сертификатов до скидки: {user.quantity}</h2>
                     </div>
                     <div className="containerProfile">
                         <h2>Предложения для вас</h2><br/>
@@ -34,7 +94,7 @@ const UserProfile = () => {
                 <section className={offer !== "1" ? "contact-form hidden" : "contact-form"}>
                     <div className="container">
                         <h1>Оформить корпоратив</h1>
-                        <form>
+                        <form onSubmit={handleSubmitCorporate}>
                             <div className="row">
                                 <div className="form-group col-md-6">
                                     <label htmlFor="fa_date">Дата планирования</label>
@@ -66,7 +126,7 @@ const UserProfile = () => {
                 <section className={offer !== "2" ? "contact-form hidden" : "contact-form"}>
                     <div className="container">
                         <h1>Оформить сертификат</h1>
-                        <form>
+                        <form onSubmit={handleSubmitCertificate}>
                             <div className="row">
                                 <select required className="inputAdd" name="certificate">
                                     <option selected disabled value="">Выберите один из вариантов</option>
@@ -82,7 +142,7 @@ const UserProfile = () => {
                 <section className={offer !== "3" ? "contact-form hidden" : "contact-form"}>
                     <div className="container">
                         <h1>Оставить отзыв</h1>
-                        <form action="" method="post" className="ajax_form">
+                        <form onSubmit={handleSubmitReply}>
                             <div className="form-group">
                                 <label htmlFor="fa_message">Комментарий</label>
                                 <textarea className="form-control" id="fa_message" name="message" rows="3"></textarea>
