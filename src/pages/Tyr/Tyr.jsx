@@ -141,11 +141,13 @@ const Tyr = () => {
             const price = event.target.price.value
             const quantity = event.target.quantity.value
             const description = event.target.description.value
+            const idGun = tyrsName[id]?.gunResponse?.idGun
             const myJson = {
                 idImage: idImg,
-                url: file.name,
+                url: file?.name,
                 file: encodedImage,
                 gunRequest: {
+                    idGun,
                     name,
                     gunType,
                     price,
@@ -165,7 +167,7 @@ const Tyr = () => {
         console.log(event.target.value)
         const selectedImage = tyrsName[event.target.value]
         console.log(selectedImage)
-        const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
+        const selectedImageUrl = "data:image/" + selectedImage?.url.split('.')[1] + ";base64," + selectedImage?.file
         console.log(selectedImageUrl)
         setImageUrlDelete(selectedImageUrl)
     }
@@ -174,7 +176,7 @@ const Tyr = () => {
         event.preventDefault()
         console.log(event.target.value)
         const selectedImage = tyrsName[event.target.value]
-        const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
+        const selectedImageUrl = "data:image/" + selectedImage?.url.split('.')[1] + ";base64," + selectedImage?.file
         setImageUrl(selectedImageUrl)
     }
 
@@ -374,7 +376,7 @@ const Tyr = () => {
                                 <option value="SHOTGUNS">Дробовики</option>
                                 <option value="MACHINE_GUNS">Пулеметы</option>
                             </select>
-                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
+                            <button className="buttonAdd" >Изменить</button>
                         </div>
                     </form>
                 </Modal>

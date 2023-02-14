@@ -101,11 +101,13 @@ const LuchshieStrelki = () => {
             const patronymic = event.target.patronymic.value
             const result = event.target.result.value
             const successfulHits = event.target.successfulHits.value
+            const idShooter = shooters[id]?.shooterResponse?.idShooter
             const myJson = {
                 idImage,
-                url: file.name,
+                url: file?.name,
                 file: encodedImage,
                 shooterRequest: {
+                    idShooter,
                     name,
                     surname,
                     patronymic,
@@ -238,17 +240,17 @@ const LuchshieStrelki = () => {
                                     <option key={item.idImage}
                                             value={shooters.indexOf(item)}>{shooters.indexOf(item) + 1}</option>)}
                             </select>
-                            <input required className="inputAdd" type="text" name="surname"
+                            <input className="inputAdd" type="text" name="surname"
                                    placeholder="Введите фамилию"/>
-                            <input required className="inputAdd" type="text" name="name"
+                            <input className="inputAdd" type="text" name="name"
                                    placeholder="Введите имя"/>
-                            <input required className="inputAdd" type="text" name="patronymic"
+                            <input className="inputAdd" type="text" name="patronymic"
                                    placeholder="Введите отчество"/>
-                            <input required className="inputAdd" type="number" name="result"
+                            <input className="inputAdd" type="number" name="result"
                                    placeholder="Введите количество выстрелов"/>
-                            <input required className="inputAdd" type="number" name="successfulHits"
+                            <input className="inputAdd" type="number" name="successfulHits"
                                    placeholder="Введите количество успешных попаданий"/>
-                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
+                            <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
                 </Modal>

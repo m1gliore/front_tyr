@@ -99,12 +99,14 @@ const VidyiUslug = () => {
             const idImg = serviceNames[id].idImage
             const name = event.target.name.value
             const description = event.target.desc.value
+            const idService = serviceNames[id].serviceResponse.idService
             const myJson = {
                 idImage: idImg,
                 url: file?.name,
                 file: encodedImage,
                 serviceRequest:
                     {
+                        idService,
                         name,
                         description
                     }

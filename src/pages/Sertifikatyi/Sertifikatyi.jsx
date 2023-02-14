@@ -82,6 +82,7 @@ const Sertifikatyi = () => {
     }
 
     const refresh = () => window.location.reload()
+
     return (
         <>
             <Navbar/>
@@ -153,7 +154,7 @@ const Sertifikatyi = () => {
                                    placeholder="Введите скидку(%)"/>
                             <input required className="inputAdd" type="number" name="countCertificate"
                                    placeholder="Введите количнство сертификатов для действия скидки"/>
-                            <button className="buttonAdd">Изменить</button>
+                            <button className="buttonAdd" >Изменить</button>
                         </div>
                     </form>
                 </Modal>
