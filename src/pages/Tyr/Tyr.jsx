@@ -277,7 +277,7 @@ const Tyr = () => {
                                                     </div>
                                                     <div className="col-auto text-right">
                                                         <a href={"/oruzhie-v-tire/" + gun.gunResponse.v}
-                                                           className="btn btn-blue" role="button">Подробнее</a>
+                                                           className="button btn-blue" role="button">Подробнее</a>
                                                     </div>
                                                 </div>
                                             </div>

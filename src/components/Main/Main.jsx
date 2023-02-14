@@ -83,23 +83,23 @@ const Main = () => {
             <section className="review">
                 <div className="mainGallery">
                     <div className="imageContainer">
-                        <img src={first} alt="one"/>
+                        <img style={{width: "450px", height: "300px"}} src={first} alt="one"/>
                         <div className="bottomText">Услуги тира</div>
                     </div>
                     <div className="imageContainer">
-                        <img src={second} alt="two"/>
+                        <img style={{width: "450px", height: "300px"}} src={second} alt="two"/>
                         <div className="bottomText">Обучение и курсы стрельбы</div>
                     </div>
                     <div className="imageContainer">
-                        <img src={third} alt="three"/>
+                        <img style={{width: "450px", height: "300px"}} src={third} alt="three"/>
                         <div className="bottomText">Предложения для корпоративов</div>
                     </div>
                     <div className="imageContainer">
-                        <img src={fourth} alt="four"/>
+                        <img style={{width: "450px", height: "300px"}} src={fourth} alt="four"/>
                         <div className="bottomText">Подарочные серификаты</div>
                     </div>
                     <div className="imageContainer">
-                        <img src={fifth} alt="five"/>
+                        <img style={{width: "450px", height: "300px"}} src={fifth} alt="five"/>
                         <div className="bottomText">Развлечения</div>
                     </div>
                 </div>
