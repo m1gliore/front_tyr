@@ -9,10 +9,8 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
-import OruzhieVTire from "./pages/OruzhieVTire/OruzhieVTire";
 import Tyr from "./pages/Tyr/Tyr";
 import Czenyi from "./pages/Czenyi/Czenyi";
-import Uslugi from "./pages/Uslugi/Uslugi";
 import Kontaktyi from "./pages/Kontaktyi/Kontaktyi";
 import VidyiUslug from "./pages/VidyiUslug/VidyiUslug";
 import UserProfile from "./pages/UserProfile/UserProfile";
@@ -30,12 +28,10 @@ const App = () => {
                 <Route exact path="/" element={<Home/>}/>
                 <Route exact path="/login" element={<Login/>}/>
                 <Route exact path="/register" element={<Register/>}/>
-                <Route exact path="/oruzhie-v-tire" element={<OruzhieVTire/>}/>
                 <Route exact path="/oruzhie-v-tire/type" element={<Tyr/>}/>
                 <Route exact path="/oruzhie-v-tire/:idOruzhie" element={<Oruzhie/>}/>
                 <Route exact path="/images/type" element={<Galereya/>}/>
                 <Route exact path="/czenyi" element={<Czenyi/>}/>
-                <Route exact path="/uslugi" element={<Uslugi/>}/>
                 <Route exact path="/uslugi/type" element={<VidyiUslug/>}/>
                 <Route exact path="/uslugi/:idUsluga" element={<Usluga/>}/>
                 <Route exact path="/strelki/type" element={<LuchshieStrelki/>}/>

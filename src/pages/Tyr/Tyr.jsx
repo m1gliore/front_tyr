@@ -203,7 +203,6 @@ const Tyr = () => {
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><a href="/">Главная</a></li>
-                                <li className="breadcrumb-item"><a href="/oruzhie-v-tire">Тир</a></li>
                                 <li className="breadcrumb-item active">{tyrs.nameCatalog}</li>
                             </ol>
                         </nav>

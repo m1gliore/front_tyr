@@ -160,7 +160,6 @@ const VidyiUslug = () => {
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><a href="/">Главная</a></li>
-                                <li className="breadcrumb-item"><a href="/uslugi">Услуги</a></li>
                                 <li className="breadcrumb-item active">{services.nameCatalog}</li>
                             </ol>
                         </nav>
