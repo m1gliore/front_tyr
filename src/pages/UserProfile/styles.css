@@ -54,6 +54,8 @@ h3, .h3 {
 
 /* CONTACTS */
 .contact-form {
+    display: flex;
+    justify-content: space-between;
     padding: 1.5rem 0 2.5rem;
     background-color: rgb(221, 221, 224);
 }
@@ -74,6 +76,14 @@ h3, .h3 {
     margin-bottom: 1rem;
 }
 
+.containerProfile {
+    margin: 5vw;
+}
+
+.hidden {
+    display: none;
+}
+
 /* MEDIA */
 @media (max-width: 767px) {
     .h1, h1 {
@@ -88,3 +98,5 @@ h3, .h3 {
         font-size: 1.5rem;
     }
 }
+
+
