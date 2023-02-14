@@ -7,6 +7,7 @@ import Modal from "../Modal/Modal";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import translit from "../../makeLink";
+import {useNavigate} from "react-router-dom";
 
 const Navbar = () => {
     const [tyrTypes, setTyrTypes] = useState([])
@@ -19,6 +20,7 @@ const Navbar = () => {
     const [imageUrlDelete, setImageUrlDelete] = useState("Категория")
     const [imageUrl, setImageUrl] = useState("Категория")
     const admin = true
+    const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
@@ -39,8 +41,8 @@ const Navbar = () => {
     // })
 
     const handleSubmitAdd = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const nameCatalog = event.target.nameCatalog.value
             const description = event.target.description.value
             const directoryType = 'TYR'
@@ -51,30 +53,30 @@ const Navbar = () => {
                 directoryType
             }
             console.log(myJson)
-            await axios.post(`http://localhost:8040/api/redact/saveNewServiceCatalog`, myJson)
+            await axios.post(`http://localhost:8040/api/redact/saveNewServiceCatalog`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
 
     const handleSubmitDelete = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idServiceCatalog = tyrTypes[id].idServiceCatalog
             const myJson = {
                 idServiceCatalog
             }
             console.log(myJson)
-            await axios.delete('http://localhost:8040/api/homePage/deleteImage/', myJson)
+            await axios.delete('http://localhost:8040/api/homePage/deleteImage/', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
 
     const handleSubmitRedact = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idServiceCatalog = tyrTypes[id].idServiceCatalog
             const nameCatalog = event.target.nameCatalog.value
@@ -86,14 +88,15 @@ const Navbar = () => {
                 description,
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
+
     const handleSubmitAddService = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const nameCatalog = event.target.nameCatalog.value
             const directoryType = 'SERVICE'
             const myJson = {
@@ -102,29 +105,30 @@ const Navbar = () => {
                 directoryType
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/redact/saveNewServiceCatalog', myJson)
+            await axios.put('http://localhost:8040/api/redact/saveNewServiceCatalog', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
+
     const handleSubmitDeleteService = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idServiceCatalog = tyrTypes[id].idServiceCatalog
             const myJson = {
                 idServiceCatalog
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
 
     const handleSubmitRedactService = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idServiceCatalog = tyrTypes[id].idServiceCatalog
             const nameCatalog = event.target.nameCatalog.value
@@ -134,7 +138,7 @@ const Navbar = () => {
                 url: translit(nameCatalog)
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -158,7 +162,6 @@ const Navbar = () => {
         setImageUrl(selectedImageUrl)
     }
 
-    const refresh = () => window.location.reload()
     return (
         <header>
             <div className="header-top">
@@ -235,12 +238,18 @@ const Navbar = () => {
                                         )}
 
                                         {admin && <>
-                                            <FontAwesomeIcon className="action" icon={faTrashCan}
-                                                             onClick={() => setModalDeleteActiveTyr(true)}/>
-                                            <FontAwesomeIcon className="action" icon={faPen}
-                                                             onClick={() => setModalRedactActiveTyr(true)}/>
-                                            <FontAwesomeIcon className="action" icon={faPlus}
-                                                             onClick={() => setModalAddActiveTyr(true)}/>
+                                            <FontAwesomeIcon className="action" icon={faTrashCan} onClick={() => {
+                                                setModalDeleteActiveTyr(true)
+                                                setImageUrl("Категория")
+                                            }}/>
+                                            <FontAwesomeIcon className="action" icon={faPen} onClick={() => {
+                                                setModalRedactActiveTyr(true)
+                                                setImageUrl("Категория")
+                                            }}/>
+                                            <FontAwesomeIcon className="action" icon={faPlus} onClick={() => {
+                                                setModalAddActiveTyr(true)
+                                                setImageUrl("Категория")
+                                            }}/>
                                         </>}
                                     </div>
                                 </li>
@@ -258,12 +267,18 @@ const Navbar = () => {
                                                href={"/uslugi/type?catalog=" + item.url}>{item.title}</a>
                                         )}
                                         {admin && <>
-                                            <FontAwesomeIcon className="action" icon={faTrashCan}
-                                                             onClick={() => setModalDeleteActiveService(true)}/>
-                                            <FontAwesomeIcon className="action" icon={faPen}
-                                                             onClick={() => setModalRedactActiveService(true)}/>
-                                            <FontAwesomeIcon className="action" icon={faPlus}
-                                                             onClick={() => setModalAddActiveService(true)}/>
+                                            <FontAwesomeIcon className="action" icon={faTrashCan} onClick={() => {
+                                                setModalDeleteActiveService(true)
+                                                setImageUrl("Категория")
+                                            }}/>
+                                            <FontAwesomeIcon className="action" icon={faPen} onClick={() => {
+                                                setModalRedactActiveService(true)
+                                                setImageUrl("Категория")
+                                            }}/>
+                                            <FontAwesomeIcon className="action" icon={faPlus} onClick={() => {
+                                                setModalAddActiveService(true)
+                                                setImageUrl("Категория")
+                                            }}/>
                                         </>}</div>
                                 </li>
                                 <li className="nav-item"><a className="nav-link"
@@ -290,12 +305,12 @@ const Navbar = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {tyrTypes?.titleHomePageResponseSetGun?.map((item) =>
                                     <option key={tyrTypes.titleHomePageResponseSetGun.indexOf(item)}
                                             value={tyrTypes.titleHomePageResponseSetGun.indexOf(item)}>{tyrTypes.titleHomePageResponseSetGun.indexOf(item) + 1}</option>)}
                             </select>
-                            <button className="buttonAdd" onClick={refresh}>Удалить</button>
+                            <button className="buttonAdd">Удалить</button>
                         </div>
                     </form>
                 </Modal>
@@ -319,16 +334,16 @@ const Navbar = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {tyrTypes?.titleHomePageResponseSetGun?.map((item) =>
                                     <option key={tyrTypes.titleHomePageResponseSetGun.indexOf(item)}
                                             value={tyrTypes.titleHomePageResponseSetGun.indexOf(item)}>{tyrTypes.titleHomePageResponseSetGun.indexOf(item) + 1}</option>)}
                             </select>
-                            <input required className="inputAdd" type="text" name="title"
+                            <input className="inputAdd" type="text" name="title"
                                    placeholder="Введите наименование категории"/>
-                            <input required className="inputAdd" type="text" name="description"
+                            <input className="inputAdd" type="text" name="description"
                                    placeholder="Введите описание категории"/>
-                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
+                            <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
                 </Modal>
@@ -340,12 +355,12 @@ const Navbar = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {tyrTypes?.titleHomePageResponseSetService?.map((item) =>
                                     <option key={tyrTypes.titleHomePageResponseSetService.indexOf(item)}
                                             value={tyrTypes.titleHomePageResponseSetService.indexOf(item)}>{tyrTypes.titleHomePageResponseSetService.indexOf(item) + 1}</option>)}
                             </select>
-                            <button className="buttonAdd" onClick={refresh}>Удалить</button>
+                            <button className="buttonAdd">Удалить</button>
                         </div>
                     </form>
                 </Modal>
@@ -355,7 +370,7 @@ const Navbar = () => {
                         <div className="rightContainer">
                             <input required className="inputAdd" type="text" name="title"
                                    placeholder="Введите наименование типа услуг"/>
-                            <button className="buttonAdd" onClick={refresh}>Добавить</button>
+                            <button className="buttonAdd">Добавить</button>
                         </div>
                     </form>
                 </Modal>
@@ -367,14 +382,14 @@ const Navbar = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {tyrTypes?.titleHomePageResponseSetService?.map((item) =>
                                     <option key={tyrTypes.titleHomePageResponseSetService.indexOf(item)}
                                             value={tyrTypes.titleHomePageResponseSetService.indexOf(item)}>{tyrTypes.titleHomePageResponseSetService.indexOf(item) + 1}</option>)}
                             </select>
                             <input required className="inputAdd" type="text" name="title"
                                    placeholder="Введите наименование типа услуг"/>
-                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
+                            <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
                 </Modal>

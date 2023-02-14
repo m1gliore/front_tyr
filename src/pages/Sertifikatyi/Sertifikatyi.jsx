@@ -6,6 +6,7 @@ import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faPen} from "@fortawesome/free-solid-svg-icons";
+import {useNavigate} from "react-router-dom";
 
 const Sertifikatyi = () => {
     const [certificates, setCertificates] = useState([])
@@ -14,6 +15,7 @@ const Sertifikatyi = () => {
     const [modalAcceptActive, setModalAcceptActive] = useState(false)
     const [imageUrl, setImageUrl] = useState("")
     const admin = true
+    const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
@@ -29,15 +31,13 @@ const Sertifikatyi = () => {
         })()
     }, [])
 
-    console.log(certificates)
-    console.log(certificateTemplates)
     certificates.sort((a, b) => {
         return a.idCertificate - b.idCertificate
     })
 
     const handleSubmitAccept = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idCertificate = certificates[id].idCertificate
             const status = event.target.status.value
@@ -46,15 +46,15 @@ const Sertifikatyi = () => {
                 status
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/redact/updateCertificate', myJson)
+            await axios.put('http://localhost:8040/api/redact/updateCertificate', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
 
     const handleSubmitRedact = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idCertificateType = certificateTemplates[id].idCertificateType
             const nominal = event.target.nominal.value
@@ -67,7 +67,7 @@ const Sertifikatyi = () => {
                 countCertificate
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/redact/updateCertificateType', myJson)
+            await axios.put('http://localhost:8040/api/redact/updateCertificateType', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -81,16 +81,18 @@ const Sertifikatyi = () => {
         setImageUrl(selectedImageUrl)
     }
 
-    const refresh = () => window.location.reload()
-
     return (
         <>
             <Navbar/>
             {admin && <>
-                <FontAwesomeIcon className="action fa-2x" icon={faCheckCircle}
-                                 onClick={() => setModalRedactActive(true)}/>
-                <FontAwesomeIcon className="action fa-2x" icon={faPen}
-                                 onClick={() => setModalAcceptActive(true)}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faCheckCircle} onClick={() => {
+                    setModalRedactActive(true)
+                    setImageUrl("")
+                }}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => {
+                    setModalAcceptActive(true)
+                    setImageUrl("")
+                }}/>
             </>}
             <section className="shooters-list-str bg-white">
                 <div className="container">
@@ -123,17 +125,17 @@ const Sertifikatyi = () => {
                         <div className="leftContainer">{imageUrl}</div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {certificates.map((item) =>
                                     <option key={item.idCertificate}
                                             value={certificates.indexOf(item)}>{certificates.indexOf(item) + 1}</option>)}
                             </select>
-                            <select required className="inputAdd" name="status" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите статус</option>
+                            <select required className="inputAdd" name="status">
+                                <option selected disabled value="">Выберите статус</option>
                                 <option value="accept">Принять</option>
                                 <option value="reject">Отклонить</option>
                             </select>
-                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
+                            <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
                 </Modal>
@@ -143,18 +145,18 @@ const Sertifikatyi = () => {
                         <div className="leftContainer">{imageUrl}</div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {certificateTemplates.map((item) =>
                                     <option key={item.idCertificateType}
                                             value={certificateTemplates.indexOf(item)}>{certificateTemplates.indexOf(item) + 1}</option>)}
                             </select>
-                            <input required className="inputAdd" type="number" name="nominal"
+                            <input required className="inputAdd" type="number" min="0" name="nominal"
                                    placeholder="Введите номинал"/>
-                            <input required className="inputAdd" type="number" name="discount"
+                            <input required className="inputAdd" type="number" min="0" max="100" name="discount"
                                    placeholder="Введите скидку(%)"/>
-                            <input required className="inputAdd" type="number" name="countCertificate"
+                            <input required className="inputAdd" type="number" min="0" name="countCertificate"
                                    placeholder="Введите количнство сертификатов для действия скидки"/>
-                            <button className="buttonAdd" >Изменить</button>
+                            <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
                 </Modal>

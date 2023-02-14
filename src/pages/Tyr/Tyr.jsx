@@ -2,7 +2,7 @@ import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -27,6 +27,7 @@ const Tyr = () => {
     const admin = true
     const [encodedImage, setEncodedImage] = useState("")
     const gunTypes = []
+    const navigate = useNavigate()
 
     const handleFile = (event) => {
         setFile(event.target.files[0])
@@ -91,8 +92,8 @@ const Tyr = () => {
     }
 
     const handleSubmitAdd = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const name = event.target.name.value
             const gunType = event.target.gunType.value
             const price = event.target.price.value
@@ -110,30 +111,30 @@ const Tyr = () => {
                 }
             }
             console.log(myJson)
-            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/${currentTyr}`, myJson)
+            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/${currentTyr}`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
 
     const handleSubmitDelete = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idImg = tyrsName[id].idImage
             const myJson = {
                 idImg
             }
             console.log(myJson)
-            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson)
+            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
 
     const handleSubmitRedact = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idImg = tyrsName[id].idImage
             const name = event.target.name.value
@@ -156,7 +157,7 @@ const Tyr = () => {
                 }
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -174,21 +175,27 @@ const Tyr = () => {
 
     const handleSelectRedact = (event) => {
         event.preventDefault()
-        console.log(event.target.value)
         const selectedImage = tyrsName[event.target.value]
         const selectedImageUrl = "data:image/" + selectedImage?.url.split('.')[1] + ";base64," + selectedImage?.file
         setImageUrl(selectedImageUrl)
     }
 
-    const refresh = () => window.location.reload()
-
     return (
         <>
             <Navbar/>
             {admin && <>
-                <FontAwesomeIcon className="action fa-2x" icon={faTrashCan} onClick={() => setModalDeleteActive(true)}/>
-                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => setModalRedactActive(true)}/>
-                <FontAwesomeIcon className="action fa-2x" icon={faPlus} onClick={() => setModalAddActive(true)}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faTrashCan} onClick={() => {
+                    setModalDeleteActive(true)
+                    setImageUrl(defaultImg)
+                }}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => {
+                    setModalRedactActive(true)
+                    setImageUrl(defaultImg)
+                }}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPlus} onClick={() => {
+                    setModalAddActive(true)
+                    setImageUrl(defaultImg)
+                }}/>
             </>}
             <main role="main">
                 <section className="category">
@@ -299,12 +306,12 @@ const Tyr = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {tyrsName.map((item) =>
                                     <option key={item.idImage}
                                             value={tyrsName.indexOf(item)}>{tyrsName.indexOf(item) + 1}</option>)}
                             </select>
-                            <button className="buttonAdd" onClick={refresh}>Удалить</button>
+                            <button className="buttonAdd">Удалить</button>
                         </div>
                     </form>
                 </Modal>
@@ -316,7 +323,7 @@ const Tyr = () => {
                             <label className="labelAdd" style={{cursor: "pointer"}} htmlFor="file">
                                 <FontAwesomeIcon icon={faUpload}/>
                             </label>
-                            <input className="inputAdd" style={{display: "none"}} type="file" id="file"
+                            <input required className="inputAdd" style={{display: "none"}} type="file" id="file"
                                    onChange={handleFile}/>
                         </div>
                         <div className="rightContainer">
@@ -324,12 +331,12 @@ const Tyr = () => {
                                    placeholder="Введите наименование оружия"/>
                             <input required className="inputAdd" type="text" name="description"
                                    placeholder="Введите описание оружия"/>
-                            <input required className="inputAdd" type="number" name="price"
+                            <input required className="inputAdd" type="number" min="0" name="price"
                                    placeholder="Введите цену оружия за выстрелы"/>
-                            <input required className="inputAdd" type="number" name="quantity"
+                            <input required className="inputAdd" type="number" min="0" name="quantity"
                                    placeholder="Введите количество выстрелов"/>
-                            <select required className="inputAdd" name="gunType" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите один из типов оружия</option>
+                            <select required className="inputAdd" name="gunType">
+                                <option selected disabled value="">Выберите один из типов оружия</option>
                                 <option value="ASSAULT_RIFLES">Автоматы</option>
                                 <option value="PISTOLS">Пистолеты</option>
                                 <option value="RIFLES">Винтовки</option>
@@ -337,7 +344,11 @@ const Tyr = () => {
                                 <option value="SHOTGUNS">Дробовики</option>
                                 <option value="MACHINE_GUNS">Пулеметы</option>
                             </select>
-                            <button className="buttonAdd" onClick={refresh}>Добавить</button>
+                            <button className="buttonAdd" onClick={() => {
+                                if (imageUrl === defaultImg) alert("Вставьте картинку!")
+                            }
+                            }>Добавить
+                            </button>
                         </div>
                     </form>
                 </Modal>
@@ -354,20 +365,20 @@ const Tyr = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {tyrsName.map((item) =>
                                     <option key={item.idImage}
                                             value={tyrsName.indexOf(item)}>{tyrsName.indexOf(item) + 1}</option>)}
                             </select>
-                            <input required className="inputAdd" type="text" name="name"
+                            <input className="inputAdd" type="text" name="name"
                                    placeholder="Введите наименование оружия"/>
-                            <input required className="inputAdd" type="text" name="description"
+                            <input className="inputAdd" type="text" name="description"
                                    placeholder="Введите описание оружия"/>
-                            <input required className="inputAdd" type="number" name="price"
+                            <input className="inputAdd" type="number" min="0" name="price"
                                    placeholder="Введите цену оружия за выстрелы"/>
-                            <input required className="inputAdd" type="number" name="quantity"
+                            <input className="inputAdd" type="number" min="0" name="quantity"
                                    placeholder="Введите количество выстрелов"/>
-                            <select required className="inputAdd" name="gunType" onChange={handleSelectRedact}>
+                            <select className="inputAdd" name="gunType">
                                 <option selected disabled>Выберите один из типов оружия</option>
                                 <option value="ASSAULT_RIFLES">Автоматы</option>
                                 <option value="PISTOLS">Пистолеты</option>
@@ -376,7 +387,7 @@ const Tyr = () => {
                                 <option value="SHOTGUNS">Дробовики</option>
                                 <option value="MACHINE_GUNS">Пулеметы</option>
                             </select>
-                            <button className="buttonAdd" >Изменить</button>
+                            <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
                 </Modal>

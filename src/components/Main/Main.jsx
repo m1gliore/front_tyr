@@ -10,6 +10,7 @@ import second from "../../images/2.jpg";
 import third from "../../images/3.jpg";
 import fourth from "../../images/4.jpg";
 import fifth from "../../images/5.jpg";
+import {useNavigate} from "react-router-dom";
 
 const Main = () => {
     const [sliderImages, setSliderImages] = useState([])
@@ -18,6 +19,7 @@ const Main = () => {
     const [imageUrl, setImageUrl] = useState(defaultImg)
     const admin = true
     const [encodedImage, setEncodedImage] = useState("")
+    const navigate = useNavigate()
 
     const handleFile = (event) => {
         setFile(event.target.files[0])
@@ -52,8 +54,8 @@ const Main = () => {
     })
 
     const handleSubmitRedact = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idImage = sliderImages[id].idImage
             const myJson = {
@@ -62,7 +64,7 @@ const Main = () => {
                 file: encodedImage,
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -75,11 +77,14 @@ const Main = () => {
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
         setImageUrl(selectedImageUrl)
     }
-    const refresh = () => window.location.reload()
+
     return (
         <main role="main">
             {admin &&
-                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => setModalRedactActive(true)}/>}
+                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => {
+                    setModalRedactActive(true)
+                    setImageUrl(defaultImg)
+                }}/>}
             <section className="review">
                 <div className="mainGallery">
                     <div className="imageContainer">
@@ -118,16 +123,16 @@ const Main = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {sliderImages.map((item) =>
                                     <option key={item.idImage}
                                             value={sliderImages.indexOf(item)}>{sliderImages.indexOf(item) + 1}</option>)}
                             </select>
-                            <input required className="inputAdd" type="text" name="title"
+                            <input className="inputAdd" type="text" name="title"
                                    placeholder="Введите название"/>
-                            <input required className="inputAdd" type="text" name="desc"
+                            <input className="inputAdd" type="text" name="desc"
                                    placeholder="Введите описание"/>
-                            <button className="buttonAdd" onClick={refresh}>Добавить</button>
+                            <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
                 </Modal>}

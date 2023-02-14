@@ -8,6 +8,7 @@ import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
 import defaultImg from '../../images/default-store-350x350.jpg'
+import {useNavigate} from "react-router-dom";
 
 
 const Galereya = () => {
@@ -25,6 +26,7 @@ const Galereya = () => {
     const [imageUrlDelete, setImageUrlDelete] = useState(defaultImg)
     const admin = true
     const [encodedImage, setEncodedImage] = useState("")
+    const navigate = useNavigate()
 
     const handleFile = (event) => {
         setFile(event.target.files[0])
@@ -58,8 +60,8 @@ const Galereya = () => {
     })
 
     const handleSubmitAdd = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const title = event.target.title.value
             const myJson = {
                 url: file.name,
@@ -67,30 +69,30 @@ const Galereya = () => {
                 title
             }
             console.log(myJson)
-            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery/galereya', myJson)
+            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery/galereya', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
 
     const handleSubmitDelete = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idImg = images[id].idImage
             const myJson = {
                 idImg
             }
             console.log(myJson)
-            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson)
+            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
 
     const handleSubmitRedact = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idImg = images[id].idImage
             const title = event.target.title.value
@@ -101,7 +103,7 @@ const Galereya = () => {
                 title
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -123,15 +125,22 @@ const Galereya = () => {
         setImageUrl(selectedImageUrl)
     }
 
-    const refresh = () => window.location.reload()
-
     return (
         <>
             <Navbar/>
             {admin && <>
-                <FontAwesomeIcon className="action fa-2x" icon={faTrashCan} onClick={() => setModalDeleteActive(true)}/>
-                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => setModalRedactActive(true)}/>
-                <FontAwesomeIcon className="action fa-2x" icon={faPlus} onClick={() => setModalAddActive(true)}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faTrashCan} onClick={() => {
+                    setModalDeleteActive(true)
+                    setImageUrl(defaultImg)
+                }}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => {
+                    setModalRedactActive(true)
+                    setImageUrl(defaultImg)
+                }}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPlus} onClick={() => {
+                    setModalAddActive(true)
+                    setImageUrl(defaultImg)
+                }}/>
             </>}
             <main role="main">
                 <div className="galleryContainer">
@@ -156,12 +165,12 @@ const Galereya = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {images.map((item) =>
                                     <option key={item.idImage}
                                             value={images.indexOf(item)}>{images.indexOf(item) + 1}</option>)}
                             </select>
-                            <button className="buttonAdd" onClick={refresh}>Удалить</button>
+                            <button className="buttonAdd">Удалить</button>
                         </div>
                     </form>
                 </Modal>
@@ -173,13 +182,17 @@ const Galereya = () => {
                             <label className="labelAdd" style={{cursor: "pointer"}} htmlFor="file">
                                 <FontAwesomeIcon icon={faUpload}/>
                             </label>
-                            <input className="inputAdd" style={{display: "none"}} type="file" id="file"
+                            <input required className="inputAdd" style={{display: "none"}} type="file" id="file"
                                    onChange={handleFile}/>
                         </div>
                         <div className="rightContainer">
                             <input required className="inputAdd" type="text" name="title"
                                    placeholder="Введите подпись изображению"/>
-                            <button className="buttonAdd" onClick={refresh}>Добавить</button>
+                            <button className="buttonAdd" onClick={() => {
+                                if (imageUrl === defaultImg) alert("Вставьте картинку!")
+                            }
+                            }>Добавить
+                            </button>
                         </div>
                     </form>
                 </Modal>
@@ -196,14 +209,14 @@ const Galereya = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {images.map((item) =>
                                     <option key={item.idImage}
                                             value={images.indexOf(item)}>{images.indexOf(item) + 1}</option>)}
                             </select>
                             <input className="inputAdd" type="text" name="title"
                                    placeholder="Введите новую подпись изображению"/>
-                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
+                            <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
                 </Modal>

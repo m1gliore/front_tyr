@@ -6,12 +6,14 @@ import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
+import {useNavigate} from "react-router-dom";
 
 const Otzyivyi = () => {
     const [replies, setReplies] = useState([])
     const [modalAcceptActive, setModalAcceptActive] = useState(false)
     const [imageUrl, setImageUrl] = useState("")
     const admin = true
+    const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
@@ -30,8 +32,8 @@ const Otzyivyi = () => {
     })
 
     const handleSubmitRedact = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idReply = replies[id].idReply
             const status = event.target.status.value
@@ -40,7 +42,7 @@ const Otzyivyi = () => {
                 status
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -54,13 +56,14 @@ const Otzyivyi = () => {
         setImageUrl(selectedImageUrl)
     }
 
-    const refresh = () => window.location.reload()
-
     return (
         <>
             <Navbar/>
             {admin &&
-                <FontAwesomeIcon className="action fa-2x" icon={faCheckCircle} onClick={() => setModalAcceptActive(true)}/>}
+                <FontAwesomeIcon className="action fa-2x" icon={faCheckCircle} onClick={() => {
+                    setModalAcceptActive(true)
+                    setImageUrl("")
+                }}/>}
             <section className="shooters-list-str bg-white">
                 <div className="container">
                     <nav aria-label="breadcrumb">
@@ -92,17 +95,17 @@ const Otzyivyi = () => {
                         <div className="leftContainer">{imageUrl}</div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {replies.map((item) =>
                                     <option key={item.idReply}
                                             value={replies.indexOf(item)}>{replies.indexOf(item) + 1}</option>)}
                             </select>
-                            <select required className="inputAdd" name="status" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите статус</option>
+                            <select required className="inputAdd" name="status">
+                                <option selected disabled value="">Выберите статус</option>
                                 <option value="accept">Принять</option>
                                 <option value="reject">Отклонить</option>
                             </select>
-                            <button className="buttonAdd" onClick={refresh}>Изменить</button>
+                            <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
                 </Modal>
