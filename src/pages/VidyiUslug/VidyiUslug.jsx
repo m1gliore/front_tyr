@@ -2,7 +2,7 @@ import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -22,6 +22,7 @@ const VidyiUslug = () => {
     const [imageUrlDelete, setImageUrlDelete] = useState(defaultImg)
     const admin = true
     const [encodedImage, setEncodedImage] = useState("")
+    const navigate = useNavigate()
 
     const handleFile = (event) => {
         setFile(event.target.files[0])
@@ -57,8 +58,8 @@ const VidyiUslug = () => {
     })
 
     const handleSubmitAdd = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const name = event.target.name.value
             const description = event.target.desc.value
             const myJson = {
@@ -71,30 +72,30 @@ const VidyiUslug = () => {
                     }
             }
             console.log(myJson)
-            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/${currentService}`, myJson)
+            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/${currentService}`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
 
     const handleSubmitDelete = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idImg = serviceNames[id].idImage
             const myJson = {
                 idImg
             }
             console.log(myJson)
-            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson)
+            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
 
     const handleSubmitRedact = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idImg = serviceNames[id].idImage
             const name = event.target.name.value
@@ -112,11 +113,12 @@ const VidyiUslug = () => {
                     }
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
+
     const handleSelectDelete = (event) => {
         event.preventDefault()
         console.log(event.target.value)
@@ -135,15 +137,22 @@ const VidyiUslug = () => {
         setImageUrl(selectedImageUrl)
     }
 
-    const refresh = () => window.location.reload()
-
     return (
         <>
             <Navbar/>
             {admin && <>
-                <FontAwesomeIcon className="action fa-2x" icon={faTrashCan} onClick={() => setModalDeleteActive(true)}/>
-                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => setModalRedactActive(true)}/>
-                <FontAwesomeIcon className="action fa-2x" icon={faPlus} onClick={() => setModalAddActive(true)}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faTrashCan} onClick={() => {
+                    setModalDeleteActive(true)
+                    setImageUrl(defaultImg)
+                }}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => {
+                    setModalRedactActive(true)
+                    setImageUrl(defaultImg)
+                }}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPlus} onClick={() => {
+                    setModalAddActive(true)
+                    setImageUrl(defaultImg)
+                }}/>
             </>}
             <main role="main">
                 <section className="service-part">
@@ -194,12 +203,12 @@ const VidyiUslug = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {serviceNames.map((item) =>
                                     <option key={item.idImage}
                                             value={serviceNames.indexOf(item)}>{serviceNames.indexOf(item) + 1}</option>)}
                             </select>
-                            <button className="buttonAdd" onClick={refresh}>Удалить</button>
+                            <button className="buttonAdd">Удалить</button>
                         </div>
                     </form>
                 </Modal>
@@ -211,7 +220,7 @@ const VidyiUslug = () => {
                             <label className="labelAdd" style={{cursor: "pointer"}} htmlFor="file">
                                 <FontAwesomeIcon icon={faUpload}/>
                             </label>
-                            <input className="inputAdd" style={{display: "none"}} type="file" id="file"
+                            <input required className="inputAdd" style={{display: "none"}} type="file" id="file"
                                    onChange={handleFile}/>
                         </div>
                         <div className="rightContainer">
@@ -219,7 +228,11 @@ const VidyiUslug = () => {
                                    placeholder="Введите наименование услуги"/>
                             <input required className="inputAdd" type="text" name="desc"
                                    placeholder="Введите описание услуги"/>
-                            <button className="buttonAdd" onClick={refresh}>Добавить</button>
+                            <button className="buttonAdd" onClick={() => {
+                                if (imageUrl === defaultImg) alert("Вставьте картинку!")
+                            }
+                            }>Добавить
+                            </button>
                         </div>
                     </form>
                 </Modal>
@@ -236,14 +249,14 @@ const VidyiUslug = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {serviceNames.map((item) =>
                                     <option key={item.idImage}
                                             value={serviceNames.indexOf(item)}>{serviceNames.indexOf(item) + 1}</option>)}
                             </select>
-                            <input required className="inputAdd" type="text" name="name"
+                            <input className="inputAdd" type="text" name="name"
                                    placeholder="Введите наименование услуги"/>
-                            <input required className="inputAdd" type="text" name="desc"
+                            <input className="inputAdd" type="text" name="desc"
                                    placeholder="Введите описание услуги"/>
                             <button className="buttonAdd">Изменить</button>
                         </div>
