@@ -7,6 +7,7 @@ import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
 import defaultImg from "../../images/default-store-350x350.jpg";
+import {useNavigate} from "react-router-dom";
 
 const LuchshieStrelki = () => {
     const [shooters, setShooters] = useState([])
@@ -18,6 +19,7 @@ const LuchshieStrelki = () => {
     const [imageUrlDelete, setImageUrlDelete] = useState(defaultImg)
     const admin = true
     const [encodedImage, setEncodedImage] = useState("")
+    const navigate = useNavigate()
 
     const handleFile = (event) => {
         setFile(event.target.files[0])
@@ -52,8 +54,8 @@ const LuchshieStrelki = () => {
     })
 
     const handleSubmitAdd = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const name = event.target.name.value
             const surname = event.target.surname.value
             const patronymic = event.target.patronymic.value
@@ -71,29 +73,30 @@ const LuchshieStrelki = () => {
                 }
             }
             console.log(myJson)
-            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery/luchshie-strelki', myJson)
+            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery/luchshie-strelki', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
 
     const handleSubmitDelete = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idImage = shooters[id].idImage
             const myJson = {
                 idImage
             }
             console.log(myJson)
-            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImage, myJson)
+            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImage, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
+
     const handleSubmitRedact = async (event) => {
+        event.preventDefault()
         try {
-            event.preventDefault()
             const id = event.target.id.value
             const idImage = shooters[id].idImage
             const name = event.target.name.value
@@ -116,17 +119,19 @@ const LuchshieStrelki = () => {
                 }
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson)
+            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
     }
+
     const handleSelectDelete = (event) => {
         event.preventDefault()
         const selectedImage = shooters[event.target.value]
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
         setImageUrlDelete(selectedImageUrl)
     }
+
     const handleSelectRedact = (event) => {
         event.preventDefault()
         console.log(event.target.value)
@@ -135,15 +140,22 @@ const LuchshieStrelki = () => {
         setImageUrl(selectedImageUrl)
     }
 
-    const refresh = () => window.location.reload()
-
     return (
         <>
             <Navbar/>
             {admin && <>
-                <FontAwesomeIcon className="action fa-2x" icon={faTrashCan} onClick={() => setModalDeleteActive(true)}/>
-                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => setModalRedactActive(true)}/>
-                <FontAwesomeIcon className="action fa-2x" icon={faPlus} onClick={() => setModalAddActive(true)}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faTrashCan} onClick={() => {
+                    setModalDeleteActive(true)
+                    setImageUrl(defaultImg)
+                }}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => {
+                    setModalRedactActive(true)
+                    setImageUrl(defaultImg)
+                }}/>
+                <FontAwesomeIcon className="action fa-2x" icon={faPlus} onClick={() => {
+                    setModalAddActive(true)
+                    setImageUrl(defaultImg)
+                }}/>
             </>}
             <section className="shooters-list-str bg-white">
                 <div className="container">
@@ -187,12 +199,12 @@ const LuchshieStrelki = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {shooters.map((item) =>
                                     <option key={item.idImage}
                                             value={shooters.indexOf(item)}>{shooters.indexOf(item) + 1}</option>)}
                             </select>
-                            <button className="buttonAdd" onClick={refresh}>Удалить</button>
+                            <button className="buttonAdd">Удалить</button>
                         </div>
                     </form>
                 </Modal>
@@ -204,7 +216,8 @@ const LuchshieStrelki = () => {
                             <label className="labelAdd" style={{cursor: "pointer"}} htmlFor="file">
                                 <FontAwesomeIcon icon={faUpload}/>
                             </label>
-                            <input className="inputAdd" style={{display: "none"}} type="file" id="file"
+                            <input required className="inputAdd" style={{display: "none"}} name="file" type="file"
+                                   id="file"
                                    onChange={handleFile}/>
                         </div>
                         <div className="rightContainer">
@@ -214,11 +227,15 @@ const LuchshieStrelki = () => {
                                    placeholder="Введите имя"/>
                             <input required className="inputAdd" type="text" name="patronymic"
                                    placeholder="Введите отчество"/>
-                            <input required className="inputAdd" type="number" name="result"
+                            <input required className="inputAdd" type="number" min="0" name="result"
                                    placeholder="Введите количество выстрелов"/>
-                            <input required className="inputAdd" type="number" name="successfulHits"
-                                   placeholder="Введите количество успешных попаданий"/>
-                            <button className="buttonAdd" onClick={refresh}>Добавить</button>
+                            <input required className="inputAdd" type="number" min="0" max="100" name="successfulHits"
+                                   placeholder="Введите количество успешных попаданий(%)"/>
+                            <button className="buttonAdd" onClick={() => {
+                                if (imageUrl === defaultImg) alert("Вставьте картинку!")
+                            }
+                            }>Добавить
+                            </button>
                         </div>
                     </form>
                 </Modal>
@@ -235,7 +252,7 @@ const LuchshieStrelki = () => {
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
-                                <option selected disabled>Выберите один из вариантов</option>
+                                <option selected disabled value="">Выберите один из вариантов</option>
                                 {shooters.map((item) =>
                                     <option key={item.idImage}
                                             value={shooters.indexOf(item)}>{shooters.indexOf(item) + 1}</option>)}
@@ -246,9 +263,9 @@ const LuchshieStrelki = () => {
                                    placeholder="Введите имя"/>
                             <input className="inputAdd" type="text" name="patronymic"
                                    placeholder="Введите отчество"/>
-                            <input className="inputAdd" type="number" name="result"
+                            <input className="inputAdd" type="number" min="0" name="result"
                                    placeholder="Введите количество выстрелов"/>
-                            <input className="inputAdd" type="number" name="successfulHits"
+                            <input className="inputAdd" type="number" min="0" max="100" name="successfulHits"
                                    placeholder="Введите количество успешных попаданий"/>
                             <button className="buttonAdd">Изменить</button>
                         </div>
