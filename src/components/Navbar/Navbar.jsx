@@ -6,7 +6,7 @@ import {faInstagram} from '@fortawesome/free-brands-svg-icons'
 import Modal from "../Modal/Modal";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import translit from "../../makeLink";
+import {translit} from "../../makeLink";
 import {useNavigate} from "react-router-dom";
 
 const Navbar = () => {
