@@ -6,7 +6,7 @@ import {faInstagram} from '@fortawesome/free-brands-svg-icons'
 import Modal from "../Modal/Modal";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {translit} from "../../makeLink";
+import transliterate from "../../makeLink";
 import {useNavigate} from "react-router-dom";
 
 const Navbar = () => {
@@ -48,7 +48,7 @@ const Navbar = () => {
             const directoryType = 'TYR'
             const myJson = {
                 nameCatalog,
-                url: translit(nameCatalog),
+                url: transliterate(nameCatalog, true),
                 description,
                 directoryType
             }
@@ -84,7 +84,7 @@ const Navbar = () => {
             const myJson = {
                 idServiceCatalog,
                 nameCatalog,
-                url: translit(nameCatalog),
+                url: transliterate(nameCatalog, true),
                 description,
             }
             console.log(myJson)
@@ -101,7 +101,7 @@ const Navbar = () => {
             const directoryType = 'SERVICE'
             const myJson = {
                 nameCatalog,
-                url: translit(nameCatalog),
+                url: transliterate(nameCatalog, true),
                 directoryType
             }
             console.log(myJson)
@@ -135,7 +135,7 @@ const Navbar = () => {
             const myJson = {
                 idServiceCatalog,
                 nameCatalog,
-                url: translit(nameCatalog)
+                url: transliterate(nameCatalog, true)
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))

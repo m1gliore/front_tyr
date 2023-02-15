@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {translit} from "../../makeLink";
+import transliterate from "../../makeLink";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -20,7 +20,7 @@ const Usluga = () => {
         })()
     }, [])
 
-    const link = `/uslugi/${translit(usluga.serviceCatalog || '')}`
+    const link = `/uslugi/${transliterate(usluga.serviceCatalog || '', true)}`
 
     return (
         <>

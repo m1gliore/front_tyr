@@ -1,63 +1,11 @@
-const translit = (word) => {
-    let answer = ''
-    const converter = {
-        'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd',
-        'е': 'ie', 'ё': 'yo', 'ж': 'zh', 'з': 'z', 'и': 'i',
-        'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n',
-        'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't',
-        'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch',
-        'ш': 'sh', 'щ': 'sch', 'ь': "'", 'ы': 'yi', 'ъ': "`",
-        'э': 'e', 'ю': 'yu', 'я': 'ya', ' ': '-', '-': '---',
-
-        'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D',
-        'Е': 'IE', 'Ё': 'YO', 'Ж': 'Zh', 'З': 'Z', 'И': 'I',
-        'Й': 'Y', 'К': 'K', 'Л': 'L', 'М': 'M', 'Н': 'N',
-        'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T',
-        'У': 'U', 'Ф': 'F', 'Х': 'H', 'Ц': 'C', 'Ч': 'Ch',
-        'Ш': 'Sh', 'Щ': 'Sch', 'Ь': "'", 'Ы': 'YI', 'Ъ': "`",
-        'Э': 'E', 'Ю': 'Yu', 'Я': 'Ya'
+const transliterate = (text, engToRus) => {
+    let rus = "щ   ш  ч  ц  ю  я  ё  ж  ъ  ы  э  а б в г д е з и й к л м н о п р с т у ф х ь".split(/ +/g)
+    let eng = "sch sh ch cz yu ya yo zh `` y' e` a b v g d e z i j k l m n o p r s t u f h `".split(/ +/g)
+    for (let x = 0; x < rus.length; x++) {
+        text = text.split(engToRus ? eng[x] : rus[x]).join(engToRus ? rus[x] : eng[x])
+        text = text.split(engToRus ? eng[x].toUpperCase() : rus[x].toUpperCase()).join(engToRus ? rus[x].toUpperCase() : eng[x].toUpperCase())
     }
-
-    for (let i = 0; i < word.length; ++i) {
-        if (converter[word[i]] === undefined) {
-            answer += word[i]
-        } else {
-            answer += converter[word[i]]
-        }
-    }
-
-    return answer
+    return text
 }
 
-const cyrillic = (word) => {
-    let answer = ''
-    const converter = {
-        'a': 'а', 'b': 'б', 'v': 'в', 'g': 'г', 'd': 'д',
-        'ie': 'е', 'yo': 'ё', 'zh': 'ж', 'z': 'з', 'i': 'и',
-        'y': 'й', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н',
-        'o': 'о', 'p': 'п', 'r': 'р', 's': 'с', 't': 'т',
-        'u': 'у', 'f': 'ф', 'h': 'х', 'c': 'ц', 'ch': 'ч',
-        'sh': 'ш', 'sch': 'щ', "'": 'ь', 'yi': 'ы', "`": 'ъ',
-        'e': 'э', 'yu': 'ю', 'ya': 'я', '-': ' ', '---': '-',
-
-        'A': 'А', 'B': 'Б', 'V': 'В', 'G': 'Г', 'D': 'Д',
-        'IE': 'Е', 'YO': 'Ё', 'ZH': 'Ж', 'Z': 'З', 'I': 'И',
-        'Y': 'Й', 'K': 'К', 'L': 'Л', 'M': 'М', 'N': 'Н',
-        'O': 'О', 'P': 'П', 'R': 'Р', 'S': 'С', 'T': 'Т',
-        'U': 'У', 'F': 'Ф', 'H': 'Х', 'C': 'Ц', 'CH': 'Ч',
-        'SH': 'Ш', 'SCH': 'Щ', 'YI': 'Ы',
-        'E': 'Э', 'YU': 'Ю', 'YA': 'Я'
-    }
-
-    for (let i = 0; i < word.length; ++i) {
-        if (converter[word[i]] === undefined) {
-            answer += word[i]
-        } else {
-            answer += converter[word[i]]
-        }
-    }
-
-    return answer
-}
-
-export {translit, cyrillic}
+export default transliterate
