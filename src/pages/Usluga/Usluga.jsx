@@ -31,7 +31,6 @@ const Usluga = () => {
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><a href="/">Главная</a></li>
-                                <li className="breadcrumb-item"><a href="/uslugi">Услуги</a></li>
                                 <li className="breadcrumb-item"><a href={link}>{usluga.serviceCatalog}</a></li>
                                 <li className="breadcrumb-item active">{usluga.title}</li>
                             </ol>

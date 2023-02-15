@@ -20,7 +20,7 @@ const Oruzhie = () => {
         })()
     }, [])
 
-    const link = `/uslugi/${translit(oruzhie.gunCatalog || '')}`
+    const link = `/oruzhie-v-tire/${translit(oruzhie.gunCatalog || '')}`
 
     return (
         <>
@@ -31,7 +31,6 @@ const Oruzhie = () => {
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><a href="/">Главная</a></li>
-                                <li className="breadcrumb-item"><a href="/oruzhie-v-tire">Оружие</a></li>
                                 <li className="breadcrumb-item"><a href={link}>{oruzhie.gunCatalog}</a></li>
                                 <li className="breadcrumb-item active">{oruzhie.title}</li>
                             </ol>
