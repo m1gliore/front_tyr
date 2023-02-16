@@ -58,10 +58,14 @@ const Main = () => {
         try {
             const id = event.target.id.value
             const idImage = sliderImages[id].idImage
+            const title = event.target.title.value
+            const description = event.target.desc.value
             const myJson = {
                 idImage,
-                url: file.name,
+                url: file?.name,
                 file: encodedImage,
+                title,
+                description
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))

@@ -98,7 +98,7 @@ const Galereya = () => {
             const title = event.target.title.value
             const myJson = {
                 idImage: idImg,
-                url: file.name,
+                url: file?.name,
                 file: encodedImage,
                 title
             }

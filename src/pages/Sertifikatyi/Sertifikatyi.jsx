@@ -24,7 +24,8 @@ const Sertifikatyi = () => {
                 const responseTemplate = await axios.get('http://localhost:8040/api/redact/allCertificateTypes')
                 setCertificates(responseCertificate.data)
                 setCertificateTemplates(responseTemplate.data)
-
+                console.log(responseCertificate.data)
+                console.log(responseTemplate.data)
             } catch (e) {
                 console.log(e)
             }
@@ -41,9 +42,12 @@ const Sertifikatyi = () => {
             const id = event.target.id.value
             const idCertificate = certificates[id].idCertificate
             const status = event.target.status.value
+            const username = certificates[id].username
             const myJson = {
                 idCertificate,
-                status
+                status,
+                username
+
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/redact/updateCertificate', myJson).then(() => navigate(0))
@@ -108,8 +112,23 @@ const Sertifikatyi = () => {
                             <div className="col-lg-4 col-md-6" key={certificate.idCertificate}>
                                 <div className="cardStr">
                                     <div className="card-body-str">
-                                        <p className="card-desc-str">Сумма: {certificate.price}</p>
-                                        <p className="card-desc-str">Дата: {certificate.registration} %</p>
+                                        <p className="card-desc-str">Дата: {certificate.registration} </p>
+                                        <p className="card-desc-str">Телефон: {certificate.phone} </p>
+                                        <p className="card-desc-str">Цена со скидкой: {certificate.price} руб.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                    <h2>Типы сертификатов</h2>
+                    <div className="row">
+                        {certificateTemplates.map((certificate) =>
+                            <div className="col-lg-4 col-md-6" key={certificate.idCertificateType}>
+                                <div className="cardStr">
+                                    <div className="card-body-str">
+                                        <p className="card-desc-str">Скидка: {certificate.discount}%</p>
+                                        <p className="card-desc-str">Номинал: {certificate.nominal} руб.</p>
+                                        <p className="card-desc-str">Количество скртификатов для скидки: {certificate.countCertificate} руб.</p>
                                     </div>
                                 </div>
                             </div>

@@ -11,6 +11,7 @@ import defaultImg from "../../images/default-store-350x350.jpg";
 import first from "../../images/NicePng_bullseye-icon-png_3253558.png";
 import second from "../../images/gun-2-128.png";
 import third from "../../images/pngegg.png";
+import transliterate from "../../makeLink";
 
 
 const Tyr = () => {
@@ -282,7 +283,7 @@ const Tyr = () => {
                                                         className="price">{gun.gunResponse.price} руб.</span> / {gun.gunResponse.quantity} выстр.
                                                     </div>
                                                     <div className="col-auto text-right">
-                                                        <a href={"/oruzhie-v-tire/" + gun.gunResponse.v}
+                                                        <a href={"/oruzhie-v-tire/" + transliterate(gun.gunResponse.name,false)}
                                                            className="button btn-blue" role="button">Подробнее</a>
                                                     </div>
                                                 </div>

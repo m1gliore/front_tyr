@@ -43,12 +43,12 @@ const Navbar = () => {
     const handleSubmitAdd = async (event) => {
         event.preventDefault()
         try {
-            const nameCatalog = event.target.nameCatalog.value
-            const description = event.target.description.value
+            const nameCatalog = event.target.nameCatalog?.value
+            const description = event.target.description?.value
             const directoryType = 'TYR'
             const myJson = {
                 nameCatalog,
-                url: transliterate(nameCatalog, true),
+                url: transliterate(nameCatalog,false),
                 description,
                 directoryType
             }
@@ -63,12 +63,12 @@ const Navbar = () => {
         event.preventDefault()
         try {
             const id = event.target.id.value
-            const idServiceCatalog = tyrTypes[id].idServiceCatalog
+            const url = tyrTypes.titleHomePageResponseSetGun[id]?.url
             const myJson = {
-                idServiceCatalog
+                url
             }
             console.log(myJson)
-            await axios.delete('http://localhost:8040/api/homePage/deleteImage/', myJson).then(() => navigate(0))
+            await axios.delete(`http://localhost:8040/api/redact/deleteServiceCatalog/${url}`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -84,7 +84,7 @@ const Navbar = () => {
             const myJson = {
                 idServiceCatalog,
                 nameCatalog,
-                url: transliterate(nameCatalog, true),
+                url: transliterate(nameCatalog,false),
                 description,
             }
             console.log(myJson)
@@ -101,7 +101,7 @@ const Navbar = () => {
             const directoryType = 'SERVICE'
             const myJson = {
                 nameCatalog,
-                url: transliterate(nameCatalog, true),
+                url: transliterate(nameCatalog,false),
                 directoryType
             }
             console.log(myJson)
@@ -135,7 +135,7 @@ const Navbar = () => {
             const myJson = {
                 idServiceCatalog,
                 nameCatalog,
-                url: transliterate(nameCatalog, true)
+                url: transliterate(nameCatalog,false)
             }
             console.log(myJson)
             await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
@@ -318,7 +318,7 @@ const Navbar = () => {
                     <h1>Добавить категорию тира</h1>
                     <form className="modalAdd" onSubmit={handleSubmitAdd}>
                         <div className="rightContainer">
-                            <input required className="inputAdd" type="text" name="title"
+                            <input required className="inputAdd" type="text" name="nameCatalog"
                                    placeholder="Введите наименование категории"/>
                             <input required className="inputAdd" type="text" name="description"
                                    placeholder="Введите описание категории"/>
@@ -339,7 +339,7 @@ const Navbar = () => {
                                     <option key={tyrTypes.titleHomePageResponseSetGun.indexOf(item)}
                                             value={tyrTypes.titleHomePageResponseSetGun.indexOf(item)}>{tyrTypes.titleHomePageResponseSetGun.indexOf(item) + 1}</option>)}
                             </select>
-                            <input className="inputAdd" type="text" name="title"
+                            <input className="inputAdd" type="text" name="nameCatalog"
                                    placeholder="Введите наименование категории"/>
                             <input className="inputAdd" type="text" name="description"
                                    placeholder="Введите описание категории"/>
@@ -368,7 +368,7 @@ const Navbar = () => {
                     <h1>Добавить тип услуг</h1>
                     <form className="modalAdd" onSubmit={handleSubmitAddService}>
                         <div className="rightContainer">
-                            <input required className="inputAdd" type="text" name="title"
+                            <input required className="inputAdd" type="text" name="nameCatalog"
                                    placeholder="Введите наименование типа услуг"/>
                             <button className="buttonAdd">Добавить</button>
                         </div>
@@ -387,7 +387,7 @@ const Navbar = () => {
                                     <option key={tyrTypes.titleHomePageResponseSetService.indexOf(item)}
                                             value={tyrTypes.titleHomePageResponseSetService.indexOf(item)}>{tyrTypes.titleHomePageResponseSetService.indexOf(item) + 1}</option>)}
                             </select>
-                            <input required className="inputAdd" type="text" name="title"
+                            <input required className="inputAdd" type="text" name="nameCatalog"
                                    placeholder="Введите наименование типа услуг"/>
                             <button className="buttonAdd">Изменить</button>
                         </div>
