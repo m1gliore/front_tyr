@@ -18,7 +18,7 @@ const Otzyivyi = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=otzyivyi')
+                const response = await axios.get(`http://localhost:8040/api/redact1/getAllReview`)
                 setReplies(response.data)
                 console.log(response.data)
             } catch (e) {
@@ -28,21 +28,23 @@ const Otzyivyi = () => {
     }, [])
 
     replies.sort((a, b) => {
-        return a.idReply - b.idReply
+        return a.idReview - b.idReview
     })
 
     const handleSubmitRedact = async (event) => {
         event.preventDefault()
         try {
             const id = event.target.id.value
-            const idReply = replies[id].idReply
-            const status = event.target.status.value
+            const idReview = replies[id].idReview
+            const reviewStatus = event.target.status.value
+            const username = replies[id].username
             const myJson = {
-                idReply,
-                status
+                idReview,
+                reviewStatus,
+                username
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
+            await axios.put(`http://localhost:8040/api/redact1/updateReview`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -52,7 +54,7 @@ const Otzyivyi = () => {
         event.preventDefault()
         console.log(event.target.value)
         const selectedImage = replies[event.target.value]
-        const selectedImageUrl = selectedImage.idReply
+        const selectedImageUrl = selectedImage.idReview
         setImageUrl(selectedImageUrl)
     }
 
@@ -75,11 +77,12 @@ const Otzyivyi = () => {
                     <h2>Отзывы</h2>
                     <div className="row">
                         {replies.map((reply) =>
-                            <div className="col-lg-4 col-md-6" key={reply.idReply}>
+                            <div className="col-lg-4 col-md-6" key={reply.idReview}>
                                 <div className="cardStr">
                                     <div className="card-body-str">
-                                        <p className="card-desc-str">Сумма: {reply.title}</p>
-                                        <p className="card-desc-str">Дата: {reply.desc} %</p>
+                                        <p className="card-desc-str">Пользователь:{reply.username}</p>
+                                        <p className="card-desc-str">{reply.dateRegistration}</p>
+                                        <p className="card-desc-str">Отзыв:{reply.reviewInfo}</p>
                                     </div>
                                 </div>
                             </div>
@@ -97,13 +100,13 @@ const Otzyivyi = () => {
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
                                 <option selected disabled value="">Выберите один из вариантов</option>
                                 {replies.map((item) =>
-                                    <option key={item.idReply}
+                                    <option key={item.idReview}
                                             value={replies.indexOf(item)}>{replies.indexOf(item) + 1}</option>)}
                             </select>
                             <select required className="inputAdd" name="status">
                                 <option selected disabled value="">Выберите статус</option>
-                                <option value="accept">Принять</option>
-                                <option value="reject">Отклонить</option>
+                                <option value="CONFIRMED">Принять</option>
+                                <option value="REJECTED">Отклонить</option>
                             </select>
                             <button className="buttonAdd">Изменить</button>
                         </div>

@@ -10,6 +10,8 @@ import transliterate from "../../makeLink";
 import {useNavigate} from "react-router-dom";
 
 const Navbar = () => {
+    const [currentTyr, setCurrentTyr] = useState([])
+    const [currentService, setCurrentService] = useState([])
     const [tyrTypes, setTyrTypes] = useState([])
     const [modalDeleteActiveTyr, setModalDeleteActiveTyr] = useState(false)
     const [modalAddActiveTyr, setModalAddActiveTyr] = useState(false)
@@ -48,7 +50,7 @@ const Navbar = () => {
             const directoryType = 'TYR'
             const myJson = {
                 nameCatalog,
-                url: transliterate(nameCatalog,false),
+                url: transliterate(nameCatalog, false),
                 description,
                 directoryType
             }
@@ -78,17 +80,17 @@ const Navbar = () => {
         event.preventDefault()
         try {
             const id = event.target.id.value
-            const idServiceCatalog = tyrTypes[id].idServiceCatalog
+            const idServiceCatalog = tyrTypes[id]?.idServiceCatalog
             const nameCatalog = event.target.nameCatalog.value
             const description = event.target.description.value
             const myJson = {
                 idServiceCatalog,
                 nameCatalog,
-                url: transliterate(nameCatalog,false),
+                url: transliterate(nameCatalog, false),
                 description,
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
+            await axios.put('http://localhost:8040/api/redact/updateServiceCatalog', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -101,7 +103,7 @@ const Navbar = () => {
             const directoryType = 'SERVICE'
             const myJson = {
                 nameCatalog,
-                url: transliterate(nameCatalog,false),
+                url: transliterate(nameCatalog, false),
                 directoryType
             }
             console.log(myJson)
@@ -115,12 +117,12 @@ const Navbar = () => {
         event.preventDefault()
         try {
             const id = event.target.id.value
-            const idServiceCatalog = tyrTypes[id].idServiceCatalog
+            const url = tyrTypes.titleHomePageResponseSetService[id]?.url
             const myJson = {
-                idServiceCatalog
+                url
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
+            await axios.put(` http://localhost:8040/api/redact/deleteServiceCatalog/${url}`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -130,15 +132,15 @@ const Navbar = () => {
         event.preventDefault()
         try {
             const id = event.target.id.value
-            const idServiceCatalog = tyrTypes[id].idServiceCatalog
+            const idServiceCatalog = tyrTypes[id]?.idServiceCatalog
             const nameCatalog = event.target.nameCatalog.value
             const myJson = {
                 idServiceCatalog,
                 nameCatalog,
-                url: transliterate(nameCatalog,false)
+                url: transliterate(nameCatalog, false)
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
+            await axios.put('http://localhost:8040/api/redact/updateServiceCatalog', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -157,9 +159,8 @@ const Navbar = () => {
     const handleSelectRedact = (event) => {
         event.preventDefault()
         console.log(event.target.value)
-        const selectedImage = tyrTypes.titleHomePageResponseSetService[event.target.value]
-        const selectedImageUrl = selectedImage.title
-        setImageUrl(selectedImageUrl)
+        setCurrentTyr(tyrTypes?.titleHomePageResponseSetGun[event.target.value])
+        setCurrentService(tyrTypes?.titleHomePageResponseSetService[event.target.value])
     }
 
     return (
@@ -244,6 +245,7 @@ const Navbar = () => {
                                             }}/>
                                             <FontAwesomeIcon className="action" icon={faPen} onClick={() => {
                                                 setModalRedactActiveTyr(true)
+                                                setCurrentTyr({})
                                                 setImageUrl("Категория")
                                             }}/>
                                             <FontAwesomeIcon className="action" icon={faPlus} onClick={() => {
@@ -273,6 +275,7 @@ const Navbar = () => {
                                             }}/>
                                             <FontAwesomeIcon className="action" icon={faPen} onClick={() => {
                                                 setModalRedactActiveService(true)
+                                                setCurrentService({})
                                                 setImageUrl("Категория")
                                             }}/>
                                             <FontAwesomeIcon className="action" icon={faPlus} onClick={() => {
@@ -329,9 +332,6 @@ const Navbar = () => {
                 <Modal active={modalRedactActiveTyr} setActive={setModalRedactActiveTyr}>
                     <h1>Изменить категорию тира</h1>
                     <form className="modalAdd" onSubmit={handleSubmitRedact}>
-                        <div className="leftContainer">
-                            <div>{imageUrl}</div>
-                        </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
                                 <option selected disabled value="">Выберите один из вариантов</option>
@@ -340,9 +340,11 @@ const Navbar = () => {
                                             value={tyrTypes.titleHomePageResponseSetGun.indexOf(item)}>{tyrTypes.titleHomePageResponseSetGun.indexOf(item) + 1}</option>)}
                             </select>
                             <input className="inputAdd" type="text" name="nameCatalog"
-                                   placeholder="Введите наименование категории"/>
+                                   placeholder="Введите наименование категории" value={currentTyr?.title}
+                                   onChange={event => setCurrentTyr(currentTyr[event.target.value])}/>
                             <input className="inputAdd" type="text" name="description"
-                                   placeholder="Введите описание категории"/>
+                                   placeholder="Введите описание категории" value={currentTyr?.description}
+                                   onChange={event => setCurrentTyr(currentTyr[event.target.value])}/>
                             <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
@@ -350,9 +352,6 @@ const Navbar = () => {
                 <Modal active={modalDeleteActiveService} setActive={setModalDeleteActiveService}>
                     <h1>Удалить тип услуг</h1>
                     <form className="modalAdd" onSubmit={handleSubmitDeleteService}>
-                        <div className="leftContainer">
-                            <div>{imageUrlDelete}</div>
-                        </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
                                 <option selected disabled value="">Выберите один из вариантов</option>
@@ -388,7 +387,8 @@ const Navbar = () => {
                                             value={tyrTypes.titleHomePageResponseSetService.indexOf(item)}>{tyrTypes.titleHomePageResponseSetService.indexOf(item) + 1}</option>)}
                             </select>
                             <input required className="inputAdd" type="text" name="nameCatalog"
-                                   placeholder="Введите наименование типа услуг"/>
+                                   placeholder="Введите наименование типа услуг" value={currentService?.title}
+                                   onChange={event => setCurrentService(currentService[event.target.value])}/>
                             <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>

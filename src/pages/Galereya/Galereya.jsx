@@ -16,7 +16,7 @@ const Galereya = () => {
         "albumLabel": "Изображение %1 из %2",
         "wrapAround": true
     })
-
+    const [image, setImage] = useState({})
     const [images, setImages] = useState([])
     const [modalDeleteActive, setModalDeleteActive] = useState(false)
     const [modalAddActive, setModalAddActive] = useState(false)
@@ -119,7 +119,7 @@ const Galereya = () => {
     }
     const handleSelectRedact = (event) => {
         event.preventDefault()
-        console.log(event.target.value)
+        setImage(images[event.target.value])
         const selectedImage = images[event.target.value]
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
         setImageUrl(selectedImageUrl)
@@ -215,7 +215,8 @@ const Galereya = () => {
                                             value={images.indexOf(item)}>{images.indexOf(item) + 1}</option>)}
                             </select>
                             <input className="inputAdd" type="text" name="title"
-                                   placeholder="Введите новую подпись изображению"/>
+                                   placeholder="Введите новую подпись изображению" value={image?.title}
+                                   onChange={event => setImage(images[event.target.value])}/>
                             <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>

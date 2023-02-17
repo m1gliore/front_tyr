@@ -12,6 +12,7 @@ import defaultImg from "../../images/default-store-350x350.jpg";
 const VidyiUslug = () => {
     const currentService = useLocation().search.split('=')[1]
     const currentPath = useLocation().pathname
+    const [currentUsluga, setCurrentUsluga] = useState({})
     const [services, setServices] = useState([])
     const [serviceNames, setServiceNames] = useState([])
     const [modalDeleteActive, setModalDeleteActive] = useState(false)
@@ -131,7 +132,7 @@ const VidyiUslug = () => {
 
     const handleSelectRedact = (event) => {
         event.preventDefault()
-        console.log(event.target.value)
+        setCurrentUsluga(serviceNames[event.target.value]?.serviceResponse)
         const selectedImage = serviceNames[event.target.value]
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
         setImageUrl(selectedImageUrl)
@@ -254,9 +255,11 @@ const VidyiUslug = () => {
                                             value={serviceNames.indexOf(item)}>{serviceNames.indexOf(item) + 1}</option>)}
                             </select>
                             <input className="inputAdd" type="text" name="name"
-                                   placeholder="Введите наименование услуги"/>
+                                   placeholder="Введите наименование услуги" value={currentUsluga?.name}
+                                   onChange={event => setCurrentUsluga(serviceNames[event.target.value])}/>
                             <input className="inputAdd" type="text" name="desc"
-                                   placeholder="Введите описание услуги"/>
+                                   placeholder="Введите описание услуги" value={currentUsluga?.description}
+                                   onChange={event => setCurrentUsluga(serviceNames[event.target.value])}/>
                             <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>

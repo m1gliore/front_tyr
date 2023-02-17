@@ -24,11 +24,7 @@ const Kontaktyi = () => {
                                 <div className="col-lg-4 col-md-6">
                                     <p>
                                         <FontAwesomeIcon icon={faPhoneSquare} className="faIcon"/>&nbsp;
-                                        +375 29 859 40 40 (МТС, Вайбер)<br/>
-                                        <FontAwesomeIcon icon={faPhoneSquare} className="faIcon"/>&nbsp;
-                                        +375 29 669 40 40 (Велком, Вайбер)<br/>
-                                        <FontAwesomeIcon icon={faPhoneSquare} className="faIcon"/>&nbsp;
-                                        +375 17 364 15 66 (городской)</p>
+                                        +375 44 769-84-98 (A1)</p>
                                     <p>
                                         <FontAwesomeIcon icon={faEnvelope} className="faIcon"/>&nbsp;
                                         <a href="mailto:tircaliber@gmail.com">tircaliber@gmail.com</a>

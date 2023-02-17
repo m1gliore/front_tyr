@@ -3,19 +3,22 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const UserProfile = () => {
-
+    const currentUser = useLocation().pathname.split('/')[2]
     const [user, setUser] = useState({})
+    const [certificateType, setCertificateType] = useState([]);
     const [offer, setOffer] = useState("1")
     const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=user')
-                setUser(response.data)
+                //const response = await axios.get('http://localhost:8040/api/client/getUserInfo')
+                const responseCertificateType = await axios.get('http://localhost:8040/api/homePage/allCertificateTypes')
+               // setUser(response.data)
+                setCertificateType(responseCertificateType.data)
             } catch (e) {
                 console.log(e)
             }
@@ -34,6 +37,7 @@ const UserProfile = () => {
             const people = event.target.people.value
             const phone = event.target.phone.value
             const surname = event.target.surname.value
+
             const myJson = {
                 date,
                 people,
@@ -49,11 +53,19 @@ const UserProfile = () => {
     const handleSubmitCertificate = async (event) => {
         event.preventDefault()
         try {
-            const certificate = event.target.certificate.value
+            const idCertificataType = event.target.certificate.value
+            const surname = event.target.surname.value
+            const phone = event.target.phone.value
+           // const idUser = user.idUser
             const myJson = {
-                certificate
+                surname,
+                phone,
+                certificateTypeRequest:
+                    {
+                        idCertificataType
+                    }
             }
-            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/certificate`, myJson).then(() => navigate(0))
+            await axios.post(`http://localhost:8040/api/client/createCertificate`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -130,10 +142,27 @@ const UserProfile = () => {
                             <div className="row">
                                 <select required className="inputAdd" name="certificate">
                                     <option selected disabled value="">Выберите один из вариантов</option>
-                                    <option value="one">Один</option>
-                                    <option value="two">Два</option>
-                                    <option value="three">Три</option>
+                                    <option
+                                        value={certificateType[0]?.idCertificataType}>Номинал: {certificateType[0]?.nominal} руб&nbsp;
+                                        Скидка: {certificateType[0]?.discount}%&nbsp;&nbsp;Кол-во сертификатов для
+                                        скидки: {certificateType[0]?.countCertificate} шт
+                                    </option>
+                                    <option
+                                        value={certificateType[1]?.idCertificataType}>Номинал: {certificateType[1]?.nominal} руб&nbsp;
+                                        Скидка: {certificateType[1]?.discount}%&nbsp;&nbsp;Кол-во сертификатов для
+                                        скидки: {certificateType[1]?.countCertificate} шт
+                                    </option>
+                                    <option
+                                        value={certificateType[2]?.idCertificataType}>Номинал: {certificateType[2]?.nominal} руб&nbsp;
+                                        Скидка: {certificateType[2]?.discount}%&nbsp;&nbsp;Кол-во сертификатов для
+                                        скидки: {certificateType[2]?.countCertificate} шт
+                                    </option>
                                 </select>
+                                <input required className="inputAdd" type="tel" name="phone"
+                                       pattern="^\+[0-9]{3} [0-9]{2} [0-9]{3}-[0-9]{2}-[0-9]{2}$"
+                                       maxLength="17" placeholder="Введите ваш номер телефона"/>
+                                <input required className="inputAdd" type="text" name="surname"
+                                       placeholder="Введите вашу фамилию"/>
                             </div>
                             <button type="submit" className="button btn-blue">Отправить</button>
                         </form>

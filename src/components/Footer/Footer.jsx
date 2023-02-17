@@ -35,7 +35,7 @@ const Footer = () => {
                                 </div>
                                 <div className="col-md-2 col-sm-6 footer-social">
                                     <div className="text-center">
-                                        <a href="https://www.instagram.com" target="_blank" className="fa-stack"
+                                        <a href="https://www.instagram.com/tircaliberr/" target="_blank" className="fa-stack"
                                            rel="noreferrer">
                                             <FontAwesomeIcon icon={faCircle} className="fa-stack-2x"/>
                                             <FontAwesomeIcon icon={faInstagram} className="fa-stack-1x bot-icon"/>

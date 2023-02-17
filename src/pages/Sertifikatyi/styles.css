@@ -22,6 +22,7 @@ a {
 }
 
 .breadcrumb {
+    margin: 2vh 5vw;
     background-color: transparent;
 }
 
@@ -33,14 +34,16 @@ a {
     color: rgb(23, 44, 65);
 }
 
-.bg-gray {
-    background-color: rgb(221, 221, 224) !important;
-}
-
 /* CATEGORY */
 
 .shooters-list-str {
     padding: 1.5rem 0;
+}
+
+.flexContainer {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0 5vw;
 }
 
 .shooters-list-str .cardStr {
@@ -48,7 +51,7 @@ a {
     border-bottom: 2px solid rgb(49, 55, 194);
     border-radius: 0;
     margin-top: 1.25rem;
-    height: 60vh;
+    height: 50vh;
 }
 
 .shooters-list-str .card-img-top-str {

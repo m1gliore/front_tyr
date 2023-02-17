@@ -13,6 +13,7 @@ import fifth from "../../images/5.jpg";
 import {useNavigate} from "react-router-dom";
 
 const Main = () => {
+    const [currentSlider, setCurrentSlider] = useState({})
     const [sliderImages, setSliderImages] = useState([])
     const [modalRedactActive, setModalRedactActive] = useState(false)
     const [file, setFile] = useState(null)
@@ -77,6 +78,7 @@ const Main = () => {
     const handleSelectRedact = (event) => {
         event.preventDefault()
         console.log(event.target.value)
+        setCurrentSlider(sliderImages[event.target.value])
         const selectedImage = sliderImages[event.target.value]
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
         setImageUrl(selectedImageUrl)
@@ -132,10 +134,12 @@ const Main = () => {
                                     <option key={item.idImage}
                                             value={sliderImages.indexOf(item)}>{sliderImages.indexOf(item) + 1}</option>)}
                             </select>
-                            <input className="inputAdd" type="text" name="title"
-                                   placeholder="Введите название"/>
-                            <input className="inputAdd" type="text" name="desc"
-                                   placeholder="Введите описание"/>
+                            <input className="inputAdd" type="text" name="title" placeholder="Введите название"
+                                   value={currentSlider?.title}
+                                   onChange={event => setCurrentSlider(sliderImages[event.target.value])}/>
+                            <input className="inputAdd" type="text" name="desc" placeholder="Введите описание"
+                                   value={currentSlider?.description}
+                                   onChange={event => setCurrentSlider(sliderImages[event.target.value])}/>
                             <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>

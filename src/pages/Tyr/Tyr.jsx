@@ -17,6 +17,7 @@ import transliterate from "../../makeLink";
 const Tyr = () => {
     const currentTyr = useLocation().search.split('=')[1]
     const currentPath = useLocation().pathname + useLocation().search
+    const [currentGun, setCurrentGun] = useState({})
     const [tyrs, setTyrs] = useState([])
     const [tyrsName, setTyrsName] = useState([])
     const [modalDeleteActive, setModalDeleteActive] = useState(false)
@@ -176,6 +177,7 @@ const Tyr = () => {
 
     const handleSelectRedact = (event) => {
         event.preventDefault()
+        setCurrentGun(tyrsName[event.target.value]?.gunResponse)
         const selectedImage = tyrsName[event.target.value]
         const selectedImageUrl = "data:image/" + selectedImage?.url.split('.')[1] + ";base64," + selectedImage?.file
         setImageUrl(selectedImageUrl)
@@ -283,7 +285,7 @@ const Tyr = () => {
                                                         className="price">{gun.gunResponse.price} руб.</span> / {gun.gunResponse.quantity} выстр.
                                                     </div>
                                                     <div className="col-auto text-right">
-                                                        <a href={"/oruzhie-v-tire/" + transliterate(gun.gunResponse.name,false)}
+                                                        <a href={"/oruzhie-v-tire/" + transliterate(gun.gunResponse.name, false)}
                                                            className="button btn-blue" role="button">Подробнее</a>
                                                     </div>
                                                 </div>
@@ -371,14 +373,19 @@ const Tyr = () => {
                                             value={tyrsName.indexOf(item)}>{tyrsName.indexOf(item) + 1}</option>)}
                             </select>
                             <input className="inputAdd" type="text" name="name"
-                                   placeholder="Введите наименование оружия"/>
+                                   placeholder="Введите наименование оружия" value={currentGun?.name}
+                                   onChange={event => setCurrentGun(tyrsName[event.target.value])}/>
                             <input className="inputAdd" type="text" name="description"
-                                   placeholder="Введите описание оружия"/>
+                                   placeholder="Введите описание оружия" value={currentGun?.description}
+                                   onChange={event => setCurrentGun(tyrsName[event.target.value])}/>
                             <input className="inputAdd" type="number" min="0" name="price"
-                                   placeholder="Введите цену оружия за выстрелы"/>
+                                   placeholder="Введите цену оружия за выстрелы" value={currentGun?.price}
+                                   onChange={event => setCurrentGun(tyrsName[event.target.value])}/>
                             <input className="inputAdd" type="number" min="0" name="quantity"
-                                   placeholder="Введите количество выстрелов"/>
-                            <select className="inputAdd" name="gunType">
+                                   placeholder="Введите количество выстрелов" value={currentGun?.quantity}
+                                   onChange={event => setCurrentGun(tyrsName[event.target.value])}/>
+                            <select className="inputAdd" name="gunType" value={currentGun?.gunType}
+                                    onChange={event => setCurrentGun(tyrsName[event.target.value])}>
                                 <option selected disabled>Выберите один из типов оружия</option>
                                 <option value="ASSAULT_RIFLES">Автоматы</option>
                                 <option value="PISTOLS">Пистолеты</option>

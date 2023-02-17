@@ -10,6 +10,7 @@ import defaultImg from "../../images/default-store-350x350.jpg";
 import {useNavigate} from "react-router-dom";
 
 const LuchshieStrelki = () => {
+    const [currentShooter, setCurrentShooter] = useState({})
     const [shooters, setShooters] = useState([])
     const [modalDeleteActive, setModalDeleteActive] = useState(false)
     const [modalAddActive, setModalAddActive] = useState(false)
@@ -134,7 +135,7 @@ const LuchshieStrelki = () => {
 
     const handleSelectRedact = (event) => {
         event.preventDefault()
-        console.log(event.target.value)
+        setCurrentShooter(shooters[event.target.value]?.shooterResponse)
         const selectedImage = shooters[event.target.value]
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
         setImageUrl(selectedImageUrl)
@@ -258,15 +259,21 @@ const LuchshieStrelki = () => {
                                             value={shooters.indexOf(item)}>{shooters.indexOf(item) + 1}</option>)}
                             </select>
                             <input className="inputAdd" type="text" name="surname"
-                                   placeholder="Введите фамилию"/>
+                                   placeholder="Введите фамилию" value={currentShooter?.surname}
+                                   onChange={event => setCurrentShooter(shooters[event.target.value])}/>
                             <input className="inputAdd" type="text" name="name"
-                                   placeholder="Введите имя"/>
+                                   placeholder="Введите имя" value={currentShooter?.name}
+                                   onChange={event => setCurrentShooter(shooters[event.target.value])}/>
                             <input className="inputAdd" type="text" name="patronymic"
-                                   placeholder="Введите отчество"/>
+                                   placeholder="Введите отчество" value={currentShooter?.patronymic}
+                                   onChange={event => setCurrentShooter(shooters[event.target.value])}/>
                             <input className="inputAdd" type="number" min="0" name="result"
-                                   placeholder="Введите количество выстрелов"/>
+                                   placeholder="Введите количество выстрелов" value={currentShooter?.result}
+                                   onChange={event => setCurrentShooter(shooters[event.target.value])}/>
                             <input className="inputAdd" type="number" min="0" max="100" name="successfulHits"
-                                   placeholder="Введите количество успешных попаданий"/>
+                                   placeholder="Введите количество успешных попаданий"
+                                   value={currentShooter?.successfulHits}
+                                   onChange={event => setCurrentShooter(shooters[event.target.value])}/>
                             <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
