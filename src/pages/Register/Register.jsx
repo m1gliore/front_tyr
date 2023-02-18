@@ -36,7 +36,7 @@ const Register = () => {
                         <input name="loginEmail" type="email" placeholder="Эл. почта" className="input"/>
                         <input name="password" type="password" placeholder="Пароль" className="input"/>
                         <input name="password2" type="password" placeholder="Повторите пароль" className="input"/>
-                        <button className="btn btn-blue">Создать</button>
+                        <button className="button-login btn-blue">Создать</button>
                     </form>
                 </div>
             </div>

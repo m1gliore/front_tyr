@@ -12,6 +12,7 @@ import first from "../../images/NicePng_bullseye-icon-png_3253558.png";
 import second from "../../images/gun-2-128.png";
 import third from "../../images/pngegg.png";
 import transliterate from "../../makeLink";
+import {userRequest} from "../../requestMethods";
 
 
 const Tyr = () => {
@@ -113,7 +114,7 @@ const Tyr = () => {
                 }
             }
             console.log(myJson)
-            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/${currentTyr}`, myJson).then(() => navigate(0))
+            await userRequest.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/${currentTyr}`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -128,7 +129,7 @@ const Tyr = () => {
                 idImg
             }
             console.log(myJson)
-            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson).then(() => navigate(0))
+            await userRequest.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -159,7 +160,7 @@ const Tyr = () => {
                 }
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
+            await userRequest.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }

@@ -8,6 +8,7 @@ import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
 import defaultImg from "../../images/default-store-350x350.jpg";
+import {userRequest} from "../../requestMethods";
 
 const VidyiUslug = () => {
     const currentService = useLocation().search.split('=')[1]
@@ -73,7 +74,7 @@ const VidyiUslug = () => {
                     }
             }
             console.log(myJson)
-            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/${currentService}`, myJson).then(() => navigate(0))
+            await userRequest.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/${currentService}`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -88,7 +89,7 @@ const VidyiUslug = () => {
                 idImg
             }
             console.log(myJson)
-            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson).then(() => navigate(0))
+            await userRequest.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -114,7 +115,7 @@ const VidyiUslug = () => {
                     }
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
+            await userRequest.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }

@@ -8,6 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
 import defaultImg from "../../images/default-store-350x350.jpg";
 import {useNavigate} from "react-router-dom";
+import {userRequest} from "../../requestMethods";
 
 const LuchshieStrelki = () => {
     const [currentShooter, setCurrentShooter] = useState({})
@@ -74,7 +75,7 @@ const LuchshieStrelki = () => {
                 }
             }
             console.log(myJson)
-            await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery/luchshie-strelki', myJson).then(() => navigate(0))
+            await userRequest.post('http://localhost:8040/api/homePage/saveNewImageInGallery/luchshie-strelki', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -89,7 +90,7 @@ const LuchshieStrelki = () => {
                 idImage
             }
             console.log(myJson)
-            await axios.delete('http://localhost:8040/api/homePage/deleteImage/' + idImage, myJson).then(() => navigate(0))
+            await userRequest.delete('http://localhost:8040/api/homePage/deleteImage/' + idImage, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -120,7 +121,7 @@ const LuchshieStrelki = () => {
                 }
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
+            await userRequest.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }

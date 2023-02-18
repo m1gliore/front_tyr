@@ -7,6 +7,7 @@ import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faPen, faPeopleGroup} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
+import {userRequest} from "../../requestMethods";
 
 const Sertifikatyi = () => {
     const [certificates, setCertificates] = useState([])
@@ -23,9 +24,9 @@ const Sertifikatyi = () => {
     useEffect(() => {
         (async () => {
             try {
-                const responseCertificate = await axios.get('http://localhost:8040/api/redact/allCertificates')
+                const responseCertificate = await userRequest.get('http://localhost:8040/api/redact/allCertificates')
                 const responseTemplate = await axios.get('http://localhost:8040/api/homePage/allCertificateTypes')
-                const responseCorporate = await axios.get('http://localhost:8040/api/redact/allCorporates')
+                const responseCorporate = await userRequest.get('http://localhost:8040/api/redact/allCorporates')
                 setCertificates(responseCertificate.data)
                 setCertificateTemplates(responseTemplate.data)
                 setCorporates(responseCorporate.data)
@@ -55,7 +56,7 @@ const Sertifikatyi = () => {
                 username
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/redact/updateCertificate', myJson).then(() => navigate(0))
+            await userRequest.put('http://localhost:8040/api/redact/updateCertificate', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -70,7 +71,7 @@ const Sertifikatyi = () => {
                 idCorporate
             }
             console.log(myJson)
-            await axios.delete(`http://localhost:8040/api/redact/deleteCorporate/${idCorporate}`, myJson).then(() => navigate(0))
+            await userRequest.delete(`http://localhost:8040/api/redact/deleteCorporate/${idCorporate}`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -91,7 +92,7 @@ const Sertifikatyi = () => {
                 countCertificate
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/redact/updateCertificateType', myJson).then(() => navigate(0))
+            await userRequest.put('http://localhost:8040/api/redact/updateCertificateType', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
