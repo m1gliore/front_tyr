@@ -2,12 +2,20 @@ import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
+import {useEffect, useState} from "react";
+import localStorage from "redux-persist/es/storage";
+import {useNavigate} from "react-router-dom";
+
 
 const Login = () => {
+
+    let currentUser = {}
+    const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
+
             const username = event.target?.username?.value
             const password = event.target?.password?.value
             const myJson = {
@@ -16,10 +24,17 @@ const Login = () => {
             }
             console.log(myJson)
             await axios.post(`http://localhost:8040/api/auth/auth`, myJson)
+                .then((response) => {
+                    currentUser = response.data
+                    localStorage.setItem("user", JSON.stringify(currentUser))
+                    navigate(`/user-profile/${username}`,{replace:true})
+                })
+
         } catch (e) {
             console.log(e)
         }
     }
+
 
     return (
         <>
@@ -30,7 +45,7 @@ const Login = () => {
                     <form className="form" onSubmit={handleSubmit}>
                         <input type="text" name="username" placeholder="Ваш логин" className="input"/>
                         <input type="password" name="password" placeholder="Пароль" className="input"/>
-                        <button className="btn btn-blue">Войти</button>
+                        <button className="button-login btn-blue">Войти</button>
                         <span className="error">Что-то пошло не так</span>
                         <a href="/restore-password" className="link">Забыли свой пароль?</a>
                         <a href="/register" className="link">Создать новую учётную запись</a>

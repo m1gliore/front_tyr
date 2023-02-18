@@ -8,8 +8,11 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import transliterate from "../../makeLink";
 import {useNavigate} from "react-router-dom";
+import {userRequest} from "../../requestMethods";
 
 const Navbar = () => {
+    const currentUser = JSON.parse(localStorage.getItem("user"))?.username
+    const loginned = !!currentUser
     const [currentTyr, setCurrentTyr] = useState([])
     const [currentService, setCurrentService] = useState([])
     const [tyrTypes, setTyrTypes] = useState([])
@@ -27,7 +30,6 @@ const Navbar = () => {
     useEffect(() => {
         (async () => {
             try {
-                //тут как-то подгрузи типы тиров
                 const response = await axios.get(`http://localhost:8040/api/homePage/getHomePageTitle`)
                 setTyrTypes(response.data)
                 console.log(response.data)
@@ -36,11 +38,6 @@ const Navbar = () => {
             }
         })()
     }, [])
-
-
-    // tyrTypes.sort((a, b) => {
-    //     return a.idServiceCatalog - b.idServiceCatalog
-    // })
 
     const handleSubmitAdd = async (event) => {
         event.preventDefault()
@@ -55,7 +52,7 @@ const Navbar = () => {
                 directoryType
             }
             console.log(myJson)
-            await axios.post(`http://localhost:8040/api/redact/saveNewServiceCatalog`, myJson).then(() => navigate(0))
+            await userRequest.post(`http://localhost:8040/api/redact/saveNewServiceCatalog`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -70,7 +67,7 @@ const Navbar = () => {
                 url
             }
             console.log(myJson)
-            await axios.delete(`http://localhost:8040/api/redact/deleteServiceCatalog/${url}`, myJson).then(() => navigate(0))
+            await userRequest.delete(`http://localhost:8040/api/redact/deleteServiceCatalog/${url}`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -90,7 +87,7 @@ const Navbar = () => {
                 description,
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/redact/updateServiceCatalog', myJson).then(() => navigate(0))
+            await userRequest.put('http://localhost:8040/api/redact/updateServiceCatalog', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -107,7 +104,7 @@ const Navbar = () => {
                 directoryType
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/redact/saveNewServiceCatalog', myJson).then(() => navigate(0))
+            await userRequest.put('http://localhost:8040/api/redact/saveNewServiceCatalog', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -122,7 +119,7 @@ const Navbar = () => {
                 url
             }
             console.log(myJson)
-            await axios.put(` http://localhost:8040/api/redact/deleteServiceCatalog/${url}`, myJson).then(() => navigate(0))
+            await userRequest.put(` http://localhost:8040/api/redact/deleteServiceCatalog/${url}`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -140,7 +137,7 @@ const Navbar = () => {
                 url: transliterate(nameCatalog, false)
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/redact/updateServiceCatalog', myJson).then(() => navigate(0))
+            await userRequest.put('http://localhost:8040/api/redact/updateServiceCatalog', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -192,20 +189,31 @@ const Navbar = () => {
                                         пом. 314а
                                     </div>
                                 </div>
-                                <div className="col-md-1 footer-auth">
-                                    <div className="text-center">
-                                        <a href="/login">
-                                            Войти
-                                        </a>
+                                {!loginned && <>
+                                    <div className="col-md-1 footer-auth">
+                                        <div className="text-center">
+                                            <a href="/login">
+                                                Войти
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="col-md-1 footer-auth">
-                                    <div className="text-center">
-                                        <a href="/register">
-                                            Зарегистрироваться
-                                        </a>
+                                    <div className="col-md-1 footer-auth">
+                                        <div className="text-center">
+                                            <a href="/register">
+                                                Зарегистрироваться
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
+                                </>}
+                                {loginned &&
+                                    <div className="col-md-1 footer-auth">
+                                        <div className="text-center">
+                                            <a href={`/user-profile/` + JSON.parse(localStorage.getItem("user"))?.username}>
+                                                {JSON.parse(localStorage.getItem("user"))?.username}
+                                            </a>
+                                        </div>
+                                    </div>
+                                }
                                 <div className="col-md-2 header-top-social">
                                     <a href="https://www.instagram.com/tircaliberr/" target="_blank" rel="noreferrer"
                                        className="fa-stack">

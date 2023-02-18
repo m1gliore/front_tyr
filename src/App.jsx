@@ -20,8 +20,11 @@ import Sertifikatyi from "./pages/Sertifikatyi/Sertifikatyi";
 import Otzyivyi from "./pages/Otzyivyi/Otzyivyi";
 import Usluga from "./pages/Usluga/Usluga";
 import Oruzhie from "./pages/Oruzhie/Oruzhie";
+import {useState} from "react";
+
 
 const App = () => {
+
     return (
         <Router>
             <Routes>
@@ -38,10 +41,10 @@ const App = () => {
                 <Route exact path="/kontaktyi" element={<Kontaktyi/>}/>
                 <Route exact path="/sertifikatyi" element={<Sertifikatyi/>}/>
                 <Route exact path="/otzyivyi" element={<Otzyivyi/>}/>
-                <Route exact path="/user-profile" element={<UserProfile/>}/>
+                <Route exact path="/user-profile/:idUser" element={<UserProfile/>}/>
             </Routes>
         </Router>
     )
 }
-
 export default App
+

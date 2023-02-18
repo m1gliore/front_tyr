@@ -11,6 +11,7 @@ import third from "../../images/3.jpg";
 import fourth from "../../images/4.jpg";
 import fifth from "../../images/5.jpg";
 import {useNavigate} from "react-router-dom";
+import {userRequest} from "../../requestMethods";
 
 const Main = () => {
     const [currentSlider, setCurrentSlider] = useState({})
@@ -69,7 +70,7 @@ const Main = () => {
                 description
             }
             console.log(myJson)
-            await axios.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
+            await userRequest.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }

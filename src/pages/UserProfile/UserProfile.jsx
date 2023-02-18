@@ -3,21 +3,24 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {userRequest} from "../../requestMethods";
 
 const UserProfile = () => {
-    const currentUser = useLocation().pathname.split('/')[2]
+    const currentUser = JSON.parse(localStorage.getItem("user"))?.username
+    const currentToken = JSON.parse(localStorage.getItem("user"))?.token
     const [user, setUser] = useState({})
     const [certificateType, setCertificateType] = useState([]);
     const [offer, setOffer] = useState("1")
     const navigate = useNavigate()
-
     useEffect(() => {
         (async () => {
             try {
-                //const response = await axios.get('http://localhost:8040/api/client/getUserInfo')
+
+                const response = await userRequest.get(`http://localhost:8040/api/client/getUserInfo/${currentUser}`,)
                 const responseCertificateType = await axios.get('http://localhost:8040/api/homePage/allCertificateTypes')
-               // setUser(response.data)
+                setUser(response.data)
+                console.log({headers: {Authorization: `Bearer ${currentToken}`}})
                 setCertificateType(responseCertificateType.data)
             } catch (e) {
                 console.log(e)
@@ -34,17 +37,18 @@ const UserProfile = () => {
         event.preventDefault()
         try {
             const date = event.target.date.value
-            const people = event.target.people.value
+            const countPeople = event.target.people.value
             const phone = event.target.phone.value
             const surname = event.target.surname.value
-
             const myJson = {
+                username: currentUser,
                 date,
-                people,
+                countPeople,
                 phone,
                 surname
             }
-            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/corporate`, myJson).then(() => navigate(0))
+            console.log(myJson)
+            await userRequest.post(`http://localhost:8040/api/client/createCorporate`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -53,19 +57,19 @@ const UserProfile = () => {
     const handleSubmitCertificate = async (event) => {
         event.preventDefault()
         try {
-            const idCertificataType = event.target.certificate.value
+            const idCertificateType = event.target.certificate.value
             const surname = event.target.surname.value
             const phone = event.target.phone.value
-           // const idUser = user.idUser
             const myJson = {
+                username: currentUser,
                 surname,
                 phone,
-                certificateTypeRequest:
-                    {
-                        idCertificataType
-                    }
+                certificateTypeRequest: {
+                    idCertificateType
+                }
             }
-            await axios.post(`http://localhost:8040/api/client/createCertificate`, myJson).then(() => navigate(0))
+            console.log(myJson)
+            await userRequest.post(`http://localhost:8040/api/client/createCertificate`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -74,11 +78,13 @@ const UserProfile = () => {
     const handleSubmitReply = async (event) => {
         event.preventDefault()
         try {
-            const message = event.target.message.value
+            const reviewInfo = event.target.message.value
             const myJson = {
-                message
+                username: currentUser,
+                reviewInfo
             }
-            await axios.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/reply`, myJson).then(() => navigate(0))
+            console.log(myJson)
+            await userRequest.post(`http://localhost:8040/api/client/saveNewReview`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
@@ -88,11 +94,11 @@ const UserProfile = () => {
         <>
             <Navbar/>
             <main role="main">
-                <h1 className="username">Здравствуйте, {user.username}</h1>
+                <h1 className="username">Здравствуйте, {currentUser}</h1>
                 <section className="contact-form">
                     <div className="containerProfile">
-                        <h2>Ваша текущая скидка: {user.discount}%</h2><br/>
-                        <h2>Осталось сертификатов до скидки: {user.quantity}</h2>
+                        <h2>Ваша текущая скидка: {user.countCertificate >2 ? 15 : 0}%</h2><br/>
+                        <h2>Осталось сертификатов до скидки: {3 - user.countCertificate}</h2>
                     </div>
                     <div className="containerProfile">
                         <h2>Предложения для вас</h2><br/>
@@ -143,17 +149,17 @@ const UserProfile = () => {
                                 <select required className="inputAdd" name="certificate">
                                     <option selected disabled value="">Выберите один из вариантов</option>
                                     <option
-                                        value={certificateType[0]?.idCertificataType}>Номинал: {certificateType[0]?.nominal} руб&nbsp;
+                                        value="1">Номинал: {certificateType[0]?.nominal} руб&nbsp;
                                         Скидка: {certificateType[0]?.discount}%&nbsp;&nbsp;Кол-во сертификатов для
                                         скидки: {certificateType[0]?.countCertificate} шт
                                     </option>
                                     <option
-                                        value={certificateType[1]?.idCertificataType}>Номинал: {certificateType[1]?.nominal} руб&nbsp;
+                                        value="2">Номинал: {certificateType[1]?.nominal} руб&nbsp;
                                         Скидка: {certificateType[1]?.discount}%&nbsp;&nbsp;Кол-во сертификатов для
                                         скидки: {certificateType[1]?.countCertificate} шт
                                     </option>
                                     <option
-                                        value={certificateType[2]?.idCertificataType}>Номинал: {certificateType[2]?.nominal} руб&nbsp;
+                                        value="3">Номинал: {certificateType[2]?.nominal} руб&nbsp;
                                         Скидка: {certificateType[2]?.discount}%&nbsp;&nbsp;Кол-во сертификатов для
                                         скидки: {certificateType[2]?.countCertificate} шт
                                     </option>

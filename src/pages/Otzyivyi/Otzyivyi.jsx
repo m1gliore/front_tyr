@@ -7,18 +7,20 @@ import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
+import {userRequest} from "../../requestMethods";
 
 const Otzyivyi = () => {
     const [replies, setReplies] = useState([])
     const [modalAcceptActive, setModalAcceptActive] = useState(false)
     const [imageUrl, setImageUrl] = useState("")
-    const admin = true
+    const currentUser = JSON.parse(localStorage.getItem("user"))?.username
+    const admin = !!currentUser
     const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get(`http://localhost:8040/api/redact1/getAllReview`)
+                const response = await userRequest.get(`http://localhost:8040/api/redact1/getAllReview`)
                 setReplies(response.data)
                 console.log(response.data)
             } catch (e) {
@@ -44,7 +46,7 @@ const Otzyivyi = () => {
                 username
             }
             console.log(myJson)
-            await axios.put(`http://localhost:8040/api/redact1/updateReview`, myJson).then(() => navigate(0))
+            await userRequest.put(`http://localhost:8040/api/redact1/updateReview`, myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
