@@ -16,4 +16,18 @@ const isAdmin = () => {
         : false
 }
 
-export {transliterate, isAdmin}
+const fileHandler = (file, setImageUrl, setEncodedImage) => {
+    if (file) {
+        setImageUrl(URL.createObjectURL(file))
+        let reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+            setEncodedImage(reader.result)
+        }
+        reader.onerror = (error) => {
+            console.log('Error: ', error)
+        }
+    }
+}
+
+export {transliterate, isAdmin, fileHandler}

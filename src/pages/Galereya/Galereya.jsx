@@ -3,14 +3,14 @@ import lightbox from 'lightbox2/dist/js/lightbox-plus-jquery.js'
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
 import defaultImg from '../../images/default-store-350x350.jpg'
 import {useNavigate} from "react-router-dom";
 import {userRequest} from "../../requestMethods";
-import {isAdmin} from "../../myLibrary";
+import {fileHandler, isAdmin} from "../../myLibrary";
+import {getMethod, postMethod} from "../../httpMethodsHandlers";
 
 const Galereya = () => {
     lightbox.option({
@@ -29,58 +29,29 @@ const Galereya = () => {
     const [encodedImage, setEncodedImage] = useState("")
     const navigate = useNavigate()
 
-    const handleFile = (event) => {
-        setFile(event.target.files[0])
-    }
-
     useEffect(() => {
-        (async () => {
-            try {
-                const response = await axios.get('http://localhost:8040/api/homePage/gallery')
-                setImages(response.data.imageResponseSet)
-            } catch (e) {
-                console.log(e)
-            }
-        })()
-
-        if (file) {
-            setImageUrl(URL.createObjectURL(file))
-            let reader = new FileReader()
-            reader.readAsDataURL(file)
-            reader.onload = () => {
-                setEncodedImage(reader.result)
-            }
-            reader.onerror = (error) => {
-                console.log('Error: ', error)
-            }
-        }
+        getMethod('http://localhost:8040/api/homePage/gallery', [setImages])
+        fileHandler(file, setImageUrl, setEncodedImage)
     }, [file])
 
-    images.sort((a, b) => {
+    images.imageResponseSet?.sort((a, b) => {
         return a.idImage - b.idImage
     })
 
-    const handleSubmitAdd = async (event) => {
-        event.preventDefault()
-        try {
-            const title = event.target.title.value
-            const myJson = {
-                url: file.name,
+    const handleSubmitAdd = (event) => {
+        postMethod(event, navigate, 'http://localhost:8040/api/homePage/saveNewImageInGallery/galereya',
+            {
+                url: file?.name,
                 file: encodedImage,
-                title
-            }
-            console.log(myJson)
-            await userRequest.post('http://localhost:8040/api/homePage/saveNewImageInGallery/galereya', myJson).then(() => navigate(0))
-        } catch (e) {
-            console.log(e)
-        }
+                title: event.target.title?.value
+            })
     }
 
     const handleSubmitDelete = async (event) => {
         event.preventDefault()
         try {
             const id = event.target.id.value
-            const idImg = images[id].idImage
+            const idImg = images.imageResponseSet[id].idImage
             const myJson = {
                 idImg
             }
@@ -95,7 +66,7 @@ const Galereya = () => {
         event.preventDefault()
         try {
             const id = event.target.id.value
-            const idImg = images[id].idImage
+            const idImg = images.imageResponseSet[id].idImage
             const title = event.target.title.value
             const myJson = {
                 idImage: idImg,
@@ -111,17 +82,14 @@ const Galereya = () => {
     }
     const handleSelectDelete = (event) => {
         event.preventDefault()
-        console.log(event.target.value)
-        const selectedImage = images[event.target.value]
-        console.log(selectedImage)
+        const selectedImage = images.imageResponseSet[event.target.value]
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
-        console.log(selectedImageUrl)
         setImageUrlDelete(selectedImageUrl)
     }
     const handleSelectRedact = (event) => {
         event.preventDefault()
-        setImage(images[event.target.value])
-        const selectedImage = images[event.target.value]
+        setImage(images.imageResponseSet[event.target.value])
+        const selectedImage = images.imageResponseSet[event.target.value]
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
         setImageUrl(selectedImageUrl)
     }
@@ -145,7 +113,7 @@ const Galereya = () => {
             </>}
             <main role="main">
                 <div className="galleryContainer">
-                    {images.map((image) =>
+                    {images.imageResponseSet?.map((image) =>
                         <a key={image.idImage} href={"data:image/" + image.url.split('.')[1] + ";base64," + image.file}
                            data-lightbox="images" data-title={image.title}>
                             <img src={"data:image/" + image.url.split('.')[1] + ";base64," + image.file}
@@ -167,9 +135,9 @@ const Galereya = () => {
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectDelete}>
                                 <option selected disabled value="">Выберите один из вариантов</option>
-                                {images.map((item) =>
+                                {images.imageResponseSet?.map((item) =>
                                     <option key={item.idImage}
-                                            value={images.indexOf(item)}>{images.indexOf(item) + 1}</option>)}
+                                            value={images.imageResponseSet.indexOf(item)}>{images.imageResponseSet.indexOf(item) + 1}</option>)}
                             </select>
                             <button className="buttonAdd">Удалить</button>
                         </div>
@@ -184,7 +152,7 @@ const Galereya = () => {
                                 <FontAwesomeIcon icon={faUpload}/>
                             </label>
                             <input required className="inputAdd" style={{display: "none"}} type="file" id="file"
-                                   onChange={handleFile}/>
+                                   onChange={event => setFile(event.target.files[0])}/>
                         </div>
                         <div className="rightContainer">
                             <input required className="inputAdd" type="text" name="title"
@@ -206,18 +174,18 @@ const Galereya = () => {
                                 <FontAwesomeIcon icon={faUpload}/>
                             </label>
                             <input className="inputAdd" style={{display: "none"}} type="file" id="file"
-                                   onChange={handleFile}/>
+                                   onChange={event => setFile(event.target.files[0])}/>
                         </div>
                         <div className="rightContainer">
                             <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
                                 <option selected disabled value="">Выберите один из вариантов</option>
-                                {images.map((item) =>
+                                {images.imageResponseSet?.map((item) =>
                                     <option key={item.idImage}
-                                            value={images.indexOf(item)}>{images.indexOf(item) + 1}</option>)}
+                                            value={images.imageResponseSet.indexOf(item)}>{images.imageResponseSet.indexOf(item) + 1}</option>)}
                             </select>
                             <input className="inputAdd" type="text" name="title"
                                    placeholder="Введите новую подпись изображению" value={image?.title}
-                                   onChange={event => setImage(images[event.target.value])}/>
+                                   onChange={event => setImage(images.imageResponseSet[event.target.value])}/>
                             <button className="buttonAdd">Изменить</button>
                         </div>
                     </form>
