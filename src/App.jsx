@@ -20,9 +20,6 @@ import Sertifikatyi from "./pages/Sertifikatyi/Sertifikatyi";
 import Otzyivyi from "./pages/Otzyivyi/Otzyivyi";
 import Usluga from "./pages/Usluga/Usluga";
 import Oruzhie from "./pages/Oruzhie/Oruzhie";
-import {useState} from "react";
-
-
 
 const App = () => {
 
