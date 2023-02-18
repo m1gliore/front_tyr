@@ -7,13 +7,13 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import {userRequest} from "../../requestMethods";
+import {isAdmin} from "../../myLibrary";
 
 const Otzyivyi = () => {
     const [replies, setReplies] = useState([])
     const [modalAcceptActive, setModalAcceptActive] = useState(false)
     const [imageUrl, setImageUrl] = useState("")
-    const currentUser = JSON.parse(localStorage.getItem("user"))?.username
-    const admin = !!currentUser
+    const admin = isAdmin()
     const navigate = useNavigate()
 
     useEffect(() => {

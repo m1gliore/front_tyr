@@ -9,6 +9,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
 import defaultImg from "../../images/default-store-350x350.jpg";
 import {userRequest} from "../../requestMethods";
+import {isAdmin} from "../../myLibrary";
 
 const VidyiUslug = () => {
     const currentService = useLocation().search.split('=')[1]
@@ -22,7 +23,7 @@ const VidyiUslug = () => {
     const [file, setFile] = useState(null)
     const [imageUrl, setImageUrl] = useState(defaultImg)
     const [imageUrlDelete, setImageUrlDelete] = useState(defaultImg)
-    const admin = true
+    const admin = isAdmin()
     const [encodedImage, setEncodedImage] = useState("")
     const navigate = useNavigate()
 

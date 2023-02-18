@@ -11,7 +11,7 @@ import defaultImg from "../../images/default-store-350x350.jpg";
 import first from "../../images/NicePng_bullseye-icon-png_3253558.png";
 import second from "../../images/gun-2-128.png";
 import third from "../../images/pngegg.png";
-import transliterate from "../../makeLink";
+import {isAdmin, transliterate} from "../../myLibrary";
 import {userRequest} from "../../requestMethods";
 
 
@@ -27,7 +27,7 @@ const Tyr = () => {
     const [file, setFile] = useState(null)
     const [imageUrl, setImageUrl] = useState(defaultImg)
     const [imageUrlDelete, setImageUrlDelete] = useState(defaultImg)
-    const admin = true
+    const admin = isAdmin()
     const [encodedImage, setEncodedImage] = useState("")
     const gunTypes = []
     const navigate = useNavigate()

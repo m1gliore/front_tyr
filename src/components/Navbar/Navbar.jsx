@@ -6,7 +6,7 @@ import {faInstagram} from '@fortawesome/free-brands-svg-icons'
 import Modal from "../Modal/Modal";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import transliterate from "../../makeLink";
+import {isAdmin, transliterate} from "../../myLibrary";
 import {useNavigate} from "react-router-dom";
 import {userRequest} from "../../requestMethods";
 
@@ -24,7 +24,7 @@ const Navbar = () => {
     const [modalRedactActiveService, setModalRedactActiveService] = useState(false)
     const [imageUrlDelete, setImageUrlDelete] = useState("Категория")
     const [imageUrl, setImageUrl] = useState("Категория")
-    const admin = true
+    const admin = isAdmin()
     const navigate = useNavigate()
 
     useEffect(() => {

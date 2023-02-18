@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import transliterate from "../../makeLink";
+import {transliterate} from "../../myLibrary";
 import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";

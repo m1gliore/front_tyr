@@ -9,6 +9,7 @@ import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-i
 import defaultImg from "../../images/default-store-350x350.jpg";
 import {useNavigate} from "react-router-dom";
 import {userRequest} from "../../requestMethods";
+import {isAdmin} from "../../myLibrary";
 
 const LuchshieStrelki = () => {
     const [currentShooter, setCurrentShooter] = useState({})
@@ -19,7 +20,7 @@ const LuchshieStrelki = () => {
     const [file, setFile] = useState(null)
     const [imageUrl, setImageUrl] = useState(defaultImg)
     const [imageUrlDelete, setImageUrlDelete] = useState(defaultImg)
-    const admin = true
+    const admin = isAdmin()
     const [encodedImage, setEncodedImage] = useState("")
     const navigate = useNavigate()
 

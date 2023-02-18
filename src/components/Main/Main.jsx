@@ -12,6 +12,7 @@ import fourth from "../../images/4.jpg";
 import fifth from "../../images/5.jpg";
 import {useNavigate} from "react-router-dom";
 import {userRequest} from "../../requestMethods";
+import {isAdmin} from "../../myLibrary";
 
 const Main = () => {
     const [currentSlider, setCurrentSlider] = useState({})
@@ -19,7 +20,7 @@ const Main = () => {
     const [modalRedactActive, setModalRedactActive] = useState(false)
     const [file, setFile] = useState(null)
     const [imageUrl, setImageUrl] = useState(defaultImg)
-    const admin = true
+    const admin = isAdmin()
     const [encodedImage, setEncodedImage] = useState("")
     const navigate = useNavigate()
 

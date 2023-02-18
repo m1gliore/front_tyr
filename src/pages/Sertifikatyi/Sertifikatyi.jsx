@@ -8,6 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheckCircle, faPen, faPeopleGroup} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import {userRequest} from "../../requestMethods";
+import {isAdmin} from "../../myLibrary";
 
 const Sertifikatyi = () => {
     const [certificates, setCertificates] = useState([])
@@ -18,7 +19,7 @@ const Sertifikatyi = () => {
     const [modalAcceptActive, setModalAcceptActive] = useState(false)
     const [modalAcceptCorporateActive, setModalAcceptCorporateActive] = useState(false)
     const [imageUrl, setImageUrl] = useState("")
-    const admin = true
+    const admin = isAdmin()
     const navigate = useNavigate()
 
     useEffect(() => {

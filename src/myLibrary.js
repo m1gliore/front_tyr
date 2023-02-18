@@ -1,3 +1,5 @@
+import jwtDecode from "jwt-decode";
+
 const transliterate = (text, engToRus) => {
     let rus = "щ   ш  ч  ц  ю  я  ё  ж  ъ  ы  э  а б в г д е з и й к л м н о п р с т у ф х ь".split(/ +/g)
     let eng = "sch sh ch cz yu ya yo zh `` y' e` a b v g d e z i j k l m n o p r s t u f h `".split(/ +/g)
@@ -8,4 +10,10 @@ const transliterate = (text, engToRus) => {
     return text
 }
 
-export default transliterate
+const isAdmin = () => {
+    return JSON.parse(localStorage.getItem("user"))
+        ? jwtDecode(JSON.parse(localStorage.getItem("user")).token).isAdmin
+        : false
+}
+
+export {transliterate, isAdmin}
