@@ -102,6 +102,12 @@ const Tyr = () => {
             const price = event.target.price.value
             const quantity = event.target.quantity.value
             const description = event.target.description.value
+            const firstIconTitle = event.target.firstIconTitle.value
+            const firstIconDesc = event.target.firstIconDesc.value
+            const secondIconTitle = event.target.secondIconTitle.value
+            const secondIconDesc = event.target.secondIconDesc.value
+            const thirdIconTitle = event.target.thirdIconTitle.value
+            const thirdIconDesc = event.target.thirdIconDesc.value
             const myJson = {
                 url: file.name,
                 file: encodedImage,
@@ -110,7 +116,13 @@ const Tyr = () => {
                     gunType,
                     price,
                     quantity,
-                    description
+                    description,
+                    firstIconTitle,
+                    firstIconDesc,
+                    secondIconTitle,
+                    secondIconDesc,
+                    thirdIconTitle,
+                    thirdIconDesc
                 }
             }
             console.log(myJson)
@@ -146,6 +158,12 @@ const Tyr = () => {
             const quantity = event.target.quantity.value
             const description = event.target.description.value
             const idGun = tyrsName[id]?.gunResponse?.idGun
+            const firstIconTitle = event.target.firstIconTitle.value
+            const firstIconDesc = event.target.firstIconDesc.value
+            const secondIconTitle = event.target.secondIconTitle.value
+            const secondIconDesc = event.target.secondIconDesc.value
+            const thirdIconTitle = event.target.thirdIconTitle.value
+            const thirdIconDesc = event.target.thirdIconDesc.value
             const myJson = {
                 idImage: idImg,
                 url: file?.name,
@@ -156,7 +174,13 @@ const Tyr = () => {
                     gunType,
                     price,
                     quantity,
-                    description
+                    description,
+                    firstIconTitle,
+                    firstIconDesc,
+                    secondIconTitle,
+                    secondIconDesc,
+                    thirdIconTitle,
+                    thirdIconDesc
                 }
             }
             console.log(myJson)
@@ -330,6 +354,18 @@ const Tyr = () => {
                                    onChange={handleFile}/>
                         </div>
                         <div className="rightContainer">
+                            <input required className="inputAdd" type="text" name="firstIconTitle"
+                                   placeholder="Введите название первой иконки"/>
+                            <input required className="inputAdd" type="text" name="firstIconDesc"
+                                   placeholder="Введите описание первой иконки"/>
+                            <input required className="inputAdd" type="text" name="secondIconTitle"
+                                   placeholder="Введите название второй иконки"/>
+                            <input required className="inputAdd" type="text" name="secondIconDesc"
+                                   placeholder="Введите описание второй иконки"/>
+                            <input required className="inputAdd" type="text" name="thirdIconTitle"
+                                   placeholder="Введите название третьей иконки"/>
+                            <input required className="inputAdd" type="text" name="thirdIconDesc"
+                                   placeholder="Введите описание третьей иконки"/>
                             <input required className="inputAdd" type="text" name="name"
                                    placeholder="Введите наименование оружия"/>
                             <input required className="inputAdd" type="text" name="description"
@@ -373,6 +409,18 @@ const Tyr = () => {
                                     <option key={item.idImage}
                                             value={tyrsName.indexOf(item)}>{tyrsName.indexOf(item) + 1}</option>)}
                             </select>
+                            <input required className="inputAdd" type="text" name="firstIconTitle"
+                                   placeholder="Введите название первой иконки"/>
+                            <input required className="inputAdd" type="text" name="firstIconDesc"
+                                   placeholder="Введите описание первой иконки"/>
+                            <input required className="inputAdd" type="text" name="secondIconTitle"
+                                   placeholder="Введите название второй иконки"/>
+                            <input required className="inputAdd" type="text" name="secondIconDesc"
+                                   placeholder="Введите описание второй иконки"/>
+                            <input required className="inputAdd" type="text" name="thirdIconTitle"
+                                   placeholder="Введите название третьей иконки"/>
+                            <input required className="inputAdd" type="text" name="thirdIconDesc"
+                                   placeholder="Введите описание третьей иконки"/>
                             <input className="inputAdd" type="text" name="name"
                                    placeholder="Введите наименование оружия" value={currentGun?.name}
                                    onChange={event => setCurrentGun(tyrsName[event.target.value])}/>
