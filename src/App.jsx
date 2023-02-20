@@ -26,8 +26,6 @@ const App = () => {
     const user = JSON.parse(localStorage.getItem("user"))?.username
     const currentUser = window.location.pathname.split("/")[2]
 
-    console.log(currentUser)
-
     return (
         <Router>
             <Routes>
