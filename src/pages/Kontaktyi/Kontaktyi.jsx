@@ -12,12 +12,6 @@ const Kontaktyi = () => {
             <main role="main">
                 <section className="base">
                     <div className="container">
-                        <nav aria-label="breadcrumb">
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><a href="/">Главная</a></li>
-                                <li className="breadcrumb-item active">Контакты тира</li>
-                            </ol>
-                        </nav>
                         <div className="base-card">
                             <h1>Контакты тира</h1>
                             <div className="row contact-info">

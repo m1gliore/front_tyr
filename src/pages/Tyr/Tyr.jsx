@@ -228,12 +228,6 @@ const Tyr = () => {
             <main role="main">
                 <section className="category">
                     <div className="container">
-                        <nav aria-label="breadcrumb">
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><a href="/">Главная</a></li>
-                                <li className="breadcrumb-item active">{tyrs.nameCatalog}</li>
-                            </ol>
-                        </nav>
                         <div className="category-card">
                             <h1>{tyrs.nameCatalog}</h1>
                             <div className="row">

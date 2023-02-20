@@ -162,12 +162,6 @@ const LuchshieStrelki = () => {
             </>}
             <section className="shooters-list-str bg-white">
                 <div className="container">
-                    <nav aria-label="breadcrumb">
-                        <ol className="breadcrumb">
-                            <li className="breadcrumb-item"><a href="/">Главная</a></li>
-                            <li className="breadcrumb-item active">Лучшие стрелки</li>
-                        </ol>
-                    </nav>
                     <h2>Лучшие стрелки</h2>
                     <div className="row">
                         {shooters.map((shooter) =>

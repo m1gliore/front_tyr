@@ -160,12 +160,6 @@ const VidyiUslug = () => {
             <main role="main">
                 <section className="service-part">
                     <div className="container">
-                        <nav aria-label="breadcrumb">
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><a href="/">Главная</a></li>
-                                <li className="breadcrumb-item active">{services.nameCatalog}</li>
-                            </ol>
-                        </nav>
                         <h1>{services.nameCatalog}</h1>
                         <div className="row">
                             <div className="col-12 text-justify">

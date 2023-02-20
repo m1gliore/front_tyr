@@ -22,21 +22,12 @@ const Oruzhie = () => {
         })()
     }, [currentPath])
 
-    const link = `/oruzhie-v-tire/type?catalog=${transliterate(oruzhie.urlTyr || '',false)}`
-
     return (
         <>
             <Navbar/>
             <main role="main">
                 <section className="base">
                     <div className="container">
-                        <nav aria-label="breadcrumb">
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><a href="/">Главная</a></li>
-                                <li className="breadcrumb-item"><a href={link}>{transliterate(oruzhie?.urlTyr || '',true)}</a></li>
-                                <li className="breadcrumb-item active">{oruzhie?.gunResponse?.name}</li>
-                            </ol>
-                        </nav>
                         <div className="base-card">
                             <img src={"data:image/" + oruzhie?.url?.split('.')[1] + ";base64," + oruzhie?.file} className="float-left p-2" alt={oruzhie?.gunResponse?.name}/>
                             <h1>{oruzhie?.gunResponse?.name}</h1>

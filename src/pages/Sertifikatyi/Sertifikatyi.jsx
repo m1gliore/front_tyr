@@ -126,12 +126,6 @@ const Sertifikatyi = () => {
                 }}/>
             </>}
             <section className="shooters-list-str bg-white">
-                <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb">
-                        <li className="breadcrumb-item"><a href="/">Главная</a></li>
-                        <li className="breadcrumb-item active">Сертификаты</li>
-                    </ol>
-                </nav>
                 <div className="flexContainer">
                     <div className="container">
                         <h2>Типы сертификатов</h2>

@@ -25,12 +25,6 @@ const Czenyi = () => {
             <main role="main">
                 <section className="base">
                     <div className="container">
-                        <nav aria-label="breadcrumb">
-                            <ol className="breadcrumb">
-                                <li className="breadcrumb-item"><a href="/">Главная</a></li>
-                                <li className="breadcrumb-item active">Цены</li>
-                            </ol>
-                        </nav>
                         <div className="base-card">
                             <h1>Цены</h1>
                             <div className="text-justify bg-gray text-danger p-3 mt-3 mb-3">
