@@ -2,55 +2,60 @@ import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheckCircle, faPen, faPeopleGroup} from "@fortawesome/free-solid-svg-icons";
+import {faBan, faCheckCircle, faPen, faPeopleGroup} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import {userRequest} from "../../requestMethods";
 import {isAdmin} from "../../myLibrary";
 
 const Sertifikatyi = () => {
     const [certificates, setCertificates] = useState([])
+    const [allCertificates, setAllCertificates] = useState([])
     const [corporates, setCorporates] = useState([])
     const [certificateTemplates, setCertificateTemplates] = useState([])
     const [template, setTemplate] = useState({})
     const [modalRedactActive, setModalRedactActive] = useState(false)
     const [modalAcceptActive, setModalAcceptActive] = useState(false)
+    const [modalRejectActive, setModalRejectActive] = useState(false)
     const [modalAcceptCorporateActive, setModalAcceptCorporateActive] = useState(false)
-    const [imageUrl, setImageUrl] = useState("")
+    const [cardNumber, setCardNumber] = useState(null)
     const admin = isAdmin()
     const navigate = useNavigate()
 
     useEffect(() => {
         (async () => {
             try {
-                const responseCertificate = await userRequest.get('http://localhost:8040/api/redact/allCertificates')
-                const responseTemplate = await axios.get('http://localhost:8040/api/homePage/allCertificateTypes')
-                const responseCorporate = await userRequest.get('http://localhost:8040/api/redact/allCorporates')
-                setCertificates(responseCertificate.data)
-                setCertificateTemplates(responseTemplate.data)
-                setCorporates(responseCorporate.data)
-                console.log(responseCertificate.data)
-                console.log(responseTemplate.data)
-                console.log(responseTemplate.data)
+                if (admin) {
+                    const responseCertificate = await userRequest.get('http://localhost:8040/api/redact/allCertificates')
+                    const responseAllCertificate = await userRequest.get('http://localhost:8040/api/redact/allCertificatesPending')
+                    const responseTemplate = await userRequest.get('http://localhost:8040/api/homePage/allCertificateTypes')
+                    const responseCorporate = await userRequest.get('http://localhost:8040/api/redact/allCorporates')
+                    setCertificates(responseCertificate.data)
+                    setAllCertificates(responseAllCertificate.data)
+                    setCertificateTemplates(responseTemplate.data)
+                    setCorporates(responseCorporate.data)
+                }
             } catch (e) {
                 console.log(e)
             }
         })()
-    }, [])
+    }, [admin])
 
     certificates.sort((a, b) => {
+        return a.idCertificate - b.idCertificate
+    })
+
+    allCertificates.sort((a, b) => {
         return a.idCertificate - b.idCertificate
     })
 
     const handleSubmitAccept = async (event) => {
         event.preventDefault()
         try {
-            const id = event.target.id.value
-            const idCertificate = certificates[id]?.idCertificate
+            const idCertificate = cardNumber
             const certificateStatus = event.target.status.value
-            const username = certificates[id].username
+            const username = allCertificates.find(item => item.idCertificate === idCertificate).username
             const myJson = {
                 idCertificate,
                 certificateStatus,
@@ -99,30 +104,15 @@ const Sertifikatyi = () => {
         }
     }
 
-    const handleSelectRedact = (event) => {
-        event.preventDefault()
-        setTemplate(certificateTemplates[event.target.value])
-        console.log(template)
-        const selectedImage = certificates[event.target.value]
-        const selectedImageUrl = selectedImage.idCertificate
-        setImageUrl(selectedImageUrl)
-    }
-
     return (
         <>
             <Navbar/>
             {admin && <>
                 <FontAwesomeIcon className="action fa-2x" icon={faPen} onClick={() => {
                     setModalRedactActive(true)
-                    setImageUrl("")
-                }}/>
-                <FontAwesomeIcon className="action fa-2x" icon={faCheckCircle} onClick={() => {
-                    setModalAcceptActive(true)
-                    setImageUrl("")
                 }}/>
                 <FontAwesomeIcon className="action fa-2x" icon={faPeopleGroup} onClick={() => {
                     setModalAcceptCorporateActive(true)
-                    setImageUrl("")
                 }}/>
             </>}
             <section className="shooters-list-str bg-white">
@@ -137,7 +127,7 @@ const Sertifikatyi = () => {
                                             <p className="card-desc-str">Скидка: {certificate.discount}%</p>
                                             <p className="card-desc-str">Номинал: {certificate.nominal} руб.</p>
                                             <p className="card-desc-str">Количество скртификатов для
-                                                скидки: {certificate.countCertificate} руб.</p>
+                                                скидки: {certificate.countCertificate} шт.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -165,10 +155,35 @@ const Sertifikatyi = () => {
                                 <div className="col-lg-4 col-md-6" key={corporate.idCorporate}>
                                     <div className="cardStr">
                                         <div className="card-body-str">
-                                            <p className="card-desc-str">Дата: {corporate.registration} </p>
-                                            <p className="card-desc-str">Телефон: {corporate.phone} </p>
+                                            <p className="card-desc-str">Дата: {corporate.registration}</p>
+                                            <p className="card-desc-str">Фамилия: {corporate.surname}</p>
+                                            <p className="card-desc-str">Телефон: {corporate.phone}</p>
                                             <p className="card-desc-str">Цена со скидкой: {corporate.price} руб.</p>
                                         </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        <h2 style={{marginTop: "5vh"}}>Неподтверждённые сертификаты</h2>
+                        <div className="row">
+                            {allCertificates.map((certificate) =>
+                                <div className="col-lg-4 col-md-6" key={certificate.idCertificate}>
+                                    <div className="cardStr">
+                                        <div className="card-body-str">
+                                            <p className="card-desc-str">Дата: {certificate.registration}</p>
+                                            <p className="card-desc-str">Телефон: {certificate.phone}</p>
+                                            <p className="card-desc-str">Цена со скидкой: {certificate.price} руб.</p>
+                                        </div>
+                                        <FontAwesomeIcon className="action fa-2x" icon={faCheckCircle}
+                                                         onClick={() => {
+                                                             setModalAcceptActive(true)
+                                                             setCardNumber(certificate.idCertificate)
+                                                         }}/>
+                                        <FontAwesomeIcon className="action fa-2x" icon={faBan}
+                                                         onClick={() => {
+                                                             setModalRejectActive(true)
+                                                             setCardNumber(certificate.idCertificate)
+                                                         }}/>
                                     </div>
                                 </div>
                             )}
@@ -181,9 +196,8 @@ const Sertifikatyi = () => {
                 <Modal active={modalAcceptCorporateActive} setActive={setModalAcceptCorporateActive}>
                     <h1>Удалить корпоратив</h1>
                     <form className="modalAdd" onSubmit={handleSubmitDelete}>
-                        <div className="leftContainer">{imageUrl}</div>
                         <div className="rightContainer">
-                            <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
+                            <select required className="inputAdd" name="id">
                                 <option selected disabled value="">Выберите один из вариантов</option>
                                 {corporates.map((item) =>
                                     <option key={item.idCorporate}
@@ -194,31 +208,28 @@ const Sertifikatyi = () => {
                     </form>
                 </Modal>
                 <Modal active={modalAcceptActive} setActive={setModalAcceptActive}>
-                    <h1>Изменить статус сертификата</h1>
+                    <h1>Принять отзыв</h1>
                     <form className="modalAdd" onSubmit={handleSubmitAccept}>
-                        <div className="leftContainer">{imageUrl}</div>
+                        <input type="text" name="status" value="CONFIRMED" style={{display: "none"}}/>
                         <div className="rightContainer">
-                            <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
-                                <option selected disabled value="">Выберите один из вариантов</option>
-                                {certificates.map((item) =>
-                                    <option key={item.idCertificate}
-                                            value={certificates.indexOf(item)}>{certificates.indexOf(item) + 1}</option>)}
-                            </select>
-                            <select required className="inputAdd" name="status">
-                                <option selected disabled value="">Выберите статус</option>
-                                <option value="CONFIRMED">Принять</option>
-                                <option value="REJECTED">Отклонить</option>
-                            </select>
-                            <button className="buttonAdd">Изменить</button>
+                            <button className="buttonAdd">Принять</button>
+                        </div>
+                    </form>
+                </Modal>
+                <Modal active={modalRejectActive} setActive={setModalRejectActive}>
+                    <h1>Отклонить отзыв</h1>
+                    <form className="modalAdd" onSubmit={handleSubmitAccept}>
+                        <input type="text" name="status" value="REJECTED" style={{display: "none"}}/>
+                        <div className="rightContainer">
+                            <button className="buttonAdd">Отклонить</button>
                         </div>
                     </form>
                 </Modal>
                 <Modal active={modalRedactActive} setActive={setModalRedactActive}>
                     <h1>Изменить шаблон сертификата</h1>
                     <form className="modalAdd" onSubmit={handleSubmitRedact}>
-                        <div className="leftContainer">{imageUrl}</div>
                         <div className="rightContainer">
-                            <select required className="inputAdd" name="id" onChange={handleSelectRedact}>
+                            <select required className="inputAdd" name="id">
                                 <option selected disabled value="">Выберите один из вариантов</option>
                                 {certificateTemplates.map((item) =>
                                     <option key={item.idCertificateType}
