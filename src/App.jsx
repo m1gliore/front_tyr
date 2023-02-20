@@ -23,6 +23,11 @@ import Oruzhie from "./pages/Oruzhie/Oruzhie";
 
 const App = () => {
 
+    const user = JSON.parse(localStorage.getItem("user"))?.username
+    const currentUser = window.location.pathname.split("/")[2]
+
+    console.log(currentUser)
+
     return (
         <Router>
             <Routes>
@@ -39,7 +44,7 @@ const App = () => {
                 <Route exact path="/kontaktyi" element={<Kontaktyi/>}/>
                 <Route exact path="/sertifikatyi" element={<Sertifikatyi/>}/>
                 <Route exact path="/otzyivyi" element={<Otzyivyi/>}/>
-                <Route exact path="/user-profile/:idUser" element={<UserProfile/>}/>
+                {user === currentUser && <Route exact path="/user-profile/:idUser" element={<UserProfile/>}/>}
             </Routes>
         </Router>
     )

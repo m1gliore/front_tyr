@@ -19,7 +19,10 @@ const Register = () => {
                 username,
             }
             console.log(myJson)
-            await axios.post(`http://localhost:8040/api/auth/register`, myJson).then(()=>navigate(0))
+            await axios.post(`http://localhost:8040/api/auth/register`, myJson).then(()=>{
+                alert("На вашу почту выслано письмо с подтверждением аккаунта")
+                navigate("/")
+            })
         } catch (e) {
             console.log(e)
         }

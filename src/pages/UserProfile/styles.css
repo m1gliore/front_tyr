@@ -84,6 +84,17 @@ h3, .h3 {
     display: none;
 }
 
+.topContainer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #dddde0;
+}
+
+.topContainer button {
+    width: 15vw;
+    margin: 1.5vw;
+}
+
 /* MEDIA */
 @media (max-width: 767px) {
     .h1, h1 {

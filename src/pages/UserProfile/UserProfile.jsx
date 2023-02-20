@@ -93,7 +93,13 @@ const UserProfile = () => {
         <>
             <Navbar/>
             <main role="main">
-                <h1 className="username">Здравствуйте, {currentUser}</h1>
+                <div className="topContainer">
+                    <h1 className="username">Здравствуйте, {currentUser}</h1>
+                    <button className="button btn-blue" onClick={() => {
+                        localStorage.removeItem("user")
+                        window.location.replace("/")
+                    }}>Выйти из учётной записи</button>
+                </div>
                 <section className="contact-form">
                     <div className="containerProfile">
                         <h2>Ваша текущая скидка: {user.countCertificate >2 ? 15 : 0}%</h2><br/>

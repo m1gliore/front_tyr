@@ -134,21 +134,7 @@ const Sertifikatyi = () => {
                 </nav>
                 <div className="flexContainer">
                     <div className="container">
-                        <h2>Сертификаты</h2>
-                        <div className="row">
-                            {certificates.map((certificate) =>
-                                <div className="col-lg-4 col-md-6" key={certificate.idCertificate}>
-                                    <div className="cardStr">
-                                        <div className="card-body-str">
-                                            <p className="card-desc-str">Дата: {certificate.registration} </p>
-                                            <p className="card-desc-str">Телефон: {certificate.phone} </p>
-                                            <p className="card-desc-str">Цена со скидкой: {certificate.price} руб.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                        <h2 style={{marginTop: "5vh"}}>Типы сертификатов</h2>
+                        <h2>Типы сертификатов</h2>
                         <div className="row">
                             {certificateTemplates.map((certificate) =>
                                 <div className="col-lg-4 col-md-6" key={certificate.idCertificateType}>
@@ -163,8 +149,22 @@ const Sertifikatyi = () => {
                                 </div>
                             )}
                         </div>
+                        <h2 style={{marginTop: "5vh"}}>Сертификаты</h2>
+                        <div className="row">
+                            {certificates.map((certificate) =>
+                                <div className="col-lg-4 col-md-6" key={certificate.idCertificate}>
+                                    <div className="cardStr">
+                                        <div className="card-body-str">
+                                            <p className="card-desc-str">Дата: {certificate.registration} </p>
+                                            <p className="card-desc-str">Телефон: {certificate.phone} </p>
+                                            <p className="card-desc-str">Цена со скидкой: {certificate.price} руб.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <div className="container">
+                    <div style={{borderLeft: "5px solid blue"}} className="container">
                         <h2>Корпоративы</h2>
                         <div className="row">
                             {corporates.map((corporate) =>
