@@ -29,7 +29,8 @@ const Login = () => {
                 })
 
         } catch (e) {
-            console.log(e)
+            const statusCode = e.response ? e.response.status : null
+            if (statusCode === 400) alert("Данные введены неверно")
         }
     }
 
@@ -44,7 +45,6 @@ const Login = () => {
                         <input type="text" name="username" placeholder="Ваш логин" className="input"/>
                         <input type="password" name="password" placeholder="Пароль" className="input"/>
                         <button className="button-login btn-blue">Войти</button>
-                        <span className="error">Что-то пошло не так</span>
                         <a href="/restore-password" className="link">Забыли свой пароль?</a>
                         <a href="/register" className="link">Создать новую учётную запись</a>
                     </form>
