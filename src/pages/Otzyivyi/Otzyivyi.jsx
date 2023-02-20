@@ -8,6 +8,7 @@ import {faBan, faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import {userRequest} from "../../requestMethods";
 import {isAdmin} from "../../myLibrary";
+import axios from "axios";
 
 const Otzyivyi = () => {
     const [allReplies, setAllReplies] = useState([])
@@ -21,15 +22,19 @@ const Otzyivyi = () => {
     useEffect(() => {
         (async () => {
             try {
-                const responseAdmin = await userRequest.get(`http://localhost:8040/api/redact1/getAllReview`)
-                const responseClient = await userRequest.get(`http://localhost:8040/api/homePage/getAllReviewsByHomePage`)
-                setAllReplies(responseAdmin.data)
+                const responseClient = await axios.get(`http://localhost:8040/api/homePage/getAllReviewsByHomePage`)
+                console.log(responseClient.data)
+                if (admin) {
+                    const responseAdmin = await userRequest.get(`http://localhost:8040/api/redact1/getAllReview`)
+                    console.log(responseClient.data)
+                    setAllReplies(responseAdmin.data)
+                }
                 setReplies(responseClient.data)
             } catch (e) {
                 console.log(e)
             }
         })()
-    }, [allReplies])
+    }, [admin, allReplies])
 
     allReplies.sort((a, b) => {
         return a.idReview - b.idReview

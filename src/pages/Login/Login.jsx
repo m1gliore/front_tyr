@@ -24,6 +24,7 @@ const Login = () => {
             await axios.post(`http://localhost:8040/api/auth/auth`, myJson)
                 .then((response) => {
                     currentUser = response.data
+                    console.log(currentUser)
                     localStorage.setItem("user", JSON.stringify(currentUser))
                     navigate(`/user-profile/${username}`,{replace:true})
                 })

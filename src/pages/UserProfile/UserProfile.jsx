@@ -7,19 +7,22 @@ import {useNavigate} from "react-router-dom";
 import {userRequest} from "../../requestMethods";
 
 const UserProfile = () => {
+
     const currentUser = JSON.parse(localStorage.getItem("user"))?.username
     const currentToken = JSON.parse(localStorage.getItem("user"))?.token
     const [user, setUser] = useState({})
     const [certificateType, setCertificateType] = useState([]);
     const [offer, setOffer] = useState("1")
+    const [discountOffer, setDiscountOffer] = useState("0")
     const navigate = useNavigate()
     useEffect(() => {
         (async () => {
             try {
+                console.log(currentToken)
                 const response = await userRequest.get(`http://localhost:8040/api/client/getUserInfo/${currentUser}`,)
                 const responseCertificateType = await axios.get('http://localhost:8040/api/homePage/allCertificateTypes')
-                setUser(response.data)
                 console.log({headers: {Authorization: `Bearer ${currentToken}`}})
+                setUser(response.data)
                 setCertificateType(responseCertificateType.data)
             } catch (e) {
                 console.log(e)
@@ -30,6 +33,11 @@ const UserProfile = () => {
     const handleChangeOffer = (event) => {
         event.preventDefault()
         setOffer(event.target.value)
+    }
+
+    const handleChangeDiscountOffer = (event) => {
+        event.preventDefault()
+        setDiscountOffer(event.target.value)
     }
 
     const handleSubmitCorporate = async (event) => {
@@ -98,12 +106,22 @@ const UserProfile = () => {
                     <button className="button btn-blue" onClick={() => {
                         localStorage.removeItem("user")
                         window.location.replace("/")
-                    }}>Выйти из учётной записи</button>
+                    }}>Выйти из учётной записи
+                    </button>
                 </div>
                 <section className="contact-form">
                     <div className="containerProfile">
-                        <h2>Ваша текущая скидка: {user.countCertificate >2 ? 15 : 0}%</h2><br/>
-                        <h2>Осталось сертификатов до скидки: {3 - user.countCertificate}</h2>
+                        <select required className="inputAdd" name="discountOffer" onChange={handleChangeDiscountOffer}>
+                            <option value="0">Первый тариф</option>
+                            <option value="1">Второй тариф</option>
+                            <option value="2">Третий тариф</option>
+                        </select>
+                        <h2>Ваша текущая
+                            скидка: {user.countCertificate > certificateType[discountOffer]?.countCertificate ? certificateType[discountOffer]?.discount : 0}%</h2>
+                        <br/>
+                        <h2>Осталось сертификатов до скидки:&nbsp;
+                            {certificateType[discountOffer]?.countCertificate - user.countCertificate < 0 ?
+                                0 : certificateType[discountOffer]?.countCertificate - user.countCertificate}</h2>
                     </div>
                     <div className="containerProfile">
                         <h2>Предложения для вас</h2><br/>

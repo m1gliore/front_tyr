@@ -20,10 +20,12 @@ import Sertifikatyi from "./pages/Sertifikatyi/Sertifikatyi";
 import Otzyivyi from "./pages/Otzyivyi/Otzyivyi";
 import Usluga from "./pages/Usluga/Usluga";
 import Oruzhie from "./pages/Oruzhie/Oruzhie";
+import {isAdmin} from "./myLibrary";
 
 const App = () => {
 
     const user = JSON.parse(localStorage.getItem("user"))?.username
+    const admin = isAdmin()
     const currentUser = window.location.pathname.split("/")[2]
 
     return (
@@ -40,7 +42,7 @@ const App = () => {
                 <Route exact path="/uslugi/:idUsluga" element={<Usluga/>}/>
                 <Route exact path="/strelki/type" element={<LuchshieStrelki/>}/>
                 <Route exact path="/kontaktyi" element={<Kontaktyi/>}/>
-                <Route exact path="/sertifikatyi" element={<Sertifikatyi/>}/>
+                {admin && <Route exact path="/sertifikatyi" element={<Sertifikatyi/>}/>}
                 <Route exact path="/otzyivyi" element={<Otzyivyi/>}/>
                 {user === currentUser && <Route exact path="/user-profile/:idUser" element={<UserProfile/>}/>}
             </Routes>
