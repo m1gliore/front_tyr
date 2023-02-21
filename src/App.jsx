@@ -21,6 +21,7 @@ import Otzyivyi from "./pages/Otzyivyi/Otzyivyi";
 import Usluga from "./pages/Usluga/Usluga";
 import Oruzhie from "./pages/Oruzhie/Oruzhie";
 import {isAdmin} from "./myLibrary";
+import RestorePassword from "./pages/RestorePassword/RestorePassword";
 
 const App = () => {
 
@@ -34,6 +35,7 @@ const App = () => {
                 <Route exact path="/" element={<Home/>}/>
                 <Route exact path="/login" element={<Login/>}/>
                 <Route exact path="/register" element={<Register/>}/>
+                <Route exact path="/restore-password" element={<RestorePassword/>}/>
                 <Route exact path="/oruzhie-v-tire/type" element={<Tyr/>}/>
                 <Route exact path="/oruzhie-v-tire/:idOruzhie" element={<Oruzhie/>}/>
                 <Route exact path="/images/type" element={<Galereya/>}/>
