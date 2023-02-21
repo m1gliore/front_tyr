@@ -10,39 +10,31 @@ const getMethod = async (url, set) => {
     }
 }
 
-const postMethod = async (event, navigate, url, myJson) => {
+const postMethod = async (event, url, myJson) => {
     event.preventDefault()
     try {
-        await userRequest.post(url, myJson).then(() => navigate(0))
+        await userRequest.post(url, myJson)
     } catch (e) {
         console.log(e)
     }
 }
 
-// const deleteMethod = async (event, arr, idArr) => {
-//     try {
-//         event.preventDefault()
-//         const id = event.target.id.value
-//         const idItem = arr[id].idArr
-//         const myJson = {
-//             idItem
-//         }
-//         await axios.delete('', myJson)
-//     } catch (e) {
-//         console.log(e)
-//     }
-// }
-//
-// const postMethod = async (event, data) => {
-//     try {
-//         event.preventDefault()
-//         const title = event.target.title.value
-//         const myJson = data
-//         console.log(myJson)
-//         await axios.post('http://localhost:8040/api/homePage/saveNewImageInGallery', myJson)
-//     } catch (e) {
-//         console.log(e)
-//     }
-// }
+const deleteMethod = async (event, url, myJson) => {
+    event.preventDefault()
+    try {
+        await userRequest.delete(url, myJson)
+    } catch (e) {
+        console.log(e)
+    }
+}
 
-export {getMethod, postMethod}
+const putMethod = async (event, url, myJson) => {
+    event.preventDefault()
+    try {
+        await userRequest.put(url, myJson)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export {getMethod, postMethod, deleteMethod, putMethod}
