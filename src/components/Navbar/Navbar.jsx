@@ -25,6 +25,7 @@ const Navbar = () => {
     const [imageUrlDelete, setImageUrlDelete] = useState("Категория")
     const [imageUrl, setImageUrl] = useState("Категория")
     const admin = isAdmin()
+    const user = JSON.parse(localStorage.getItem("user"))?.username
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -163,7 +164,7 @@ const Navbar = () => {
     return (
         <header>
             <div className="header-top">
-                <div className="container" style={{marginLeft: "10px", marginRight: "10px"}}>
+                <div className="container" style={{margin: 0}}>
                     <div className="flexRow">
                         <div className="col-lg-3 header-logo">
                             <img className="logo" src={logo} alt="logo"/>
@@ -206,7 +207,7 @@ const Navbar = () => {
                                     </div>
                                 </>}
                                 {loginned &&
-                                    <div className="col-md-1 footer-auth">
+                                    <div className="col-md-2 footer-auth">
                                         <div className="text-center">
                                             <a href={`/user-profile/` + JSON.parse(localStorage.getItem("user"))?.username}>
                                                 {JSON.parse(localStorage.getItem("user"))?.username}
@@ -214,13 +215,24 @@ const Navbar = () => {
                                         </div>
                                     </div>
                                 }
-                                <div className="col-md-2 header-top-social">
+                                <div className="col-md-1 header-top-social">
                                     <a href="https://www.instagram.com/tircaliberr/" target="_blank" rel="noreferrer"
                                        className="fa-stack">
                                         <FontAwesomeIcon icon={faCircle} className="fa-stack-2x"/>
                                         <FontAwesomeIcon icon={faInstagram} className="fa-stack-1x top-icon"/>
                                     </a>
                                 </div>
+                                {user &&
+                                    <button className="button btn-blue" style={{
+                                        color: "rgb(49, 55, 194)",
+                                        backgroundColor: "#fff",
+                                        width: "15%",
+                                        marginLeft: "15px"
+                                    }} onClick={() => {
+                                        localStorage.removeItem("user")
+                                        window.location.replace("/")
+                                    }}>Выйти из учётной записи
+                                    </button>}
                             </div>
                         </div>
                     </div>

@@ -103,11 +103,6 @@ const UserProfile = () => {
             <main role="main">
                 <div className="topContainer">
                     <h1 className="username">Здравствуйте, {currentUser}</h1>
-                    <button className="button btn-blue" onClick={() => {
-                        localStorage.removeItem("user")
-                        window.location.replace("/")
-                    }}>Выйти из учётной записи
-                    </button>
                 </div>
                 <section className="contact-form">
                     <div className="containerProfile">

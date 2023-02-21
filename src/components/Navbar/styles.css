@@ -2,7 +2,7 @@
 
 /* HEADER */
 .flexRow {
-    width: 90vw;
+    width: 95vw;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
