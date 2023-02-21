@@ -13,7 +13,7 @@ import {isAdmin} from "../../myLibrary";
 
 const VidyiUslug = () => {
     const currentService = useLocation().search.split('=')[1]
-    const currentPath = useLocation().pathname
+    const currentPath = useLocation().pathname.split('/')[1]
     const [currentUsluga, setCurrentUsluga] = useState({})
     const [services, setServices] = useState([])
     const [serviceNames, setServiceNames] = useState([])
@@ -177,7 +177,7 @@ const VidyiUslug = () => {
                                             <h2>{serviceName.serviceResponse.name}</h2>
                                             <p>{serviceName.serviceResponse.description}</p>
                                             <a className="btn btn-blue"
-                                               href={currentPath + "/" + serviceName.serviceResponse.name}
+                                               href={"/" + currentPath + "/" + serviceName.serviceResponse.name}
                                                role="button">Подробнее</a>
                                         </div>
                                     </div>
