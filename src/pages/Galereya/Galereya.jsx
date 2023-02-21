@@ -8,9 +8,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
 import defaultImg from '../../images/default-store-350x350.jpg'
 import {useNavigate} from "react-router-dom";
-import {userRequest} from "../../requestMethods";
 import {fileHandler, isAdmin} from "../../myLibrary";
-import {getMethod, postMethod} from "../../httpMethodsHandlers";
+import {deleteMethod, getMethod, postMethod, putMethod} from "../../httpMethodsHandlers";
 
 const Galereya = () => {
     lightbox.option({
@@ -39,46 +38,29 @@ const Galereya = () => {
     })
 
     const handleSubmitAdd = (event) => {
-        postMethod(event, navigate, 'http://localhost:8040/api/homePage/saveNewImageInGallery/galereya',
+        postMethod(event, 'http://localhost:8040/api/homePage/saveNewImageInGallery/galereya',
             {
                 url: file?.name,
                 file: encodedImage,
                 title: event.target.title?.value
-            })
+            }).then(() => navigate(0))
     }
 
-    const handleSubmitDelete = async (event) => {
-        event.preventDefault()
-        try {
-            const id = event.target.id.value
-            const idImg = images.imageResponseSet[id].idImage
-            const myJson = {
-                idImg
-            }
-            console.log(myJson)
-            await userRequest.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson).then(() => navigate(0))
-        } catch (e) {
-            console.log(e)
-        }
+    const handleSubmitDelete = (event) => {
+        deleteMethod(event, `http://localhost:8040/api/homePage/deleteImage/${images.imageResponseSet[event.target.id.value].idImage}`,
+            {
+                idImg: images.imageResponseSet[event.target.id.value].idImage
+            }).then(() => navigate(0))
     }
 
     const handleSubmitRedact = async (event) => {
-        event.preventDefault()
-        try {
-            const id = event.target.id.value
-            const idImg = images.imageResponseSet[id].idImage
-            const title = event.target.title.value
-            const myJson = {
-                idImage: idImg,
+        putMethod(event, 'http://localhost:8040/api/homePage/updateImageInGallery',
+            {
+                idImage: images.imageResponseSet[event.target.id.value].idImage,
                 url: file?.name,
                 file: encodedImage,
-                title
-            }
-            console.log(myJson)
-            await userRequest.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
-        } catch (e) {
-            console.log(e)
-        }
+                title: event.target.title?.value
+            }).then(() => navigate(0))
     }
     const handleSelectDelete = (event) => {
         event.preventDefault()
