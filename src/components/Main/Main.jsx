@@ -109,7 +109,7 @@ const Main = () => {
                     </div>
                     <div className="imageContainer">
                         <img style={{width: "450px", height: "300px"}} src={fourth} alt="four"/>
-                        <div className="bottomText">Подарочные серификаты</div>
+                        <div className="bottomText">Подарочные сертификаты</div>
                     </div>
                     <div className="imageContainer">
                         <img style={{width: "450px", height: "300px"}} src={fifth} alt="five"/>

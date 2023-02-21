@@ -105,7 +105,7 @@ const Navbar = () => {
                 directoryType
             }
             console.log(myJson)
-            await userRequest.put('http://localhost:8040/api/redact/saveNewServiceCatalog', myJson).then(() => navigate(0))
+            await userRequest.post('http://localhost:8040/api/redact/saveNewServiceCatalog', myJson).then(() => navigate(0))
         } catch (e) {
             console.log(e)
         }
