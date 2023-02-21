@@ -27,7 +27,7 @@ const fileHandler = (file, setImageUrl, setEncodedImage) => {
             setEncodedImage(reader.result)
         }
         reader.onerror = (error) => {
-            console.log('Error: ', error)
+            alert('Error: ', error)
         }
     }
 }

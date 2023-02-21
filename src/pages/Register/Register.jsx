@@ -1,8 +1,8 @@
 import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {publicRequest} from "../../requestMethods";
 
 const Register = () => {
     const navigate = useNavigate()
@@ -26,7 +26,7 @@ const Register = () => {
 
             if (password !== password2) throw new SyntaxError("Пароли не совподают")
 
-            await axios.post(`http://localhost:8040/api/auth/register`, myJson).then(() => {
+            await publicRequest.post(`http://localhost:8040/api/auth/register`, myJson).then(() => {
                 alert("На вашу почту выслано письмо с подтверждением аккаунта")
                 navigate("/")
             })

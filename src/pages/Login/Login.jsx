@@ -1,9 +1,9 @@
 import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
-import axios from "axios";
 import localStorage from "redux-persist/es/storage";
 import {useNavigate} from "react-router-dom";
+import {publicRequest} from "../../requestMethods";
 
 const Login = () => {
 
@@ -20,11 +20,9 @@ const Login = () => {
                 password,
                 username
             }
-            console.log(myJson)
-            await axios.post(`http://localhost:8040/api/auth/auth`, myJson)
+            await publicRequest.post(`http://localhost:8040/api/auth/auth`, myJson)
                 .then((response) => {
                     currentUser = response.data
-                    console.log(currentUser)
                     localStorage.setItem("user", JSON.stringify(currentUser))
                     navigate(`/user-profile/${username}`,{replace:true})
                 })

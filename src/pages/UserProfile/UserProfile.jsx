@@ -2,9 +2,8 @@ import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import {userRequest} from "../../requestMethods";
+import {publicRequest, userRequest} from "../../requestMethods";
 
 const UserProfile = () => {
 
@@ -18,14 +17,12 @@ const UserProfile = () => {
     useEffect(() => {
         (async () => {
             try {
-                console.log(currentToken)
                 const response = await userRequest.get(`http://localhost:8040/api/client/getUserInfo/${currentUser}`,)
-                const responseCertificateType = await axios.get('http://localhost:8040/api/homePage/allCertificateTypes')
-                console.log({headers: {Authorization: `Bearer ${currentToken}`}})
+                const responseCertificateType = await publicRequest.get('http://localhost:8040/api/homePage/allCertificateTypes')
                 setUser(response.data)
                 setCertificateType(responseCertificateType.data)
             } catch (e) {
-                console.log(e)
+                alert(e)
             }
         })()
     }, [currentToken, currentUser])
@@ -54,10 +51,9 @@ const UserProfile = () => {
                 phone,
                 surname
             }
-            console.log(myJson)
             await userRequest.post(`http://localhost:8040/api/client/createCorporate`, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -75,10 +71,9 @@ const UserProfile = () => {
                     idCertificateType
                 }
             }
-            console.log(myJson)
             await userRequest.post(`http://localhost:8040/api/client/createCertificate`, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -90,10 +85,9 @@ const UserProfile = () => {
                 username: currentUser,
                 reviewInfo
             }
-            console.log(myJson)
             await userRequest.post(`http://localhost:8040/api/client/saveNewReview`, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 

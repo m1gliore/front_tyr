@@ -1,8 +1,8 @@
 import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import {publicRequest} from "../../requestMethods";
 
 const RestorePassword = () => {
 
@@ -15,8 +15,7 @@ const RestorePassword = () => {
             const myJson = {
                 loginEmail
             }
-            console.log(myJson)
-            await axios.post(`http://localhost:8040/api/auth/hui`, myJson).then(() => navigate("/"))
+            await publicRequest.post(`http://localhost:8040/api/auth/hui`, myJson).then(() => navigate("/"))
 
         } catch (e) {
             const statusCode = e.response ? e.response.status : null

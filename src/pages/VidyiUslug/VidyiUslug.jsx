@@ -3,12 +3,11 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
 import defaultImg from "../../images/default-store-350x350.jpg";
-import {userRequest} from "../../requestMethods";
+import {publicRequest, userRequest} from "../../requestMethods";
 import {isAdmin} from "../../myLibrary";
 
 const VidyiUslug = () => {
@@ -34,12 +33,11 @@ const VidyiUslug = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=' + currentService)
+                const response = await publicRequest.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=' + currentService)
                 setServices(response.data)
                 setServiceNames(response.data.imageResponseSet)
-                console.log(response.data)
             } catch (e) {
-                console.log(e)
+                alert(e)
             }
         })()
 
@@ -51,7 +49,7 @@ const VidyiUslug = () => {
                 setEncodedImage(reader.result)
             }
             reader.onerror = (error) => {
-                console.log('Error: ', error)
+                alert('Error: ', error)
             }
         }
     }, [currentService, file])
@@ -76,10 +74,9 @@ const VidyiUslug = () => {
                         price
                     }
             }
-            console.log(myJson)
             await userRequest.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/${currentService}`, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -91,10 +88,9 @@ const VidyiUslug = () => {
             const myJson = {
                 idImg
             }
-            console.log(myJson)
             await userRequest.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -119,20 +115,16 @@ const VidyiUslug = () => {
                         price
                     }
             }
-            console.log(myJson)
             await userRequest.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
     const handleSelectDelete = (event) => {
         event.preventDefault()
-        console.log(event.target.value)
         const selectedImage = serviceNames[event.target.value]
-        console.log(selectedImage)
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file
-        console.log(selectedImageUrl)
         setImageUrlDelete(selectedImageUrl)
     }
 

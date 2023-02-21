@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import {transliterate} from "../../myLibrary";
-import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import {useLocation} from "react-router-dom";
+import {publicRequest} from "../../requestMethods";
 
 const Oruzhie = () => {
 
@@ -13,11 +13,10 @@ const Oruzhie = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get(`http://localhost:8040/api/homePage/getOneGun/${transliterate(currentPath, true)}`)
+                const response = await publicRequest.get(`http://localhost:8040/api/homePage/getOneGun/${transliterate(currentPath, true)}`)
                 setOruzhie(response.data)
-                console.log(response.data)
             } catch (e) {
-                console.log(e)
+                alert(e)
             }
         })()
     }, [currentPath])

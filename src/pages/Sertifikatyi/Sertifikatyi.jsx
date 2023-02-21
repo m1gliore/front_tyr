@@ -36,7 +36,7 @@ const Sertifikatyi = () => {
                     setCorporates(responseCorporate.data)
                 }
             } catch (e) {
-                console.log(e)
+                alert(e)
             }
         })()
     }, [admin])
@@ -60,10 +60,9 @@ const Sertifikatyi = () => {
                 certificateStatus,
                 username
             }
-            console.log(myJson)
             await userRequest.put('http://localhost:8040/api/redact/updateCertificate', myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -75,10 +74,9 @@ const Sertifikatyi = () => {
             const myJson = {
                 idCorporate
             }
-            console.log(myJson)
             await userRequest.delete(`http://localhost:8040/api/redact/deleteCorporate/${idCorporate}`, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -96,10 +94,9 @@ const Sertifikatyi = () => {
                 discount,
                 countCertificate
             }
-            console.log(myJson)
             await userRequest.put('http://localhost:8040/api/redact/updateCertificateType', myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 

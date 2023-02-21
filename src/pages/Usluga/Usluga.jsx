@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import axios from "axios";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import {useLocation} from "react-router-dom";
+import {publicRequest} from "../../requestMethods";
 
 const Usluga = () => {
 
@@ -12,11 +12,10 @@ const Usluga = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get(`http://localhost:8040/api/homePage/getOneService/${currentPath}`)
+                const response = await publicRequest.get(`http://localhost:8040/api/homePage/getOneService/${currentPath}`)
                 setUsluga(response.data)
-                console.log(response.data)
             } catch (e) {
-                console.log(e)
+                alert(e)
             }
         })()
     }, [currentPath])

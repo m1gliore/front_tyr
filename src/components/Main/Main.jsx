@@ -3,7 +3,6 @@ import {faPen, faUpload} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useEffect, useState} from "react";
 import Modal from "../Modal/Modal";
-import axios from "axios";
 import defaultImg from "../../images/default-store-350x350.jpg";
 import first from "../../images/1.jpg";
 import second from "../../images/2.jpg";
@@ -11,7 +10,7 @@ import third from "../../images/3.jpg";
 import fourth from "../../images/4.jpg";
 import fifth from "../../images/5.jpg";
 import {useNavigate} from "react-router-dom";
-import {userRequest} from "../../requestMethods";
+import {publicRequest, userRequest} from "../../requestMethods";
 import {isAdmin} from "../../myLibrary";
 
 const Main = () => {
@@ -31,11 +30,10 @@ const Main = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=home')
+                const response = await publicRequest.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=home')
                 setSliderImages(response.data.imageResponseSet)
-                console.log(response.data)
             } catch (e) {
-                console.log(e)
+                alert(e)
             }
         })()
 
@@ -47,7 +45,7 @@ const Main = () => {
                 setEncodedImage(reader.result)
             }
             reader.onerror = (error) => {
-                console.log('Error: ', error)
+                alert('Error: ', error)
             }
         }
     }, [file])
@@ -70,16 +68,14 @@ const Main = () => {
                 title,
                 description
             }
-            console.log(myJson)
             await userRequest.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
     const handleSelectRedact = (event) => {
         event.preventDefault()
-        console.log(event.target.value)
         setCurrentSlider(sliderImages[event.target.value])
         const selectedImage = sliderImages[event.target.value]
         const selectedImageUrl = "data:image/" + selectedImage.url.split('.')[1] + ";base64," + selectedImage.file

@@ -2,13 +2,12 @@ import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
 import defaultImg from "../../images/default-store-350x350.jpg";
 import {useNavigate} from "react-router-dom";
-import {userRequest} from "../../requestMethods";
+import {publicRequest, userRequest} from "../../requestMethods";
 import {isAdmin} from "../../myLibrary";
 
 const LuchshieStrelki = () => {
@@ -31,11 +30,10 @@ const LuchshieStrelki = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=luchshie-strelki')
+                const response = await publicRequest.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=luchshie-strelki')
                 setShooters(response.data.imageResponseSet)
-                console.log(response.data)
             } catch (e) {
-                console.log(e)
+                alert(e)
             }
         })()
 
@@ -47,7 +45,7 @@ const LuchshieStrelki = () => {
                 setEncodedImage(reader.result)
             }
             reader.onerror = (error) => {
-                console.log('Error: ', error)
+                alert('Error: ', error)
             }
         }
     }, [file])
@@ -75,10 +73,9 @@ const LuchshieStrelki = () => {
                     successfulHits
                 }
             }
-            console.log(myJson)
             await userRequest.post('http://localhost:8040/api/homePage/saveNewImageInGallery/luchshie-strelki', myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -90,10 +87,9 @@ const LuchshieStrelki = () => {
             const myJson = {
                 idImage
             }
-            console.log(myJson)
             await userRequest.delete('http://localhost:8040/api/homePage/deleteImage/' + idImage, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -121,10 +117,9 @@ const LuchshieStrelki = () => {
                     successfulHits
                 }
             }
-            console.log(myJson)
             await userRequest.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 

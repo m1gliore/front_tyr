@@ -5,10 +5,9 @@ import {faCircle, faEnvelope, faPen, faPlus, faTrashCan} from '@fortawesome/free
 import {faInstagram} from '@fortawesome/free-brands-svg-icons'
 import Modal from "../Modal/Modal";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {isAdmin, transliterate} from "../../myLibrary";
 import {useNavigate} from "react-router-dom";
-import {userRequest} from "../../requestMethods";
+import {publicRequest, userRequest} from "../../requestMethods";
 
 const Navbar = () => {
     const currentUser = JSON.parse(localStorage.getItem("user"))?.username
@@ -31,11 +30,10 @@ const Navbar = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get(`http://localhost:8040/api/homePage/getHomePageTitle`)
+                const response = await publicRequest.get(`http://localhost:8040/api/homePage/getHomePageTitle`)
                 setTyrTypes(response.data)
-                console.log(response.data)
             } catch (e) {
-                console.log(e)
+                alert(e)
             }
         })()
     }, [])
@@ -52,10 +50,9 @@ const Navbar = () => {
                 description,
                 directoryType
             }
-            console.log(myJson)
             await userRequest.post(`http://localhost:8040/api/redact/saveNewServiceCatalog`, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -67,10 +64,9 @@ const Navbar = () => {
             const myJson = {
                 url
             }
-            console.log(myJson)
             await userRequest.delete(`http://localhost:8040/api/redact/deleteServiceCatalog/${url}`, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -87,10 +83,9 @@ const Navbar = () => {
                 url: transliterate(nameCatalog, false),
                 description,
             }
-            console.log(myJson)
             await userRequest.put('http://localhost:8040/api/redact/updateServiceCatalog', myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -104,10 +99,9 @@ const Navbar = () => {
                 url: transliterate(nameCatalog, false),
                 directoryType
             }
-            console.log(myJson)
             await userRequest.post('http://localhost:8040/api/redact/saveNewServiceCatalog', myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -119,10 +113,9 @@ const Navbar = () => {
             const myJson = {
                 url
             }
-            console.log(myJson)
             await userRequest.put(` http://localhost:8040/api/redact/deleteServiceCatalog/${url}`, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -137,26 +130,21 @@ const Navbar = () => {
                 nameCatalog,
                 url: transliterate(nameCatalog, false)
             }
-            console.log(myJson)
             await userRequest.put('http://localhost:8040/api/redact/updateServiceCatalog', myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
     const handleSelectDelete = (event) => {
         event.preventDefault()
-        console.log(event.target.value)
         const selectedImage = tyrTypes.titleHomePageResponseSetGun[event.target.value]
-        console.log(selectedImage)
         const selectedImageUrl = selectedImage.title
-        console.log(selectedImageUrl)
         setImageUrlDelete(selectedImageUrl)
     }
 
     const handleSelectRedact = (event) => {
         event.preventDefault()
-        console.log(event.target.value)
         setCurrentTyr(tyrTypes?.titleHomePageResponseSetGun[event.target.value])
         setCurrentService(tyrTypes?.titleHomePageResponseSetService[event.target.value])
     }

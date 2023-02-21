@@ -6,9 +6,8 @@ import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBan, faCheckCircle} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
-import {userRequest} from "../../requestMethods";
+import {publicRequest, userRequest} from "../../requestMethods";
 import {isAdmin} from "../../myLibrary";
-import axios from "axios";
 
 const Otzyivyi = () => {
     const [allReplies, setAllReplies] = useState([])
@@ -22,16 +21,14 @@ const Otzyivyi = () => {
     useEffect(() => {
         (async () => {
             try {
-                const responseClient = await axios.get(`http://localhost:8040/api/homePage/getAllReviewsByHomePage`)
-                console.log(responseClient.data)
+                const responseClient = await publicRequest.get(`http://localhost:8040/api/homePage/getAllReviewsByHomePage`)
                 if (admin) {
                     const responseAdmin = await userRequest.get(`http://localhost:8040/api/redact1/getAllReview`)
-                    console.log(responseClient.data)
                     setAllReplies(responseAdmin.data)
                 }
                 setReplies(responseClient.data)
             } catch (e) {
-                console.log(e)
+                alert(e)
             }
         })()
     }, [admin, allReplies])
@@ -45,7 +42,6 @@ const Otzyivyi = () => {
     })
 
     const handleSubmitRedact = async (event) => {
-        console.log(event)
         event.preventDefault()
         try {
             const idReview = cardNumber
@@ -56,10 +52,9 @@ const Otzyivyi = () => {
                 reviewStatus,
                 username
             }
-            console.log(myJson)
             await userRequest.put(`http://localhost:8040/api/redact1/updateReview`, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 

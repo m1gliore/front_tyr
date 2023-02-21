@@ -2,7 +2,7 @@ import './styles.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faAngleLeft, faAngleRight} from '@fortawesome/free-solid-svg-icons'
 import {useEffect, useState} from "react";
-import axios from "axios";
+import {publicRequest} from "../../requestMethods";
 
 const Carousel = () => {
 
@@ -11,11 +11,10 @@ const Carousel = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=home')
+                const response = await publicRequest.get('http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=home')
                 setSliderImages(response.data.imageResponseSet)
-                console.log(response.data)
             } catch (e) {
-                console.log(e)
+                alert(e)
             }
         })()
     }, [])

@@ -3,7 +3,6 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen, faPlus, faTrashCan, faUpload} from "@fortawesome/free-solid-svg-icons";
@@ -12,7 +11,7 @@ import first from "../../images/NicePng_bullseye-icon-png_3253558.png";
 import second from "../../images/gun-2-128.png";
 import third from "../../images/pngegg.png";
 import {isAdmin, transliterate} from "../../myLibrary";
-import {userRequest} from "../../requestMethods";
+import {publicRequest, userRequest} from "../../requestMethods";
 
 
 const Tyr = () => {
@@ -39,11 +38,11 @@ const Tyr = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get(`http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=${currentTyr}`)
+                const response = await publicRequest.get(`http://localhost:8040/api/homePage/getServiceCatalogBy?catalog=${currentTyr}`)
                 setTyrs(response.data)
                 setTyrsName(response.data.imageResponseSet)
             } catch (e) {
-                console.log(e)
+                alert(e)
             }
         })()
 
@@ -55,7 +54,7 @@ const Tyr = () => {
                 setEncodedImage(reader.result)
             }
             reader.onerror = (error) => {
-                console.log('Error: ', error)
+                alert('Error: ', error)
             }
         }
 
@@ -125,10 +124,9 @@ const Tyr = () => {
                     thirdIconDesc
                 }
             }
-            console.log(myJson)
             await userRequest.post(`http://localhost:8040/api/homePage/saveNewImageInGallery/${currentTyr}`, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -140,10 +138,9 @@ const Tyr = () => {
             const myJson = {
                 idImg
             }
-            console.log(myJson)
             await userRequest.delete('http://localhost:8040/api/homePage/deleteImage/' + idImg, myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
@@ -183,20 +180,16 @@ const Tyr = () => {
                     thirdIconDesc
                 }
             }
-            console.log(myJson)
             await userRequest.put('http://localhost:8040/api/homePage/updateImageInGallery', myJson).then(() => navigate(0))
         } catch (e) {
-            console.log(e)
+            alert(e)
         }
     }
 
     const handleSelectDelete = (event) => {
         event.preventDefault()
-        console.log(event.target.value)
         const selectedImage = tyrsName[event.target.value]
-        console.log(selectedImage)
         const selectedImageUrl = "data:image/" + selectedImage?.url.split('.')[1] + ";base64," + selectedImage?.file
-        console.log(selectedImageUrl)
         setImageUrlDelete(selectedImageUrl)
     }
 

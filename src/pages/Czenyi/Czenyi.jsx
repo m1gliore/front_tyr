@@ -2,7 +2,7 @@ import './styles.css';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
-import axios from "axios";
+import {publicRequest} from "../../requestMethods";
 
 const Czenyi = () => {
     const [costs, setCosts] = useState([])
@@ -10,7 +10,7 @@ const Czenyi = () => {
     useEffect(() => {
         (async () => {
             try {
-                const response = await axios.get('http://localhost:8040/api/homePage/getPriceCatalog')
+                const response = await publicRequest.get('http://localhost:8040/api/homePage/getPriceCatalog')
                 setCosts(response.data)
             } catch (e) {
 
