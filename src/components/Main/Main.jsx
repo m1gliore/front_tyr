@@ -95,26 +95,36 @@ const Main = () => {
                 }}/>}
             <section className="review">
                 <div className="mainGallery">
-                    <div className="imageContainer">
-                        <img style={{width: "450px", height: "300px"}} src={first} alt="one"/>
-                        <div className="bottomText">Услуги тира</div>
-                    </div>
-                    <div className="imageContainer">
-                        <img style={{width: "450px", height: "300px"}} src={second} alt="two"/>
-                        <div className="bottomText">Обучение и курсы стрельбы</div>
-                    </div>
-                    <div className="imageContainer">
-                        <img style={{width: "450px", height: "300px"}} src={third} alt="three"/>
-                        <div className="bottomText">Предложения для корпоративов</div>
-                    </div>
-                    <div className="imageContainer">
-                        <img style={{width: "450px", height: "300px"}} src={fourth} alt="four"/>
-                        <div className="bottomText">Подарочные сертификаты</div>
-                    </div>
-                    <div className="imageContainer">
-                        <img style={{width: "450px", height: "300px"}} src={fifth} alt="five"/>
-                        <div className="bottomText">Развлечения</div>
-                    </div>
+                    <a href="/uslugi/type?catalog=Uslugi%20tira">
+                        <div className="imageContainer">
+                            <img style={{width: "450px", height: "300px"}} src={first} alt="one"/>
+                            <div className="bottomText">Услуги тира</div>
+                        </div>
+                    </a>
+                    <a href="/uslugi/type?catalog=Obuchenie%20i%20kursyy%20strelqqbyy">
+                        <div className="imageContainer">
+                            <img style={{width: "450px", height: "300px"}} src={second} alt="two"/>
+                            <div className="bottomText">Обучение и курсы стрельбы</div>
+                        </div>
+                    </a>
+                    <a href="/uslugi/type?catalog=Predlozhenie%20dlya%20korporativa">
+                        <div className="imageContainer">
+                            <img style={{width: "450px", height: "300px"}} src={third} alt="three"/>
+                            <div className="bottomText">Предложения для корпоративов</div>
+                        </div>
+                    </a>
+                    <a href="/uslugi/type?catalog=Podarochnyye%20sertifikatyy">
+                        <div className="imageContainer">
+                            <img style={{width: "450px", height: "300px"}} src={fourth} alt="four"/>
+                            <div className="bottomText">Подарочные сертификаты</div>
+                        </div>
+                    </a>
+                    <a href="/uslugi/type?catalog=Razvlecheniya">
+                        <div className="imageContainer">
+                            <img style={{width: "450px", height: "300px"}} src={fifth} alt="five"/>
+                            <div className="bottomText">Развлечения</div>
+                        </div>
+                    </a>
                 </div>
             </section>
             {admin &&
