@@ -65,13 +65,15 @@ const VidyiUslug = () => {
         try {
             const name = event.target.name.value
             const description = event.target.desc.value
+            const price = event.target.price.value
             const myJson = {
                 url: file.name,
                 file: encodedImage,
                 serviceRequest:
                     {
                         name,
-                        description
+                        description,
+                        price
                     }
             }
             console.log(myJson)
@@ -103,6 +105,7 @@ const VidyiUslug = () => {
             const idImg = serviceNames[id].idImage
             const name = event.target.name.value
             const description = event.target.desc.value
+            const price = event.target.price.value
             const idService = serviceNames[id].serviceResponse.idService
             const myJson = {
                 idImage: idImg,
@@ -112,7 +115,8 @@ const VidyiUslug = () => {
                     {
                         idService,
                         name,
-                        description
+                        description,
+                        price
                     }
             }
             console.log(myJson)
@@ -224,6 +228,8 @@ const VidyiUslug = () => {
                                    placeholder="Введите наименование услуги"/>
                             <input required className="inputAdd" type="text" name="desc"
                                    placeholder="Введите описание услуги"/>
+                            <input required className="inputAdd" type="number" min="0" name="price"
+                                   placeholder="Введите цену услуги"/>
                             <button className="buttonAdd" onClick={() => {
                                 if (imageUrl === defaultImg) alert("Вставьте картинку!")
                             }
@@ -255,6 +261,9 @@ const VidyiUslug = () => {
                                    onChange={event => setCurrentUsluga(serviceNames[event.target.value])}/>
                             <input className="inputAdd" type="text" name="desc"
                                    placeholder="Введите описание услуги" value={currentUsluga?.description}
+                                   onChange={event => setCurrentUsluga(serviceNames[event.target.value])}/>
+                            <input required className="inputAdd" type="number" min="0" name="price"
+                                   placeholder="Введите цену услуги" value={currentUsluga?.price}
                                    onChange={event => setCurrentUsluga(serviceNames[event.target.value])}/>
                             <button className="buttonAdd">Изменить</button>
                         </div>
