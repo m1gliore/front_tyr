@@ -4,7 +4,7 @@ import Footer from "../../components/Footer/Footer";
 import {useEffect, useState} from "react";
 import Modal from "../../components/Modal/Modal";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBan, faCheckCircle, faPen, faPeopleGroup} from "@fortawesome/free-solid-svg-icons";
+import {faCheckCircle, faPen, faPeopleGroup} from "@fortawesome/free-solid-svg-icons";
 import {useNavigate} from "react-router-dom";
 import {userRequest} from "../../requestMethods";
 import {isAdmin} from "../../myLibrary";
@@ -17,7 +17,6 @@ const Sertifikatyi = () => {
     const [template, setTemplate] = useState({})
     const [modalRedactActive, setModalRedactActive] = useState(false)
     const [modalAcceptActive, setModalAcceptActive] = useState(false)
-    const [modalRejectActive, setModalRejectActive] = useState(false)
     const [modalAcceptCorporateActive, setModalAcceptCorporateActive] = useState(false)
     const [cardNumber, setCardNumber] = useState(null)
     const admin = isAdmin()
@@ -179,11 +178,6 @@ const Sertifikatyi = () => {
                                                              setModalAcceptActive(true)
                                                              setCardNumber(certificate.idCertificate)
                                                          }}/>
-                                        <FontAwesomeIcon className="action fa-2x" icon={faBan}
-                                                         onClick={() => {
-                                                             setModalRejectActive(true)
-                                                             setCardNumber(certificate.idCertificate)
-                                                         }}/>
                                     </div>
                                 </div>
                             )}
@@ -208,20 +202,11 @@ const Sertifikatyi = () => {
                     </form>
                 </Modal>
                 <Modal active={modalAcceptActive} setActive={setModalAcceptActive}>
-                    <h1>Принять отзыв</h1>
+                    <h1>Принять сертификат</h1>
                     <form className="modalAdd" onSubmit={handleSubmitAccept}>
                         <input type="text" name="status" value="CONFIRMED" style={{display: "none"}}/>
                         <div className="rightContainer">
                             <button className="buttonAdd">Принять</button>
-                        </div>
-                    </form>
-                </Modal>
-                <Modal active={modalRejectActive} setActive={setModalRejectActive}>
-                    <h1>Отклонить отзыв</h1>
-                    <form className="modalAdd" onSubmit={handleSubmitAccept}>
-                        <input type="text" name="status" value="REJECTED" style={{display: "none"}}/>
-                        <div className="rightContainer">
-                            <button className="buttonAdd">Отклонить</button>
                         </div>
                     </form>
                 </Modal>

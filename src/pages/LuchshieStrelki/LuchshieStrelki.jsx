@@ -166,7 +166,7 @@ const LuchshieStrelki = () => {
                     <div className="row">
                         {shooters.map((shooter) =>
                             <div className="col-lg-4 col-md-6" key={shooter.shooterResponse.idShooter}>
-                                <div className="cardStr">
+                                <div className="cardStr" style={{height: "70vh"}}>
                                     <img className="card-img-top-str mx-auto d-block"
                                          src={"data:image/" + shooter.url.split('.')[1] + ";base64," + shooter.file}
                                          alt={shooter.title}/>
