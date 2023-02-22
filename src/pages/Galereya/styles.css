@@ -12,6 +12,7 @@
     height: 50vh;
     padding: 15px;
     transition: .5s;
+    object-fit: contain;
 }
 
 .galleryContainer img:hover {
